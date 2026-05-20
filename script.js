@@ -26,3 +26,67 @@ areaTabs.forEach((tab) => {
     });
   });
 });
+
+document.querySelectorAll(".area-subnav").forEach((nav) => {
+  let isDown = false;
+  let didDrag = false;
+  let startX = 0;
+  let startScrollLeft = 0;
+
+  nav.addEventListener("pointerdown", (event) => {
+    if (event.button !== 0 && event.pointerType === "mouse") return;
+
+    isDown = true;
+    didDrag = false;
+    startX = event.clientX;
+    startScrollLeft = nav.scrollLeft;
+    nav.classList.add("is-dragging");
+    nav.setPointerCapture(event.pointerId);
+  });
+
+  nav.addEventListener("pointermove", (event) => {
+    if (!isDown) return;
+
+    const distance = event.clientX - startX;
+    didDrag = didDrag || Math.abs(distance) > 6;
+    nav.scrollLeft = startScrollLeft - distance;
+  });
+
+  const stopDragging = (event) => {
+    if (!isDown) return;
+
+    isDown = false;
+    nav.classList.remove("is-dragging");
+
+    if (nav.hasPointerCapture(event.pointerId)) {
+      nav.releasePointerCapture(event.pointerId);
+    }
+  };
+
+  nav.addEventListener("pointerup", stopDragging);
+  nav.addEventListener("pointercancel", stopDragging);
+
+  nav.addEventListener(
+    "click",
+    (event) => {
+      if (!didDrag) return;
+
+      event.preventDefault();
+      event.stopPropagation();
+      didDrag = false;
+    },
+    true,
+  );
+
+  nav.addEventListener(
+    "wheel",
+    (event) => {
+      if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
+      if (nav.scrollWidth <= nav.clientWidth) return;
+
+      event.preventDefault();
+      nav.scrollLeft += event.deltaY;
+    },
+    { passive: false },
+  );
+});

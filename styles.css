@@ -849,11 +849,29 @@ h3 {
   display: flex;
   gap: 10px;
   overflow-x: auto;
+  overflow-y: hidden;
   margin-top: 28px;
   padding: 16px clamp(20px, 6vw, 88px);
   border-bottom: 1px solid var(--line);
   background: rgba(246, 241, 232, 0.88);
   backdrop-filter: blur(18px);
+  cursor: grab;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overscroll-behavior-x: contain;
+  user-select: none;
+}
+
+.area-subnav::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.area-subnav.is-dragging {
+  cursor: grabbing;
+  scroll-behavior: auto;
 }
 
 .area-subnav a {
@@ -867,6 +885,11 @@ h3 {
   font-size: 14px;
   font-weight: 800;
   box-shadow: 0 10px 24px rgba(16, 32, 30, 0.05);
+  scroll-snap-align: start;
+}
+
+.area-subnav.is-dragging a {
+  pointer-events: none;
 }
 
 .area-subnav a:hover,

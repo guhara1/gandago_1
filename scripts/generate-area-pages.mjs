@@ -559,6 +559,7 @@ const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, n
         <p>최종 수정일: ${updated}. 실제 가능 지역, 예약 시간, 금액은 상담 시점의 운영 조건을 기준으로 안내합니다.</p>
       </div>
     </footer>
+    <script src="../../../script.js" defer></script>
   </body>
 </html>
 `;
