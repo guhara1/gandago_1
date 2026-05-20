@@ -268,6 +268,17 @@ const incheonDongGroups = {
   "yeonsu-gu": ["동춘동", "선학동", "송도동", "연수동", "옥련동", "청학동"]
 };
 
+const gyeonggiGuGroups = {
+  "suwon-si": ["권선구", "영통구", "장안구", "팔달구"],
+  "seongnam-si": ["분당구", "수정구", "중원구"],
+  "anyang-si": ["동안구", "만안구"],
+  "bucheon-si": ["소사구", "오정구", "원미구"],
+  "ansan-si": ["단원구", "상록구"],
+  "goyang-si": ["덕양구", "일산동구", "일산서구"],
+  "yongin-si": ["기흥구", "수지구", "처인구"],
+  "hwaseong-si": ["동탄구", "만세구", "병점구", "효행구"]
+};
+
 const areaMetaByRegion = Object.fromEntries(
   areas.map(([regionSlug, , list]) => [
     regionSlug,
@@ -277,6 +288,7 @@ const areaMetaByRegion = Object.fromEntries(
 
 const dongGroupsByRegion = {
   seoul: seoulDongGroups,
+  gyeonggi: gyeonggiGuGroups,
   incheon: incheonDongGroups
 };
 
@@ -299,6 +311,7 @@ const joinParticle = (value) => {
 };
 
 const dongAreaType = (dongName) => {
+  if (/권선구|영통구|장안구|팔달구|분당구|수정구|중원구|동안구|만안구|소사구|오정구|원미구|단원구|상록구|덕양구|일산동구|일산서구|기흥구|수지구|처인구|동탄구|만세구|병점구|효행구/.test(dongName)) return "행정구 단위로 생활권과 이동 조건을 나눠 확인해야 하는 지역";
   if (/영종|운서|용유|북도|연평|백령|대청|덕적|자월|영흥|강화|교동|삼산|서도|화도|길상/.test(dongName)) return "공항·도서·읍면 이동 조건을 먼저 확인해야 하는 생활권";
   if (/송도|청라|검단|아라|원당|당하|마전|불로대곡|오류왕길|검암경서/.test(dongName)) return "신도시와 대단지 주거권 중심으로 방문 동선 확인이 중요한 생활권";
   if (/부평|구월|간석|주안|연수|동춘|옥련|계산|작전|효성|서창|논현/.test(dongName)) return "역세권과 아파트 단지가 함께 있는 인천 주거 생활권";
@@ -310,6 +323,13 @@ const dongAreaType = (dongName) => {
 };
 
 const dongProfile = (dongName) => {
+  if (/권선구|영통구|장안구|팔달구|분당구|수정구|중원구|동안구|만안구|소사구|오정구|원미구|단원구|상록구|덕양구|일산동구|일산서구|기흥구|수지구|처인구|동탄구|만세구|병점구|효행구/.test(dongName)) {
+    return {
+      short: "경기 행정구 생활권",
+      focus: "구 단위 위치, 이동 거리, 단지 출입 조건",
+      intent: "시 전체보다 세부 생활권 기준으로 방문 가능 여부를 확인하려는 분"
+    };
+  }
   if (/영종|운서|용유|북도|연평|백령|대청|덕적|자월|영흥|강화|교동|삼산|서도|화도|길상/.test(dongName)) {
     return {
       short: "공항·도서·읍면 이동 생활권",
