@@ -833,6 +833,7 @@ const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, n
     <meta name="robots" content="index,follow,max-image-preview:large" />
     <link rel="canonical" href="${url}" />
     <link rel="stylesheet" href="../../../styles.css" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="ko_KR" />
     <meta property="og:site_name" content="간다GO" />

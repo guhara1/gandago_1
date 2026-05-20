@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="red heart">
+  <rect width="64" height="64" rx="16" fill="#fff7f4"/>
+  <path
+    fill="#e11d2e"
+    d="M32 52s-2.1-1.4-5.2-3.9C15.8 39.2 9 32.2 9 23.6 9 16.8 14.3 12 20.6 12c3.9 0 7.7 1.9 10 5 2.3-3.1 6.1-5 10-5C46.9 12 52 16.8 52 23.6c0 8.6-6.8 15.6-17.8 24.5C34.1 50.6 32 52 32 52Z"
+  />
+</svg>

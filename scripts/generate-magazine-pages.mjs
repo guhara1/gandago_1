@@ -341,6 +341,7 @@ const hubHtml = () => {
     <meta name="robots" content="index,follow,max-image-preview:large" />
     <link rel="canonical" href="${canonical}" />
     <link rel="stylesheet" href="${base}styles.css" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   </head>
   <body class="content-page magazine-page">
     <a class="skip-link" href="#main">본문으로 이동</a>
