@@ -28,6 +28,14 @@ const guidePaths = [
   "guide/faq"
 ];
 
+const reviewPaths = [
+  "reviews",
+  "reviews/seoul",
+  "reviews/gyeonggi",
+  "reviews/incheon",
+  "reviews/first-time"
+];
+
 const supportPages = [
   {
     path: "about",
@@ -521,12 +529,12 @@ const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, n
           </div>
         </div>
         <div class="nav-item">
-          <a href="../../../#reviews">이용 후기</a>
+          <a href="../../../reviews/">이용 후기</a>
           <div class="submenu" aria-label="이용 후기 하위 메뉴">
-            <a href="../../../#review-seoul">서울 이용 후기</a>
-            <a href="../../../#review-gyeonggi">경기 이용 후기</a>
-            <a href="../../../#review-incheon">인천 이용 후기</a>
-            <a href="../../../#review-first">첫 이용 후기</a>
+            <a href="../../../reviews/seoul/">서울 이용 후기</a>
+            <a href="../../../reviews/gyeonggi/">경기 이용 후기</a>
+            <a href="../../../reviews/incheon/">인천 이용 후기</a>
+            <a href="../../../reviews/first-time/">첫 이용 후기</a>
           </div>
         </div>
         <div class="nav-item">
@@ -788,12 +796,12 @@ const supportShell = ({ path: pagePath, title, description, eyebrow, heading, su
           </div>
         </div>
         <div class="nav-item">
-          <a href="${base}#reviews">이용 후기</a>
+          <a href="${base}reviews/">이용 후기</a>
           <div class="submenu" aria-label="이용 후기 하위 메뉴">
-            <a href="${base}#review-seoul">서울 이용 후기</a>
-            <a href="${base}#review-gyeonggi">경기 이용 후기</a>
-            <a href="${base}#review-incheon">인천 이용 후기</a>
-            <a href="${base}#review-first">첫 이용 후기</a>
+            <a href="${base}reviews/seoul/">서울 이용 후기</a>
+            <a href="${base}reviews/gyeonggi/">경기 이용 후기</a>
+            <a href="${base}reviews/incheon/">인천 이용 후기</a>
+            <a href="${base}reviews/first-time/">첫 이용 후기</a>
           </div>
         </div>
         <div class="nav-item">
@@ -913,7 +921,8 @@ const main = async () => {
   const urls = [
     `${siteUrl}/`,
     ...servicePaths.map((pagePath) => `${siteUrl}/${pagePath}/`),
-    ...guidePaths.map((pagePath) => `${siteUrl}/${pagePath}/`)
+    ...guidePaths.map((pagePath) => `${siteUrl}/${pagePath}/`),
+    ...reviewPaths.map((pagePath) => `${siteUrl}/${pagePath}/`)
   ];
 
   for (const [regionSlug, regionName, list] of areas) {

@@ -14,6 +14,13 @@ const guideLinks = [
   ["안전 이용 안내", "guide/safety/"]
 ];
 
+const reviewLinks = [
+  ["서울 이용 후기", "reviews/seoul/"],
+  ["경기 이용 후기", "reviews/gyeonggi/"],
+  ["인천 이용 후기", "reviews/incheon/"],
+  ["첫 이용 후기", "reviews/first-time/"]
+];
+
 const extraGuideLinks = [
   ["처음 이용 안내", "guide/first-time/"],
   ["예약 취소 및 변경 안내", "guide/cancel-change/"],
@@ -284,7 +291,12 @@ const header = (base) => `
             ${guideLinks.map(([label, href]) => `<a href="${base}${href}">${label}</a>`).join("\n            ")}
           </div>
         </div>
-        <div class="nav-item"><a href="${base}#reviews">이용 후기</a></div>
+        <div class="nav-item">
+          <a href="${base}reviews/">이용 후기</a>
+          <div class="submenu" aria-label="이용 후기 하위 메뉴">
+            ${reviewLinks.map(([label, href]) => `<a href="${base}${href}">${label}</a>`).join("\n            ")}
+          </div>
+        </div>
         <div class="nav-item"><a href="${base}#magazine">매거진</a></div>
         <div class="nav-item"><a href="${base}contact/">고객센터</a></div>
       </nav>

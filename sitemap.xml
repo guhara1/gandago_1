@@ -115,6 +115,36 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://gandago-1.pages.dev/reviews/</loc>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://gandago-1.pages.dev/reviews/seoul/</loc>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://gandago-1.pages.dev/reviews/gyeonggi/</loc>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://gandago-1.pages.dev/reviews/incheon/</loc>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://gandago-1.pages.dev/reviews/first-time/</loc>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://gandago-1.pages.dev/area/seoul/gangnam/</loc>
     <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
