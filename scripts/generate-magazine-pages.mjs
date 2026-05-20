@@ -220,11 +220,8 @@ const pathFor = (article) => `magazine/${article.slug}/`;
 const header = (base) => `
     <header class="site-header is-scrolled" aria-label="상단 메뉴">
       <a class="brand" href="${base}" aria-label="간다GO 홈">
-        <span class="brand-mark">ㄱ</span>
-        <span>
-          <strong><span class="brand-core">간다</span><span class="brand-go">GO</span></strong>
-          <small>Seoul · Gyeonggi · Incheon</small>
-        </span>
+        <img class="brand-logo" src="${base}areas/ganda_go_logo_transparent.png" alt="간다GO" width="220" height="55" />
+        <small>Seoul · Gyeonggi · Incheon</small>
       </a>
       <nav class="nav" aria-label="주요 메뉴">
         <div class="nav-item">
@@ -267,7 +264,9 @@ const header = (base) => `
 const footer = (base) => `
     <footer class="site-footer" aria-label="사이트 하단 정보">
       <div class="footer-brand">
-        <strong><span class="brand-core">간다</span><span class="brand-go">GO</span></strong>
+        <a class="footer-logo" href="${base}" aria-label="간다GO 홈">
+          <img src="${base}areas/ganda_go_logo_transparent.png" alt="간다GO" width="280" height="70" />
+        </a>
         <p>서울 · 경기 · 인천에 집중한 합법 웰니스 방문 관리 안내 서비스입니다.</p>
         <a class="footer-call" href="tel:${phone}">예약 문의 ${phone}</a>
       </div>
