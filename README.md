@@ -1,4 +1,4 @@
-# 간다GO
+﻿# 간다GO
 
 서울, 경기, 인천 지역에 특화한 프리미엄 출장마사지 안내 사이트입니다.
 
@@ -8,7 +8,7 @@
 - 반응형 프리미엄 UI: `styles.css`
 - 최소 JavaScript: `script.js`
 - 검색 엔진 기본 파일: `robots.txt`, `sitemap.xml`
-- 공유 썸네일 및 히어로 이미지: `assets/gandago-hero.png`
+- 공유 썸네일 및 히어로 이미지: `assets/gandago-hero-optimized.jpg`
 - 지역별 개별 페이지: `areas/seoul`, `areas/gyeonggi`, `areas/incheon`
 - 지역 페이지 생성 스크립트: `scripts/generate-area-pages.mjs`
 

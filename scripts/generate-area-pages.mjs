@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+﻿import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 const siteUrl = "https://gandago-1.pages.dev";
@@ -839,7 +839,7 @@ const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, n
     <meta property="og:title" content="${title}" />
     <meta property="og:description" content="${description}" />
     <meta property="og:url" content="${url}" />
-    <meta property="og:image" content="${siteUrl}/assets/gandago-hero.png" />
+    <meta property="og:image" content="${siteUrl}/assets/gandago-hero-optimized.jpg" />
     <meta property="og:image:alt" content="간다GO ${name} 방문 마사지 안내 이미지" />
     <script type="application/ld+json">
       {
@@ -865,7 +865,7 @@ const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, n
   <body class="area-page">
     <header class="site-header is-scrolled" aria-label="상단 메뉴">
       <a class="brand" href="../../../" aria-label="간다GO 홈">
-        <img class="brand-logo" src="../../../areas/ganda_go_logo_transparent.png" alt="간다GO" width="220" height="55" />
+        <img class="brand-logo" src="../../../areas/ganda_go_logo_site.png" alt="간다GO" width="220" height="55" />
         <small>Seoul · Gyeonggi · Incheon</small>
       </a>
       <nav class="nav" aria-label="주요 메뉴">
@@ -1057,7 +1057,7 @@ const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, n
     <footer class="site-footer" aria-label="사이트 하단 정보">
       <div class="footer-brand">
         <a class="footer-logo" href="../../../" aria-label="간다GO 홈">
-          <img src="../../../areas/ganda_go_logo_transparent.png" alt="간다GO" width="280" height="70" />
+          <img src="../../../areas/ganda_go_logo_site.png" alt="간다GO" width="280" height="70" />
         </a>
         <p>${regionName} ${name} 방문 마사지 안내</p>
         <a class="footer-call" href="tel:${phone}">예약 문의 ${phone}</a>
@@ -1131,7 +1131,7 @@ const supportShell = ({ path: pagePath, title, description, eyebrow, heading, su
 
     <header class="site-header is-scrolled" aria-label="상단 메뉴">
       <a class="brand" href="${base}" aria-label="간다GO 홈">
-        <img class="brand-logo" src="${base}areas/ganda_go_logo_transparent.png" alt="간다GO" width="220" height="55" />
+        <img class="brand-logo" src="${base}areas/ganda_go_logo_site.png" alt="간다GO" width="220" height="55" />
         <small>Seoul · Gyeonggi · Incheon</small>
       </a>
       <nav class="nav" aria-label="주요 메뉴">
@@ -1224,7 +1224,7 @@ const supportShell = ({ path: pagePath, title, description, eyebrow, heading, su
     <footer class="site-footer" aria-label="사이트 하단 정보">
       <div class="footer-brand">
         <a class="footer-logo" href="${base}" aria-label="간다GO 홈">
-          <img src="${base}areas/ganda_go_logo_transparent.png" alt="간다GO" width="280" height="70" />
+          <img src="${base}areas/ganda_go_logo_site.png" alt="간다GO" width="280" height="70" />
         </a>
         <p>서울 · 경기 · 인천에 집중한 합법 웰니스 방문 마사지 안내 서비스입니다.</p>
         <a class="footer-call" href="tel:${phone}">예약 문의 ${phone}</a>
@@ -1302,7 +1302,7 @@ const dongPageShell = ({ regionSlug, regionName, districtSlug, dongName }) => {
     <meta property="og:title" content="${title}" />
     <meta property="og:description" content="${description}" />
     <meta property="og:url" content="${canonical}" />
-    <meta property="og:image" content="${siteUrl}/assets/gandago-hero.png" />
+    <meta property="og:image" content="${siteUrl}/assets/gandago-hero-optimized.jpg" />
     <meta property="og:image:alt" content="간다GO ${dongName} 방문 마사지 안내 이미지" />
     <script type="application/ld+json">
       {
@@ -1328,7 +1328,7 @@ const dongPageShell = ({ regionSlug, regionName, districtSlug, dongName }) => {
   <body class="area-page">
     <header class="site-header is-scrolled" aria-label="상단 메뉴">
       <a class="brand" href="${base}" aria-label="간다GO 홈">
-        <img class="brand-logo" src="${base}areas/ganda_go_logo_transparent.png" alt="간다GO" width="220" height="55" />
+        <img class="brand-logo" src="${base}areas/ganda_go_logo_site.png" alt="간다GO" width="220" height="55" />
         <small>Seoul · Gyeonggi · Incheon</small>
       </a>
       <nav class="nav" aria-label="주요 메뉴">
@@ -1467,7 +1467,7 @@ const dongPageShell = ({ regionSlug, regionName, districtSlug, dongName }) => {
     <footer class="site-footer" aria-label="사이트 하단 정보">
       <div class="footer-brand">
         <a class="footer-logo" href="${base}" aria-label="간다GO 홈">
-          <img src="${base}areas/ganda_go_logo_transparent.png" alt="간다GO" width="280" height="70" />
+          <img src="${base}areas/ganda_go_logo_site.png" alt="간다GO" width="280" height="70" />
         </a>
         <p>${regionName} ${districtName} ${dongName} 방문 마사지 안내</p>
         <a class="footer-call" href="tel:${phone}">예약 문의 ${phone}</a>

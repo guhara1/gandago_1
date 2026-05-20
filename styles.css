@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   --ink: #10201e;
   --ink-2: #223633;
   --paper: #f7f3ec;
@@ -858,7 +858,7 @@ h3 {
   padding: clamp(86px, 10vw, 142px) clamp(20px, 6vw, 88px) clamp(64px, 8vw, 108px);
   background:
     linear-gradient(105deg, rgba(8, 23, 21, 0.97) 0%, rgba(11, 42, 39, 0.94) 45%, rgba(34, 33, 28, 0.58) 100%),
-    url("assets/gandago-hero.png");
+    url("assets/gandago-hero-optimized.jpg");
   background-size: cover;
   background-position: center;
   color: var(--white);
@@ -1807,7 +1807,7 @@ h3 {
   padding-top: clamp(78px, 9vw, 118px);
   background:
     linear-gradient(120deg, rgba(8, 23, 21, 0.96), rgba(22, 76, 71, 0.88)),
-    url("assets/gandago-hero.png");
+    url("assets/gandago-hero-optimized.jpg");
   background-size: cover;
   background-position: center;
 }
@@ -1928,7 +1928,7 @@ h3 {
   background:
     radial-gradient(circle at 82% 16%, rgba(205, 151, 74, 0.18), transparent 34%),
     linear-gradient(135deg, rgba(14, 41, 37, 0.96), rgba(25, 91, 83, 0.86)),
-    url("assets/gandago-hero.png");
+    url("assets/gandago-hero-optimized.jpg");
   background-size: cover;
   background-position: center;
   color: #fffdf8;

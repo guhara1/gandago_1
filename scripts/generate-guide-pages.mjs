@@ -1,4 +1,4 @@
-import { mkdir, writeFile } from "node:fs/promises";
+﻿import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 const siteUrl = "https://gandago-1.pages.dev";
@@ -267,7 +267,7 @@ const linkHref = (href, base) => href.startsWith("#") ? `${base}${href}` : `${ba
 const header = (base) => `
     <header class="site-header is-scrolled" aria-label="상단 메뉴">
       <a class="brand" href="${base}" aria-label="간다GO 홈">
-        <img class="brand-logo" src="${base}areas/ganda_go_logo_transparent.png" alt="간다GO" width="220" height="55" />
+        <img class="brand-logo" src="${base}areas/ganda_go_logo_site.png" alt="간다GO" width="220" height="55" />
         <small>Seoul · Gyeonggi · Incheon</small>
       </a>
       <nav class="nav" aria-label="주요 메뉴">
@@ -317,7 +317,7 @@ const footer = (base) => `
     <footer class="site-footer" aria-label="사이트 하단 정보">
       <div class="footer-brand">
         <a class="footer-logo" href="${base}" aria-label="간다GO 홈">
-          <img src="${base}areas/ganda_go_logo_transparent.png" alt="간다GO" width="280" height="70" />
+          <img src="${base}areas/ganda_go_logo_site.png" alt="간다GO" width="280" height="70" />
         </a>
         <p>서울 · 경기 · 인천에 집중한 합법 웰니스 방문 마사지 안내 서비스입니다.</p>
         <a class="footer-call" href="tel:${phone}">예약 문의 ${phone}</a>
@@ -386,7 +386,7 @@ const pageHtml = (page) => {
     <meta property="og:title" content="${page.title} | 간다GO" />
     <meta property="og:description" content="${page.description}" />
     <meta property="og:url" content="${canonical}" />
-    <meta property="og:image" content="${siteUrl}/assets/gandago-hero.png" />
+    <meta property="og:image" content="${siteUrl}/assets/gandago-hero-optimized.jpg" />
     <meta property="og:image:alt" content="간다GO ${page.title} 안내 이미지" />
   </head>
   <body class="content-page service-page guide-page">
