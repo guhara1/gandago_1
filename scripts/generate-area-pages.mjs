@@ -14,6 +14,20 @@ const servicePaths = [
   "service/before-reservation"
 ];
 
+const guidePaths = [
+  "guide",
+  "guide/reservation",
+  "guide/price",
+  "guide/service-time",
+  "guide/available-area",
+  "guide/prepare",
+  "guide/safety",
+  "guide/first-time",
+  "guide/cancel-change",
+  "guide/payment",
+  "guide/faq"
+];
+
 const supportPages = [
   {
     path: "about",
@@ -496,14 +510,14 @@ const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, n
           </div>
         </div>
         <div class="nav-item">
-          <a href="../../../#process">이용 방법</a>
+          <a href="../../../guide/">이용 방법</a>
           <div class="submenu" aria-label="이용 방법 하위 메뉴">
-            <a href="../../../#process-booking">예약 절차</a>
-            <a href="../../../#process-price">요금 안내</a>
-            <a href="../../../#process-hours">이용 가능 시간</a>
-            <a href="../../../#process-areas">방문 가능 지역</a>
-            <a href="../../../#process-change">취소 및 변경 안내</a>
-            <a href="../../../#process-safety">안전 이용 안내</a>
+            <a href="../../../guide/reservation/">예약 절차</a>
+            <a href="../../../guide/price/">요금 안내</a>
+            <a href="../../../guide/service-time/">이용 가능 시간</a>
+            <a href="../../../guide/available-area/">방문 가능 지역</a>
+            <a href="../../../guide/prepare/">이용 전 준비사항</a>
+            <a href="../../../guide/safety/">안전 이용 안내</a>
           </div>
         </div>
         <div class="nav-item">
@@ -672,9 +686,9 @@ const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, n
         <div>
           <h2>서비스</h2>
           <a href="../../../service/">서비스 안내</a>
-          <a href="../../../#process">이용 방법</a>
-          <a href="../../../#areas">방문 가능 지역</a>
-          <a href="../../../#reviews">이용 후기</a>
+          <a href="../../../guide/">이용 방법</a>
+          <a href="../../../guide/reservation/">예약 절차</a>
+          <a href="../../../guide/price/">요금 안내</a>
         </div>
         <div>
           <h2>콘텐츠</h2>
@@ -763,14 +777,14 @@ const supportShell = ({ path: pagePath, title, description, eyebrow, heading, su
           </div>
         </div>
         <div class="nav-item">
-          <a href="${base}#process">이용 방법</a>
+          <a href="${base}guide/">이용 방법</a>
           <div class="submenu" aria-label="이용 방법 하위 메뉴">
-            <a href="${base}#process-booking">예약 절차</a>
-            <a href="${base}#process-price">요금 안내</a>
-            <a href="${base}#process-hours">이용 가능 시간</a>
-            <a href="${base}#process-areas">방문 가능 지역</a>
-            <a href="${base}#process-change">취소 및 변경 안내</a>
-            <a href="${base}#process-safety">안전 이용 안내</a>
+            <a href="${base}guide/reservation/">예약 절차</a>
+            <a href="${base}guide/price/">요금 안내</a>
+            <a href="${base}guide/service-time/">이용 가능 시간</a>
+            <a href="${base}guide/available-area/">방문 가능 지역</a>
+            <a href="${base}guide/prepare/">이용 전 준비사항</a>
+            <a href="${base}guide/safety/">안전 이용 안내</a>
           </div>
         </div>
         <div class="nav-item">
@@ -840,9 +854,9 @@ const supportShell = ({ path: pagePath, title, description, eyebrow, heading, su
         <div>
           <h2>서비스</h2>
           <a href="${base}service/">서비스 안내</a>
-          <a href="${base}#process">이용 방법</a>
-          <a href="${base}#areas">방문 가능 지역</a>
-          <a href="${base}#reviews">이용 후기</a>
+          <a href="${base}guide/">이용 방법</a>
+          <a href="${base}guide/reservation/">예약 절차</a>
+          <a href="${base}guide/price/">요금 안내</a>
         </div>
         <div>
           <h2>콘텐츠</h2>
@@ -896,7 +910,11 @@ const buildLinks = (html) => {
 
 const main = async () => {
   const root = process.cwd();
-  const urls = [`${siteUrl}/`, ...servicePaths.map((pagePath) => `${siteUrl}/${pagePath}/`)];
+  const urls = [
+    `${siteUrl}/`,
+    ...servicePaths.map((pagePath) => `${siteUrl}/${pagePath}/`),
+    ...guidePaths.map((pagePath) => `${siteUrl}/${pagePath}/`)
+  ];
 
   for (const [regionSlug, regionName, list] of areas) {
     for (let index = 0; index < list.length; index += 1) {

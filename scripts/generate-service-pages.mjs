@@ -14,13 +14,22 @@ const serviceLinks = [
   ["예약 전 확인사항", "service/before-reservation/"]
 ];
 
+const guideLinks = [
+  ["예약 절차", "guide/reservation/"],
+  ["요금 안내", "guide/price/"],
+  ["이용 가능 시간", "guide/service-time/"],
+  ["방문 가능 지역", "guide/available-area/"],
+  ["이용 전 준비사항", "guide/prepare/"],
+  ["안전 이용 안내", "guide/safety/"]
+];
+
 const sharedLinks = [
-  ["예약 절차 안내", "#process"],
-  ["요금 안내", "#process-price"],
+  ["예약 절차 안내", "guide/reservation/"],
+  ["요금 안내", "guide/price/"],
   ["서울 출장마사지 가능 지역", "#panel-seoul"],
   ["경기 출장마사지 가능 지역", "#panel-gyeonggi"],
   ["인천 출장마사지 가능 지역", "#panel-incheon"],
-  ["처음 이용하는 분을 위한 안내", "service/before-reservation/"]
+  ["처음 이용하는 분을 위한 안내", "guide/first-time/"]
 ];
 
 const servicePages = [
@@ -62,8 +71,8 @@ const servicePages = [
       ["서울 출장마사지 가능 지역 보기", "#panel-seoul"],
       ["경기 출장마사지 가능 지역 보기", "#panel-gyeonggi"],
       ["인천 출장마사지 가능 지역 보기", "#panel-incheon"],
-      ["예약 절차 확인하기", "#process"],
-      ["요금 안내 확인하기", "#process-price"]
+      ["예약 절차 확인하기", "guide/reservation/"],
+      ["요금 안내 확인하기", "guide/price/"]
     ]
   },
   {
@@ -151,8 +160,8 @@ const servicePages = [
       ["처음 이용하는 분들이 자주 묻는 질문", "처음이라면 어떤 정보를 먼저 말해야 하나요? 지역, 희망 시간, 관리 유형, 건물 출입 방식을 알려주시면 됩니다. 불법·선정적 요청은 받지 않으며, 의료 목적의 치료 효과를 보장하지 않습니다."]
     ],
     related: [
-      ["예약 절차 보기", "#process"],
-      ["요금 안내 보기", "#process-price"],
+      ["예약 절차 보기", "guide/reservation/"],
+      ["요금 안내 보기", "guide/price/"],
       ["서울 출장마사지 가능 지역 보기", "#panel-seoul"],
       ["경기 출장마사지 가능 지역 보기", "#panel-gyeonggi"],
       ["인천 출장마사지 가능 지역 보기", "#panel-incheon"],
@@ -193,14 +202,9 @@ const header = (base) => `
           </div>
         </div>
         <div class="nav-item">
-          <a href="${base}#process">이용 방법</a>
+          <a href="${base}guide/">이용 방법</a>
           <div class="submenu" aria-label="이용 방법 하위 메뉴">
-            <a href="${base}#process-booking">예약 절차</a>
-            <a href="${base}#process-price">요금 안내</a>
-            <a href="${base}#process-hours">이용 가능 시간</a>
-            <a href="${base}#process-areas">방문 가능 지역</a>
-            <a href="${base}#process-change">취소 및 변경 안내</a>
-            <a href="${base}#process-safety">안전 이용 안내</a>
+            ${guideLinks.map(([label, href]) => `<a href="${base}${href}">${label}</a>`).join("\n            ")}
           </div>
         </div>
         <div class="nav-item"><a href="${base}#reviews">이용 후기</a></div>
@@ -221,9 +225,9 @@ const footer = (base) => `
         <div>
           <h2>서비스</h2>
           <a href="${base}service/">서비스 안내</a>
-          <a href="${base}service/business-trip-massage/">출장마사지 안내</a>
-          <a href="${base}service/before-reservation/">예약 전 확인사항</a>
-          <a href="${base}#areas">방문 가능 지역</a>
+          <a href="${base}guide/">이용 방법</a>
+          <a href="${base}guide/reservation/">예약 절차</a>
+          <a href="${base}guide/price/">요금 안내</a>
         </div>
         <div>
           <h2>콘텐츠</h2>
