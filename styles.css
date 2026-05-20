@@ -137,12 +137,74 @@ a {
   white-space: nowrap;
 }
 
+.nav-item {
+  position: relative;
+  padding: 12px 0;
+}
+
 .nav a {
   opacity: 0.84;
 }
 
-.nav a:hover {
+.nav a:hover,
+.nav-item:focus-within > a,
+.nav-item:hover > a {
   opacity: 1;
+}
+
+.submenu {
+  position: absolute;
+  top: calc(100% - 2px);
+  left: 50%;
+  z-index: 40;
+  display: grid;
+  min-width: 210px;
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  background: rgba(16, 32, 30, 0.94);
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.28);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 8px);
+  transition: opacity 160ms ease, transform 160ms ease;
+  backdrop-filter: blur(18px);
+}
+
+.submenu a {
+  display: block;
+  padding: 9px 10px;
+  border-radius: 6px;
+  color: var(--white);
+  font-size: 13px;
+  opacity: 0.86;
+}
+
+.submenu a:hover,
+.submenu a:focus {
+  background: rgba(255, 255, 255, 0.1);
+  opacity: 1;
+}
+
+.nav-item:hover .submenu,
+.nav-item:focus-within .submenu {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+}
+
+.site-header.is-scrolled .submenu {
+  border-color: var(--line);
+  background: rgba(255, 253, 248, 0.96);
+}
+
+.site-header.is-scrolled .submenu a {
+  color: var(--ink);
+}
+
+.site-header.is-scrolled .submenu a:hover,
+.site-header.is-scrolled .submenu a:focus {
+  background: rgba(30, 112, 103, 0.08);
 }
 
 .nav-cta,

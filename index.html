@@ -57,12 +57,62 @@
         </span>
       </a>
       <nav class="nav" aria-label="주요 메뉴">
-        <a href="#areas">지역별 찾기</a>
-        <a href="#service">서비스 안내</a>
-        <a href="#process">이용 방법</a>
-        <a href="#reviews">이용 후기</a>
-        <a href="#magazine">매거진</a>
-        <a href="#support">고객센터</a>
+        <div class="nav-item">
+          <a href="#areas">지역별 찾기</a>
+          <div class="submenu" aria-label="지역별 찾기 하위 메뉴">
+            <a href="#panel-seoul">서울</a>
+            <a href="#panel-gyeonggi">경기</a>
+            <a href="#panel-incheon">인천</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="#service">서비스 안내</a>
+          <div class="submenu" aria-label="서비스 안내 하위 메뉴">
+            <a href="#service-onsite">출장마사지 안내</a>
+            <a href="#service-home-thai">홈타이 안내</a>
+            <a href="#service-swedish">스웨디시 안내</a>
+            <a href="#service-aroma">아로마 관리 안내</a>
+            <a href="#service-dry">건식 관리 안내</a>
+            <a href="#service-before">예약 전 확인사항</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="#process">이용 방법</a>
+          <div class="submenu" aria-label="이용 방법 하위 메뉴">
+            <a href="#process-booking">예약 절차</a>
+            <a href="#process-price">요금 안내</a>
+            <a href="#process-hours">이용 가능 시간</a>
+            <a href="#process-areas">방문 가능 지역</a>
+            <a href="#process-change">취소 및 변경 안내</a>
+            <a href="#process-safety">안전 이용 안내</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="#reviews">이용 후기</a>
+          <div class="submenu" aria-label="이용 후기 하위 메뉴">
+            <a href="#review-seoul">서울 이용 후기</a>
+            <a href="#review-gyeonggi">경기 이용 후기</a>
+            <a href="#review-incheon">인천 이용 후기</a>
+            <a href="#review-first">첫 이용 후기</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="#magazine">매거진</a>
+          <div class="submenu" aria-label="매거진 하위 메뉴">
+            <a href="#magazine-fatigue">피로 관리</a>
+            <a href="#magazine-local">지역 생활 정보</a>
+            <a href="#magazine-knowledge">마사지 상식</a>
+            <a href="#magazine-before">예약 전 알아둘 점</a>
+            <a href="#magazine-worker">직장인 피로 회복</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="#support">고객센터</a>
+          <div class="submenu" aria-label="고객센터 하위 메뉴">
+            <a href="#support">예약 문의</a>
+            <a href="#support">자주 묻는 질문</a>
+          </div>
+        </div>
       </nav>
       <a class="nav-cta" href="#booking">예약 문의</a>
     </header>
@@ -121,32 +171,32 @@
           </p>
         </div>
         <div class="feature-grid service-grid">
-          <article class="feature-card">
+          <article class="feature-card" id="service-onsite">
             <span class="card-number">01</span>
             <h3>출장마사지 안내</h3>
             <p>예약한 공간으로 방문해 진행하는 관리입니다. 지역, 시간, 공간 조건을 먼저 확인한 뒤 상담합니다.</p>
           </article>
-          <article class="feature-card">
+          <article class="feature-card" id="service-home-thai">
             <span class="card-number">02</span>
             <h3>홈타이 안내</h3>
             <p>편안한 분위기에서 몸의 긴장을 풀고 휴식을 돕는 방문 관리입니다. 강도와 컨디션을 사전에 공유하는 것이 좋습니다.</p>
           </article>
-          <article class="feature-card">
+          <article class="feature-card" id="service-swedish">
             <span class="card-number">03</span>
             <h3>스웨디시 안내</h3>
             <p>부드러운 흐름 중심의 관리로 편안한 힐링과 피로 완화를 원하는 분에게 안내됩니다. 선정적 표현이나 과장된 설명은 사용하지 않습니다.</p>
           </article>
-          <article class="feature-card">
+          <article class="feature-card" id="service-aroma">
             <span class="card-number">04</span>
             <h3>아로마 관리 안내</h3>
             <p>아로마 오일을 활용해 차분한 휴식을 돕는 관리입니다. 향 선호도와 피부 민감 여부를 예약 상담에서 확인합니다.</p>
           </article>
-          <article class="feature-card">
+          <article class="feature-card" id="service-dry">
             <span class="card-number">05</span>
             <h3>건식 관리 안내</h3>
             <p>오일 사용 없이 진행하는 관리입니다. 옷차림, 관리 강도, 불편한 부위를 미리 알려주면 더 안정적으로 안내할 수 있습니다.</p>
           </article>
-          <article class="feature-card">
+          <article class="feature-card" id="service-before">
             <span class="card-number">06</span>
             <h3>예약 전 확인사항</h3>
             <p>방문 지역, 희망 시간, 주차 가능 여부, 공동현관 출입 방식, 건강 상태와 피해야 할 부위를 상담 전에 확인합니다.</p>
@@ -163,32 +213,32 @@
           </p>
         </div>
         <div class="feature-grid service-grid">
-          <article class="feature-card">
+          <article class="feature-card" id="process-booking">
             <span class="card-number">01</span>
             <h3>예약 절차</h3>
             <p>전화 상담으로 지역, 희망 시간, 관리 종류, 방문 공간 조건을 확인한 뒤 가능 여부를 안내합니다.</p>
           </article>
-          <article class="feature-card">
+          <article class="feature-card" id="process-price">
             <span class="card-number">02</span>
             <h3>요금 안내</h3>
             <p>요금은 지역, 시간, 관리 종류, 이동 조건에 따라 달라질 수 있어 상담 시점의 실제 기준으로 안내합니다.</p>
           </article>
-          <article class="feature-card">
+          <article class="feature-card" id="process-hours">
             <span class="card-number">03</span>
             <h3>이용 가능 시간</h3>
             <p>이용 가능 시간은 당일 예약 현황과 이동 동선에 따라 달라집니다. 확정 전 가능 시간을 다시 확인합니다.</p>
           </article>
-          <article class="feature-card">
+          <article class="feature-card" id="process-areas">
             <span class="card-number">04</span>
             <h3>방문 가능 지역</h3>
             <p>서울, 경기, 인천을 중심으로 운영하며 세부 행정구역별 가능 여부는 지역별 페이지와 상담을 기준으로 확인합니다.</p>
           </article>
-          <article class="feature-card">
+          <article class="feature-card" id="process-change">
             <span class="card-number">05</span>
             <h3>취소 및 변경 안내</h3>
             <p>예약 시간, 주소, 코스 변경은 가능한 빨리 알려주세요. 방문 준비가 시작된 뒤에는 조정이 제한될 수 있습니다.</p>
           </article>
-          <article class="feature-card">
+          <article class="feature-card" id="process-safety">
             <span class="card-number">06</span>
             <h3>안전 이용 안내</h3>
             <p>불법·선정적 요청은 받지 않습니다. 건강 상태, 피해야 할 부위, 공간 출입 조건을 사전에 공유해 주세요.</p>
@@ -378,7 +428,7 @@
           </p>
         </div>
         <div class="review-grid">
-          <article class="review-card">
+          <article class="review-card" id="review-seoul">
             <div class="review-card-head">
               <span>서울 이용 후기</span>
               <strong>강남구 · 아로마 관리</strong>
@@ -392,7 +442,7 @@
               <div><dt>재이용 여부</dt><dd>일정이 맞으면 다시 문의할 의향이 있습니다.</dd></div>
             </dl>
           </article>
-          <article class="review-card">
+          <article class="review-card" id="review-gyeonggi">
             <div class="review-card-head">
               <span>경기 이용 후기</span>
               <strong>성남시 · 건식 관리</strong>
@@ -406,7 +456,7 @@
               <div><dt>재이용 여부</dt><dd>예약 가능 시간을 미리 맞출 수 있으면 재문의할 계획입니다.</dd></div>
             </dl>
           </article>
-          <article class="review-card">
+          <article class="review-card" id="review-incheon">
             <div class="review-card-head">
               <span>인천 이용 후기</span>
               <strong>연수구 · 스웨디시</strong>
@@ -420,7 +470,7 @@
               <div><dt>재이용 여부</dt><dd>방문 조건이 맞는 날 다시 상담해볼 생각입니다.</dd></div>
             </dl>
           </article>
-          <article class="review-card">
+          <article class="review-card" id="review-first">
             <div class="review-card-head">
               <span>첫 이용 후기</span>
               <strong>방문 관리 첫 상담</strong>
@@ -449,27 +499,27 @@
           </p>
         </div>
         <div class="magazine-layout">
-          <article class="magazine-card">
+          <article class="magazine-card" id="magazine-fatigue">
             <span>피로 관리</span>
             <h3>장시간 운전 후 몸이 무거울 때 확인할 부분</h3>
             <p>허리, 어깨, 종아리처럼 오래 긴장되는 부위를 먼저 확인하고 무리한 강도보다 컨디션을 기준으로 상담하는 것이 좋습니다.</p>
           </article>
-          <article class="magazine-card">
+          <article class="magazine-card" id="magazine-local">
             <span>지역 생활 정보</span>
             <h3>강남·분당·송도처럼 야근 많은 지역에서 피로가 쌓이는 이유</h3>
             <p>업무 밀집 지역은 퇴근 시간이 늦고 이동 시간이 길어지는 경우가 많아 방문 가능 시간과 휴식 공간을 함께 확인해야 합니다.</p>
           </article>
-          <article class="magazine-card">
+          <article class="magazine-card" id="magazine-knowledge">
             <span>마사지 상식</span>
             <h3>아로마 관리와 건식 관리를 고를 때 다른 점</h3>
             <p>오일 사용 여부, 옷차림, 피부 민감도, 선호하는 압의 차이를 기준으로 선택하면 상담이 더 명확해집니다.</p>
           </article>
-          <article class="magazine-card">
+          <article class="magazine-card" id="magazine-before">
             <span>예약 전 알아둘 점</span>
             <h3>출장마사지 예약 전 업체 정보를 확인해야 하는 이유</h3>
             <p>연락처, 가능 지역, 취소 기준, 불법 요청 거절 원칙을 확인하면 예약 전 불확실성을 줄일 수 있습니다.</p>
           </article>
-          <article class="magazine-card">
+          <article class="magazine-card" id="magazine-worker">
             <span>직장인 피로 회복</span>
             <h3>퇴근 후 방문 관리 예약 전 체크할 생활 포인트</h3>
             <p>식사 직후인지, 다음 일정이 있는지, 조용한 공간이 확보되는지에 따라 관리 만족도가 달라질 수 있습니다.</p>
