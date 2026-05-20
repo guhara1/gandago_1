@@ -32,6 +32,7 @@ document.querySelectorAll(".area-subnav").forEach((nav) => {
   let didDrag = false;
   let startX = 0;
   let startScrollLeft = 0;
+  const dragThreshold = 8;
 
   nav.addEventListener("pointerdown", (event) => {
     if (event.button !== 0 && event.pointerType === "mouse") return;
@@ -40,31 +41,29 @@ document.querySelectorAll(".area-subnav").forEach((nav) => {
     didDrag = false;
     startX = event.clientX;
     startScrollLeft = nav.scrollLeft;
-    nav.classList.add("is-dragging");
-    nav.setPointerCapture(event.pointerId);
   });
 
   nav.addEventListener("pointermove", (event) => {
     if (!isDown) return;
 
     const distance = event.clientX - startX;
-    didDrag = didDrag || Math.abs(distance) > 6;
+    if (Math.abs(distance) <= dragThreshold && !didDrag) return;
+
+    didDrag = true;
+    nav.classList.add("is-dragging");
     nav.scrollLeft = startScrollLeft - distance;
   });
 
-  const stopDragging = (event) => {
+  const stopDragging = () => {
     if (!isDown) return;
 
     isDown = false;
     nav.classList.remove("is-dragging");
-
-    if (nav.hasPointerCapture(event.pointerId)) {
-      nav.releasePointerCapture(event.pointerId);
-    }
   };
 
   nav.addEventListener("pointerup", stopDragging);
   nav.addEventListener("pointercancel", stopDragging);
+  nav.addEventListener("pointerleave", stopDragging);
 
   nav.addEventListener(
     "click",
@@ -73,7 +72,10 @@ document.querySelectorAll(".area-subnav").forEach((nav) => {
 
       event.preventDefault();
       event.stopPropagation();
-      didDrag = false;
+
+      window.setTimeout(() => {
+        didDrag = false;
+      }, 0);
     },
     true,
   );
