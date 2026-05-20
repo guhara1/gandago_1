@@ -83,8 +83,8 @@ const areas = [
 
 const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, next }) => {
   const url = `${siteUrl}/areas/${regionSlug}/${slug}/`;
-  const title = `${name} 출장마사지 예약 안내 | 간다고 ${regionName} 방문 케어`;
-  const description = `간다고 ${name} 페이지는 ${context} ${check} 서울·경기·인천 방문 마사지 예약 전 확인할 정보를 정리합니다.`;
+  const title = `${name} 출장마사지 예약 안내 | 간다GO ${regionName} 방문 케어`;
+  const description = `간다GO ${name} 페이지는 ${context} ${check} 서울·경기·인천 방문 마사지 예약 전 확인할 정보를 정리합니다.`;
   const neighboring = [prev, next].filter(Boolean).join(" · ");
 
   return `<!doctype html>
@@ -99,12 +99,12 @@ const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, n
     <link rel="stylesheet" href="../../../styles.css" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="ko_KR" />
-    <meta property="og:site_name" content="간다고" />
+    <meta property="og:site_name" content="간다GO" />
     <meta property="og:title" content="${title}" />
     <meta property="og:description" content="${description}" />
     <meta property="og:url" content="${url}" />
     <meta property="og:image" content="${siteUrl}/assets/gandago-hero.png" />
-    <meta property="og:image:alt" content="간다고 ${name} 방문 마사지 안내 이미지" />
+    <meta property="og:image:alt" content="간다GO ${name} 방문 마사지 안내 이미지" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -116,11 +116,11 @@ const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, n
           "@type": "Service",
           "name": "${name} 출장마사지 예약 안내",
           "areaServed": { "@type": "AdministrativeArea", "name": "${name}" },
-          "provider": { "@type": "HealthAndBeautyBusiness", "name": "간다고", "telephone": "${phone}" }
+          "provider": { "@type": "HealthAndBeautyBusiness", "name": "간다GO", "telephone": "${phone}" }
         },
         "reviewedBy": {
           "@type": "Organization",
-          "name": "간다고 운영팀"
+          "name": "간다GO 운영팀"
         },
         "dateModified": "${updated}"
       }
@@ -128,10 +128,10 @@ const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, n
   </head>
   <body class="area-page">
     <header class="site-header is-scrolled" aria-label="상단 메뉴">
-      <a class="brand" href="../../../" aria-label="간다고 홈">
+      <a class="brand" href="../../../" aria-label="간다GO 홈">
         <span class="brand-mark">ㄱ</span>
         <span>
-          <strong>간다고</strong>
+          <strong><span class="brand-core">간다</span><span class="brand-go">GO</span></strong>
           <small>Seoul · Gyeonggi · Incheon</small>
         </span>
       </a>
@@ -177,7 +177,7 @@ const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, n
         <article>
           <p class="eyebrow">Who · How · Why</p>
           <h2>작성 기준</h2>
-          <p>이 페이지는 간다고 운영팀이 예약 상담에 필요한 지역별 확인 항목을 정리한 안내입니다. AI 초안을 활용할 수 있으나, 최종 게시 전 운영 기준과 법적 표현을 검토한다는 원칙으로 관리합니다.</p>
+          <p>이 페이지는 간다GO 운영팀이 예약 상담에 필요한 지역별 확인 항목을 정리한 안내입니다. AI 초안을 활용할 수 있으나, 최종 게시 전 운영 기준과 법적 표현을 검토한다는 원칙으로 관리합니다.</p>
         </article>
         <article>
           <p class="eyebrow">Nearby</p>
@@ -189,7 +189,7 @@ const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, n
 
     <footer class="site-footer">
       <div>
-        <strong>간다고</strong>
+        <strong><span class="brand-core">간다</span><span class="brand-go">GO</span></strong>
         <p>${regionName} ${name} 방문 마사지 안내</p>
       </div>
       <div class="footer-links">

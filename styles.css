@@ -94,6 +94,24 @@ a {
   display: block;
 }
 
+.brand-core,
+.brand-go {
+  display: inline-block;
+}
+
+.brand-go {
+  margin-left: 0.04em;
+  color: #30d7bd;
+  background: linear-gradient(135deg, #30d7bd 0%, #fff0a6 45%, #ff9f5a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.34),
+    0 4px 10px rgba(48, 215, 189, 0.34),
+    0 12px 28px rgba(255, 159, 90, 0.2);
+  transform: skewX(-6deg);
+}
+
 .brand small {
   margin-top: -4px;
   font-size: 11px;
@@ -192,6 +210,13 @@ h1 {
   font-size: clamp(68px, 14vw, 156px);
   line-height: 0.9;
   letter-spacing: 0;
+}
+
+h1 .brand-go {
+  text-shadow:
+    0 2px 0 rgba(255, 255, 255, 0.32),
+    0 10px 26px rgba(48, 215, 189, 0.38),
+    0 24px 70px rgba(255, 159, 90, 0.28);
 }
 
 h2 {
