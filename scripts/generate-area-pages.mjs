@@ -447,6 +447,18 @@ const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, n
         <a href="#faq">${name} 출장마사지 FAQ</a>
       </nav>
 
+      <section class="area-conversion-panel" aria-label="${name} 빠른 예약 안내">
+        <div>
+          <span>Gandago Booking Desk</span>
+          <strong>${name} 방문 가능 여부와 요금을 먼저 확인하세요</strong>
+          <p>상세 주소, 희망 시간, 관리 유형을 알려주시면 실제 이동 조건을 기준으로 상담합니다.</p>
+        </div>
+        <div class="area-conversion-actions">
+          <a class="button primary" href="tel:${phone}">${phone}</a>
+          <a class="button secondary on-light" href="#before">예약 전 확인사항</a>
+        </div>
+      </section>
+
       <section class="area-content">
         <article id="coverage">
           <p class="eyebrow">Local Note</p>
