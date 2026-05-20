@@ -543,12 +543,18 @@ h3 {
 }
 
 .coverage-intro {
-  display: grid;
-  max-width: 1080px;
-  grid-template-columns: minmax(0, 0.8fr) minmax(300px, 0.64fr);
-  gap: clamp(24px, 6vw, 76px);
-  align-items: end;
-  margin-bottom: 30px;
+  max-width: 900px;
+  margin-bottom: 34px;
+}
+
+.coverage-intro h2 {
+  max-width: 760px;
+  margin-bottom: 22px;
+}
+
+.coverage-intro p:not(.eyebrow) {
+  max-width: 720px;
+  margin-bottom: 0;
 }
 
 .area-explorer {
