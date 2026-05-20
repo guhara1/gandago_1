@@ -2021,22 +2021,6 @@ h3 {
   line-height: 1.75;
 }
 
-.magazine-article-cover {
-  padding: 0 clamp(20px, 7vw, 120px);
-  margin-top: -40px;
-}
-
-.magazine-article-cover span {
-  display: block;
-  min-height: clamp(220px, 32vw, 430px);
-  border: 1px solid rgba(255, 253, 248, 0.42);
-  border-radius: 8px;
-  background:
-    linear-gradient(135deg, rgba(9, 31, 29, 0.14), rgba(221, 166, 86, 0.2)),
-    linear-gradient(120deg, #123834 0%, #2c786f 48%, #efc98b 100%);
-  box-shadow: 0 28px 72px rgba(16, 32, 30, 0.18);
-}
-
 .magazine-article-body {
   display: grid;
   gap: 28px;
