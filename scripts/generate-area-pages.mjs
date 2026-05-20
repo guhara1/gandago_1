@@ -5,6 +5,89 @@ const siteUrl = "https://gandago-1.pages.dev";
 const phone = "0508-202-4743";
 const updated = "2026-05-20";
 
+const supportPages = [
+  {
+    path: "about",
+    title: "회사 소개",
+    description: "간다GO와 운영사 YH LAB의 운영 배경, 책임 정보, 서비스 원칙을 안내합니다.",
+    eyebrow: "About",
+    heading: "간다GO 운영 배경",
+    summary: "간다GO는 서울, 경기, 인천에 집중해 방문 마사지 예약 전 확인해야 할 지역, 절차, 안전 기준을 정리하는 안내 사이트입니다.",
+    sections: [
+      ["운영 주체", "회사 YH LAB, 대표 김유환이 운영하며 사업자등록번호와 주소를 사이트 하단에 공개합니다."],
+      ["서비스 범위", "서울, 경기, 인천 지역을 중심으로 합법적인 웰니스 방문 관리 정보와 예약 상담 기준을 안내합니다."],
+      ["콘텐츠 책임", "지역 페이지와 안내 콘텐츠는 과장된 치료 효과나 선정적 표현을 피하고, 실제 예약 전 확인에 필요한 정보 위주로 작성합니다."]
+    ]
+  },
+  {
+    path: "contact",
+    title: "고객센터",
+    description: "간다GO 공지사항, 자주 묻는 질문, 1:1 문의, 제휴 문의, 운영 정책 안내입니다.",
+    eyebrow: "Contact",
+    heading: "고객센터",
+    summary: "예약과 사이트 운영 관련 문의는 아래 기준을 확인한 뒤 전화 상담으로 진행합니다.",
+    sections: [
+      ["공지사항", "현재 간다GO는 서울, 경기, 인천 지역 안내를 우선 운영합니다. 운영 지역과 정책 변경이 있을 때 이 페이지에 반영합니다.", "notice"],
+      ["자주 묻는 질문", "요금, 가능 시간, 방문 가능 지역은 상담 시점의 이동 조건과 예약 현황에 따라 달라질 수 있습니다.", "faq"],
+      ["1:1 문의", `예약 또는 이용 전 확인이 필요한 내용은 ${phone}으로 문의해 주세요. 상담 시 지역, 희망 시간, 관리 유형을 함께 알려주시면 더 정확합니다.`, "one-to-one"],
+      ["제휴 문의", "콘텐츠, 지역 운영, 브랜드 제휴 문의는 사업자 정보와 제안 내용을 정리한 뒤 전화 상담을 통해 접수합니다.", "partnership"],
+      ["운영 정책", "간다GO는 불법·성매매·선정적 서비스를 제공하거나 중개하지 않으며, 치료 효과를 보장하지 않습니다.", "operation-policy"]
+    ]
+  },
+  {
+    path: "policy/editorial",
+    title: "편집 정책",
+    description: "간다GO 콘텐츠 작성 기준, 검수 원칙, 스팸 방지 기준을 안내합니다.",
+    eyebrow: "Editorial Policy",
+    heading: "편집 정책",
+    summary: "간다GO는 검색 순위 조작보다 이용자의 예약 전 판단에 도움이 되는 정보 제공을 우선합니다.",
+    sections: [
+      ["작성 기준", "지역명만 바꾼 반복 글을 만들지 않고, 이동 조건, 건물 출입, 상담 전 확인사항처럼 실제 판단에 필요한 정보를 우선합니다."],
+      ["검수 기준", "허위 후기, 과장된 치료 효과, 선정적 표현, 자격을 오해하게 하는 표현을 사용하지 않습니다."],
+      ["수정 기준", "지역 행정구역, 운영 기준, 연락처, 정책 정보가 바뀌면 확인 가능한 날짜와 함께 콘텐츠를 갱신합니다."]
+    ]
+  },
+  {
+    path: "policy/privacy",
+    title: "개인정보처리방침",
+    description: "간다GO 개인정보 수집 최소화, 이용 목적, 보관 기준을 안내합니다.",
+    eyebrow: "Privacy",
+    heading: "개인정보처리방침",
+    summary: "간다GO는 문의와 예약 상담에 필요한 정보만 최소한으로 확인하는 것을 원칙으로 합니다.",
+    sections: [
+      ["수집 항목", "전화 상담 과정에서 지역, 희망 시간, 문의 내용처럼 예약 가능 여부 확인에 필요한 정보가 안내될 수 있습니다."],
+      ["이용 목적", "수집된 정보는 예약 가능 여부 확인, 상담 응대, 운영 기준 안내 목적으로만 사용합니다."],
+      ["보관과 보호", "불필요한 개인정보를 공개 페이지에 게시하지 않으며, 실제 운영 시 관련 법령에 맞춰 보관과 파기 기준을 관리합니다."]
+    ]
+  },
+  {
+    path: "policy/terms",
+    title: "이용약관",
+    description: "간다GO 사이트 이용 기준, 금지 행위, 책임 범위를 안내합니다.",
+    eyebrow: "Terms",
+    heading: "이용약관",
+    summary: "본 사이트는 서울, 경기, 인천 방문 마사지 안내와 예약 전 정보 확인을 돕기 위한 목적으로 운영됩니다.",
+    sections: [
+      ["이용 목적", "사이트 콘텐츠는 예약 전 참고 정보이며, 최종 가능 여부와 금액은 상담 시점의 운영 조건을 기준으로 안내됩니다."],
+      ["금지 행위", "불법·선정적 요청, 허위 정보 제공, 타인의 개인정보 도용, 서비스 운영을 방해하는 행위를 금지합니다."],
+      ["책임 범위", "의료 행위, 질병 진단, 치료 효과를 보장하지 않으며 건강 관련 우려가 있는 경우 전문가 상담이 우선입니다."]
+    ]
+  },
+  {
+    path: "policy/refund",
+    title: "취소 및 환불 안내",
+    description: "간다GO 예약 변경, 취소, 환불 상담 기준을 안내합니다.",
+    eyebrow: "Refund",
+    heading: "취소 및 환불 안내",
+    summary: "예약 변경과 취소는 방문 준비와 이동 시작 여부에 따라 조정 가능 범위가 달라질 수 있습니다.",
+    sections: [
+      ["예약 변경", "시간, 주소, 관리 유형 변경이 필요하면 가능한 빨리 전화로 알려주세요."],
+      ["취소 기준", "방문 준비 또는 이동이 시작된 뒤에는 조정이 제한될 수 있어 상담 시점의 조건을 기준으로 안내합니다."],
+      ["환불 안내", "실제 결제 방식과 진행 상태에 따라 환불 가능 여부가 달라질 수 있으므로 개별 상담을 통해 확인합니다."]
+    ]
+  }
+];
+
 const areas = [
   ["seoul", "서울", [
     ["강남구", "gangnam-gu", "테헤란로와 압구정·청담 생활권처럼 업무와 주거 이동이 겹치는 지역입니다.", "건물 출입 방식과 주차 가능 여부를 먼저 확인하는 편이 좋습니다."],
@@ -186,10 +269,13 @@ const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, n
           </div>
         </div>
         <div class="nav-item">
-          <a href="../../../#support">고객센터</a>
+          <a href="../../../contact/">고객센터</a>
           <div class="submenu" aria-label="고객센터 하위 메뉴">
-            <a href="../../../#support">예약 문의</a>
-            <a href="../../../#support">자주 묻는 질문</a>
+            <a href="../../../contact/#notice">공지사항</a>
+            <a href="../../../contact/#faq">자주 묻는 질문</a>
+            <a href="../../../contact/#one-to-one">1:1 문의</a>
+            <a href="../../../contact/#partnership">제휴 문의</a>
+            <a href="../../../policy/editorial/">운영 정책</a>
           </div>
         </div>
       </nav>
@@ -256,8 +342,182 @@ const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, n
           <h2>콘텐츠</h2>
           <a href="../../../#magazine">매거진</a>
           <a href="../../../#trust">신뢰 기준</a>
-          <a href="../../../#support">고객센터</a>
-          <a href="../../../#booking">예약 문의</a>
+          <a href="../../../about/">회사 소개</a>
+          <a href="../../../contact/">고객센터</a>
+        </div>
+        <div>
+          <h2>정책</h2>
+          <a href="../../../policy/editorial/">편집 정책</a>
+          <a href="../../../policy/privacy/">개인정보처리방침</a>
+          <a href="../../../policy/terms/">이용약관</a>
+          <a href="../../../policy/refund/">취소·환불 안내</a>
+        </div>
+      </nav>
+
+      <address class="footer-business">
+        <span>회사 YH LAB</span>
+        <span>대표 김유환</span>
+        <span>사업자등록번호 815-26-00585</span>
+        <span>주소 경기도 파주시 청석로 268</span>
+      </address>
+
+      <div class="footer-disclosure">
+        <p>간다GO는 불법·성매매·선정적 서비스를 제공하거나 중개하지 않으며, 질병 진단 또는 치료 효과를 보장하지 않습니다.</p>
+        <p>최종 수정일: ${updated}. 실제 가능 지역, 예약 시간, 금액은 상담 시점의 운영 조건을 기준으로 안내합니다.</p>
+      </div>
+    </footer>
+  </body>
+</html>
+`;
+};
+
+const supportShell = ({ path: pagePath, title, description, eyebrow, heading, summary, sections }) => {
+  const depth = pagePath.split("/").length;
+  const base = "../".repeat(depth);
+  const canonical = `${siteUrl}/${pagePath}/`;
+  return `<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>${title} | 간다GO</title>
+    <meta name="description" content="${description}" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href="${canonical}" />
+    <link rel="stylesheet" href="${base}styles.css" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta property="og:site_name" content="간다GO" />
+    <meta property="og:title" content="${title} | 간다GO" />
+    <meta property="og:description" content="${description}" />
+    <meta property="og:url" content="${canonical}" />
+  </head>
+  <body class="content-page">
+    <a class="skip-link" href="#main">본문으로 이동</a>
+
+    <header class="site-header is-scrolled" aria-label="상단 메뉴">
+      <a class="brand" href="${base}" aria-label="간다GO 홈">
+        <span class="brand-mark">ㄱ</span>
+        <span>
+          <strong><span class="brand-core">간다</span><span class="brand-go">GO</span></strong>
+          <small>Seoul · Gyeonggi · Incheon</small>
+        </span>
+      </a>
+      <nav class="nav" aria-label="주요 메뉴">
+        <div class="nav-item">
+          <a href="${base}#areas">지역별 찾기</a>
+          <div class="submenu" aria-label="지역별 찾기 하위 메뉴">
+            <a href="${base}#panel-seoul">서울</a>
+            <a href="${base}#panel-gyeonggi">경기</a>
+            <a href="${base}#panel-incheon">인천</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="${base}#service">서비스 안내</a>
+          <div class="submenu" aria-label="서비스 안내 하위 메뉴">
+            <a href="${base}#service-onsite">출장마사지 안내</a>
+            <a href="${base}#service-home-thai">홈타이 안내</a>
+            <a href="${base}#service-swedish">스웨디시 안내</a>
+            <a href="${base}#service-aroma">아로마 관리 안내</a>
+            <a href="${base}#service-dry">건식 관리 안내</a>
+            <a href="${base}#service-before">예약 전 확인사항</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="${base}#process">이용 방법</a>
+          <div class="submenu" aria-label="이용 방법 하위 메뉴">
+            <a href="${base}#process-booking">예약 절차</a>
+            <a href="${base}#process-price">요금 안내</a>
+            <a href="${base}#process-hours">이용 가능 시간</a>
+            <a href="${base}#process-areas">방문 가능 지역</a>
+            <a href="${base}#process-change">취소 및 변경 안내</a>
+            <a href="${base}#process-safety">안전 이용 안내</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="${base}#reviews">이용 후기</a>
+          <div class="submenu" aria-label="이용 후기 하위 메뉴">
+            <a href="${base}#review-seoul">서울 이용 후기</a>
+            <a href="${base}#review-gyeonggi">경기 이용 후기</a>
+            <a href="${base}#review-incheon">인천 이용 후기</a>
+            <a href="${base}#review-first">첫 이용 후기</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="${base}#magazine">매거진</a>
+          <div class="submenu" aria-label="매거진 하위 메뉴">
+            <a href="${base}#magazine-fatigue">피로 관리</a>
+            <a href="${base}#magazine-local">지역 생활 정보</a>
+            <a href="${base}#magazine-knowledge">마사지 상식</a>
+            <a href="${base}#magazine-before">예약 전 알아둘 점</a>
+            <a href="${base}#magazine-worker">직장인 피로 회복</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="${base}contact/">고객센터</a>
+          <div class="submenu" aria-label="고객센터 하위 메뉴">
+            <a href="${base}contact/#notice">공지사항</a>
+            <a href="${base}contact/#faq">자주 묻는 질문</a>
+            <a href="${base}contact/#one-to-one">1:1 문의</a>
+            <a href="${base}contact/#partnership">제휴 문의</a>
+            <a href="${base}policy/editorial/">운영 정책</a>
+          </div>
+        </div>
+      </nav>
+      <a class="nav-cta" href="${base}#booking">예약 문의</a>
+    </header>
+
+    <main id="main" class="content-main">
+      <section class="content-hero">
+        <p class="eyebrow">${eyebrow}</p>
+        <h1>${heading}</h1>
+        <p>${summary}</p>
+      </section>
+
+      <section class="content-grid" aria-label="${title} 상세 정보">
+        ${sections.map(([sectionTitle, body, id]) => `<article${id ? ` id="${id}"` : ""} class="content-card">
+          <h2>${sectionTitle}</h2>
+          <p>${body}</p>
+        </article>`).join("\n        ")}
+      </section>
+
+      <section class="content-cta" aria-label="문의 안내">
+        <div>
+          <h2>예약 및 운영 문의</h2>
+          <p>실제 가능 지역, 예약 시간, 금액은 상담 시점의 운영 조건을 기준으로 안내합니다.</p>
+        </div>
+        <a class="button primary" href="tel:${phone}">${phone}</a>
+      </section>
+    </main>
+
+    <footer class="site-footer" aria-label="사이트 하단 정보">
+      <div class="footer-brand">
+        <strong><span class="brand-core">간다</span><span class="brand-go">GO</span></strong>
+        <p>서울 · 경기 · 인천에 집중한 합법 웰니스 방문 마사지 안내 서비스입니다.</p>
+        <a class="footer-call" href="tel:${phone}">예약 문의 ${phone}</a>
+      </div>
+
+      <nav class="footer-nav" aria-label="하단 주요 메뉴">
+        <div>
+          <h2>서비스</h2>
+          <a href="${base}#service">서비스 안내</a>
+          <a href="${base}#process">이용 방법</a>
+          <a href="${base}#areas">방문 가능 지역</a>
+          <a href="${base}#reviews">이용 후기</a>
+        </div>
+        <div>
+          <h2>콘텐츠</h2>
+          <a href="${base}#magazine">매거진</a>
+          <a href="${base}#trust">신뢰 기준</a>
+          <a href="${base}about/">회사 소개</a>
+          <a href="${base}contact/">고객센터</a>
+        </div>
+        <div>
+          <h2>정책</h2>
+          <a href="${base}policy/editorial/">편집 정책</a>
+          <a href="${base}policy/privacy/">개인정보처리방침</a>
+          <a href="${base}policy/terms/">이용약관</a>
+          <a href="${base}policy/refund/">취소·환불 안내</a>
         </div>
       </nav>
 
@@ -315,6 +575,13 @@ const main = async () => {
       }));
       urls.push(`${siteUrl}/areas/${regionSlug}/${slug}/`);
     }
+  }
+
+  for (const page of supportPages) {
+    const dir = path.join(root, ...page.path.split("/"));
+    await mkdir(dir, { recursive: true });
+    await writeFile(path.join(dir, "index.html"), supportShell(page));
+    urls.push(`${siteUrl}/${page.path}/`);
   }
 
   const indexPath = path.join(root, "index.html");

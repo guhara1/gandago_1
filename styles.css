@@ -840,7 +840,7 @@ h3 {
 
 .footer-nav {
   display: grid;
-  grid-template-columns: repeat(2, minmax(130px, 1fr));
+  grid-template-columns: repeat(3, minmax(120px, 1fr));
   gap: 22px;
 }
 
@@ -907,6 +907,85 @@ h3 {
   margin: 0;
 }
 
+.content-page {
+  background: var(--paper);
+}
+
+.content-main {
+  padding-top: 120px;
+}
+
+.content-hero {
+  padding: 80px clamp(22px, 5vw, 80px) 46px;
+  background:
+    linear-gradient(135deg, rgba(16, 32, 30, 0.94), rgba(31, 89, 80, 0.88)),
+    linear-gradient(0deg, rgba(201, 162, 86, 0.22), rgba(201, 162, 86, 0));
+  color: var(--paper);
+}
+
+.content-hero h1 {
+  max-width: 920px;
+  margin: 10px 0 18px;
+  font-size: clamp(44px, 7vw, 88px);
+  line-height: 0.98;
+}
+
+.content-hero p:not(.eyebrow) {
+  max-width: 760px;
+  color: rgba(255, 252, 245, 0.82);
+  font-size: clamp(18px, 2vw, 24px);
+  line-height: 1.7;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  padding: 56px clamp(22px, 5vw, 80px);
+}
+
+.content-card {
+  min-height: 220px;
+  padding: 30px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 252, 245, 0.86);
+  box-shadow: 0 18px 44px rgba(16, 32, 30, 0.08);
+}
+
+.content-card h2 {
+  margin: 0 0 16px;
+  font-size: 24px;
+}
+
+.content-card p {
+  margin: 0;
+  color: rgba(16, 32, 30, 0.72);
+  line-height: 1.8;
+}
+
+.content-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin: 0 clamp(22px, 5vw, 80px) 70px;
+  padding: 28px;
+  border: 1px solid rgba(16, 32, 30, 0.14);
+  border-radius: 8px;
+  background: #fffaf0;
+}
+
+.content-cta h2 {
+  margin: 0 0 8px;
+  font-size: 24px;
+}
+
+.content-cta p {
+  margin: 0;
+  color: rgba(16, 32, 30, 0.66);
+}
+
 @media (max-width: 900px) {
   .site-header {
     padding: 14px 18px;
@@ -932,8 +1011,26 @@ h3 {
   .trust-layout,
   .coverage-intro,
   .editorial,
-  .site-footer {
+  .site-footer,
+  .content-grid {
     grid-template-columns: 1fr;
+  }
+
+  .footer-nav {
+    grid-template-columns: 1fr;
+  }
+
+  .content-main {
+    padding-top: 96px;
+  }
+
+  .content-hero {
+    padding-top: 56px;
+  }
+
+  .content-cta {
+    align-items: stretch;
+    flex-direction: column;
   }
 
   .area-tabs {
