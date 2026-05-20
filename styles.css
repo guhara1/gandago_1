@@ -57,7 +57,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
+  gap: 16px;
   padding: 18px clamp(20px, 5vw, 72px);
   color: var(--white);
   background: linear-gradient(180deg, rgba(16, 32, 30, 0.76), rgba(16, 32, 30, 0));
@@ -103,8 +103,9 @@ a {
 .nav {
   display: flex;
   align-items: center;
-  gap: 24px;
-  font-size: 15px;
+  gap: clamp(10px, 1.35vw, 20px);
+  font-size: 14px;
+  white-space: nowrap;
 }
 
 .nav a {

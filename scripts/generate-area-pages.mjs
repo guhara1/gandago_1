@@ -136,10 +136,12 @@ const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, n
         </span>
       </a>
       <nav class="nav" aria-label="주요 메뉴">
-        <a href="../../../#service">서비스</a>
-        <a href="../../../#areas">지역</a>
-        <a href="../../../#trust">신뢰 원칙</a>
-        <a href="../../../#faq">FAQ</a>
+        <a href="../../../#areas">지역별 찾기</a>
+        <a href="../../../#service">서비스 안내</a>
+        <a href="../../../#process">이용 방법</a>
+        <a href="../../../#reviews">이용 후기</a>
+        <a href="../../../#magazine">매거진</a>
+        <a href="../../../#support">고객센터</a>
       </nav>
       <a class="nav-cta" href="tel:${phone}">예약 문의</a>
     </header>
