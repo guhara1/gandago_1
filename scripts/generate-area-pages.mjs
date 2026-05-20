@@ -271,6 +271,105 @@ const dongAreaType = (dongName) => {
   return "주거지와 역세권 이동이 함께 있는 생활권";
 };
 
+const dongProfile = (dongName) => {
+  if (/여의|광화문|을지로|가산|성수|마곡|문래|구로|상암|종로|충현|공덕|용산|한강로/.test(dongName)) {
+    return {
+      short: "업무지·오피스텔 생활권",
+      focus: "퇴근 이후 문의, 보안 데스크 출입, 차량 정차 위치",
+      intent: "업무 일정 뒤 조용한 방문 관리를 찾는 분"
+    };
+  }
+  if (/잠실|반포|개포|대치|도곡|목동|상계|중계|고덕|명일|신정|신월|진관|불광|월계|하계|왕십리|옥수|금호/.test(dongName)) {
+    return {
+      short: "아파트·주거 단지 생활권",
+      focus: "공동현관 확인, 단지 내 동선, 주차 가능 여부",
+      intent: "집에서 편하게 휴식형 관리를 확인하려는 분"
+    };
+  }
+  if (/명동|홍대|서교|합정|연남|신촌|이태원|한남|압구정|청담|화양|건대|대학|낙성대|혜화|삼청/.test(dongName)) {
+    return {
+      short: "상권·숙소 혼합 생활권",
+      focus: "숙소 위치, 야간 이동 동선, 엘리베이터 이용 시간",
+      intent: "외부 일정 후 방문 가능 여부를 먼저 확인하려는 분"
+    };
+  }
+  if (/방화|공항|마곡|수서|청량리|회기|구파발|수색|창동|도봉|강일|항동|위례|장지/.test(dongName)) {
+    return {
+      short: "교통 거점·외곽 이동 생활권",
+      focus: "이동 거리, 도착 가능 시간, 정차 지점",
+      intent: "이동 조건까지 함께 상담받고 싶은 분"
+    };
+  }
+  return {
+    short: "주거지·역세권 혼합 생활권",
+    focus: "상세 주소, 출입 방식, 희망 시간대",
+    intent: "처음 예약 전 조건을 차분히 확인하려는 분"
+  };
+};
+
+const dongSeoMeta = ({ districtName, districtSlug, dongName }) => {
+  const profile = dongProfile(dongName);
+  const seed = hashString(`${districtSlug}-${dongName}`);
+  const titleAngles = [
+    "퇴근 후 방문 조건",
+    "공동현관·주차 동선",
+    "처음 예약 체크",
+    "야간 상담 전 확인",
+    "아파트 방문 기준",
+    "오피스텔 출입 안내",
+    "숙소 주변 이용 조건",
+    "주말 예약 흐름",
+    "정차 위치 확인",
+    "관리 유형 선택"
+  ];
+  const situationAngles = [
+    "퇴근 직후 문의가 몰릴 수 있는 시간대",
+    "공동현관과 보안 데스크 확인이 필요한 건물",
+    "차량 정차 위치를 미리 잡아두면 좋은 골목",
+    "아파트 단지와 오피스텔이 섞인 생활권",
+    "주말 저녁 예약 전 여유 시간을 잡아야 하는 상황",
+    "처음 이용자가 요금 범위를 먼저 확인해야 하는 경우",
+    "숙소나 업무용 건물에서 출입 안내가 필요한 경우",
+    "늦은 시간대 소음과 이동 동선을 함께 고려해야 하는 경우",
+    "관리 유형을 정하기 전 컨디션을 먼저 설명해야 하는 상황",
+    "주차 가능 여부가 실제 방문 시간에 영향을 주는 경우"
+  ];
+  const prepAngles = [
+    "상세 주소 전달 방법",
+    "희망 시간 조율 기준",
+    "관리 유형별 참고 요금",
+    "오일 관리 전 준비사항",
+    "건식 관리 선택 기준",
+    "안전 이용 원칙",
+    "예약 확정 전 확인 순서",
+    "주변 행정동 비교 링크",
+    "처음 이용 전 체크리스트",
+    "상담 시 피해야 할 오해"
+  ];
+  const titleAngle = titleAngles[seed % titleAngles.length];
+  const situation = situationAngles[(seed + 3) % situationAngles.length];
+  const prep = prepAngles[(seed + 7) % prepAngles.length];
+  const titlePatterns = [
+    `${dongName} 출장마사지 | ${districtName} ${titleAngle} 가이드`,
+    `${dongName} 방문 마사지 안내 | ${profile.short} ${prep}`,
+    `${dongName} 출장마사지 예약 안내 | ${profile.focus} 체크`,
+    `${dongName} 홈타이·방문 관리 | ${titleAngle} 정리`,
+    `${dongName} 출장마사지 가능 여부 | ${profile.short} ${prep}`
+  ];
+  const descriptionPatterns = [
+    `${dongName}은 ${profile.short}입니다. ${situation}에 맞춰 ${profile.focus}와 ${prep}을 예약 전 차분히 확인하세요.`,
+    `${districtName} ${dongName} 방문 관리를 찾는 ${profile.intent}을 위해 ${situation}, 출입 방식, 요금 범위, 관리 유형 선택 기준을 정리했습니다.`,
+    `${dongName} 출장마사지 상담 전 필요한 ${profile.focus}, ${prep}, 처음 이용 전 준비사항을 생활권 특성에 맞춰 안내합니다.`,
+    `${profile.short}인 ${dongName}에서 방문 가능 여부를 확인할 때 ${situation}와 ${prep}, 예약 시간 조율 기준을 함께 살펴보세요.`,
+    `${dongName} 출장마사지 페이지는 ${profile.intent}을 위해 ${situation}, 출입·주차 변수, 안전한 예약 흐름과 주변 행정동 링크를 제공합니다.`
+  ];
+  return {
+    title: titlePatterns[seed % titlePatterns.length],
+    description: descriptionPatterns[(seed + 2) % descriptionPatterns.length],
+    profile
+  };
+};
+
 const priceCards = [
   {
     name: "스웨디시 관리",
@@ -956,8 +1055,9 @@ const dongPageShell = ({ districtSlug, dongName }) => {
   const districtName = district?.name || "서울";
   const pagePath = dongPagePath(districtSlug, dongName);
   const canonical = encodeURI(`${siteUrl}/${pagePath}/`);
-  const title = `${dongName} 출장마사지 | ${districtName} 행정동 방문 관리 안내`;
-  const description = `${dongName} 출장마사지 예약 전 확인할 방문 가능 생활권, 출입 방식, 이용 시간대, 요금 기준과 안전 이용 원칙을 간다GO가 정리합니다.`;
+  const meta = dongSeoMeta({ districtName, districtSlug, dongName });
+  const title = meta.title;
+  const description = meta.description;
   const areaType = dongAreaType(dongName);
   const parentHref = "../";
   const siblings = sortKorean(seoulDongGroups[districtSlug] || []).filter((name) => name !== dongName).slice(0, 8);
