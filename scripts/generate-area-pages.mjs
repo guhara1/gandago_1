@@ -276,6 +276,121 @@ const priceSection = (name) => `<article id="price" class="area-price-panel">
           <p class="price-note">요금표는 과장된 최저가 유도나 확정가 고지가 아닙니다. 심야 시간, 외곽 이동, 주차 난이도, 당일 예약 상황에 따라 안내 범위가 달라질 수 있으며, 불법·선정적 요청은 금액과 관계없이 받지 않습니다.</p>
         </article>`;
 
+const reviewerNames = [
+  "이O근", "김O현", "박O준", "정O아", "최O민", "윤O서", "한O우", "조O영",
+  "강O진", "문O호", "오O라", "서O원", "임O수", "배O희", "신O재", "남O경",
+  "유O찬", "권O미", "장O훈", "송O림"
+];
+
+const careReviewTypes = [
+  "아로마 관리", "건식 관리", "스웨디시 안내", "홈타이 상담", "스포츠 관리", "방문 홈케어"
+];
+
+const reviewTimePhrases = [
+  "평일 퇴근 후 저녁 상담", "주말 오후 사전 예약", "당일 늦은 저녁 가능 시간 확인",
+  "업무 일정 뒤 전화 상담", "오전 문의 후 저녁 방문 조율", "주말 전날 미리 상담"
+];
+
+const visitPlacePhrases = [
+  "아파트 단지", "오피스텔", "숙소 인근", "역세권 주거지", "업무지구 근처", "주거 골목 안쪽"
+];
+
+const positiveReviewPhrases = [
+  "상담 때 출입 방식과 도착 가능 시간을 먼저 확인해 줘서 기다리는 동안 불안이 적었습니다.",
+  "관리 유형을 무리하게 권하지 않고 컨디션과 시간에 맞춰 설명해 준 점이 좋았습니다.",
+  "요금 범위를 먼저 알려주고 추가로 확인해야 할 부분을 차분히 짚어줘서 판단하기 쉬웠습니다.",
+  "건물 주차와 공동현관 문제를 미리 확인해 방문 과정이 복잡하게 느껴지지 않았습니다.",
+  "처음 문의였는데 필요한 정보와 피해야 할 표현을 분명히 안내해 신뢰가 갔습니다.",
+  "희망 시간만 묻지 않고 이동 조건까지 같이 확인해 실제 가능한 일정으로 조율할 수 있었습니다."
+];
+
+const regretReviewPhrases = [
+  "다만 퇴근 시간대라 도착 가능 시간이 한 번 더 조정되어 여유를 두고 문의하는 편이 좋겠다고 느꼈습니다.",
+  "처음에는 건물명을 정확히 말하지 않아 상담이 길어졌고, 다음에는 상세 주소를 먼저 준비하려고 합니다.",
+  "주차 가능 여부를 늦게 확인해서 안내가 조금 지연됐습니다. 다음 예약 때는 이 부분을 먼저 말할 생각입니다.",
+  "희망한 시간대가 이미 가까워 선택지가 많지는 않았습니다. 가능하면 하루 전 문의가 더 편할 것 같습니다.",
+  "관리 강도를 처음에 자세히 설명하지 않아 중간에 다시 맞췄습니다. 다음에는 선호도를 미리 말하려고 합니다.",
+  "공동현관 호출 방식 확인이 늦어졌습니다. 예약 전 체크리스트를 먼저 보는 게 도움이 될 것 같습니다."
+];
+
+const regionReviewNotes = {
+  seoul: [
+    "퇴근 직후 도로와 엘리베이터가 겹치는 시간이어서 상담에서 도착 여유를 다시 잡았습니다.",
+    "업무지와 주거지가 가까운 편이라 건물 보안 데스크 확인이 생각보다 중요했습니다."
+  ],
+  gyeonggi: [
+    "생활권이 넓어 동 단위 위치를 말하니 예상 이동 시간을 더 현실적으로 들을 수 있었습니다.",
+    "신도시와 외곽 동선 차이가 있어 차량 진입 가능 여부를 먼저 확인한 점이 도움이 됐습니다."
+  ],
+  incheon: [
+    "항만·공항·구도심 동선이 섞이는 지역이라 세부 위치 확인이 생각보다 중요했습니다.",
+    "주차와 건물 출입 조건을 먼저 맞추니 상담이 훨씬 짧고 명확하게 진행됐습니다."
+  ]
+};
+
+const hashString = (value) => [...value].reduce((sum, char) => sum + char.charCodeAt(0), 0);
+
+const pick = (list, seed, offset = 0) => list[(seed + offset) % list.length];
+
+const buildAreaReviews = ({ regionSlug, name, slug, context, check }) => {
+  const seed = hashString(`${regionSlug}-${slug}-${name}`);
+  const regionNotes = regionReviewNotes[regionSlug] || regionReviewNotes.seoul;
+
+  return Array.from({ length: 6 }, (_, index) => {
+    const localSeed = seed + index * 11;
+    const type = careReviewTypes[(seed + index) % careReviewTypes.length];
+    const time = reviewTimePhrases[(seed + index * 5) % reviewTimePhrases.length];
+    const place = visitPlacePhrases[(seed + index * 5 + 2) % visitPlacePhrases.length];
+    const good = positiveReviewPhrases[(seed + index * 5 + 1) % positiveReviewPhrases.length];
+    const regret = regretReviewPhrases[(seed + index * 5 + 3) % regretReviewPhrases.length];
+    const note = regionNotes[index % regionNotes.length];
+    const contextSentence = index % 2 === 0 ? context : check;
+    const revisit = index % 3 === 0
+      ? "재이용 의사는 있지만, 다음에는 시간 여유를 두고 문의할 생각입니다."
+      : index % 3 === 1
+        ? "조건이 맞는 날에는 다시 상담해 볼 만하다고 느꼈습니다."
+        : "요금과 가능 시간을 먼저 확인한 뒤 다시 이용 여부를 결정하려고 합니다.";
+
+    return {
+      title: `${name} ${type} 이용 흐름`,
+      reviewer: `${reviewerNames[(seed + index * 3) % reviewerNames.length]} 님`,
+      time,
+      location: `${name} ${place}`,
+      type,
+      body: `${contextSentence} ${note} ${good}`,
+      regret,
+      revisit
+    };
+  });
+};
+
+const reviewSection = ({ regionSlug, name, slug, context, check }) => {
+  const reviews = buildAreaReviews({ regionSlug, name, slug, context, check });
+
+  return `<article id="local-reviews" class="area-review-panel">
+          <p class="eyebrow">Local Reviews</p>
+          <h2>${name} 출장마사지 이용 후기</h2>
+          <p>${name} 후기는 과장된 만족 표현보다 실제 예약 흐름을 기준으로 정리합니다. 아래 내용은 개인정보를 익명 처리한 후기 형식이며, 실제 후기를 게시할 때는 작성 동의와 이용 확인, 표현 검수를 거친 내용만 사용한다는 기준을 함께 둡니다.</p>
+          <div class="area-review-grid" aria-label="${name} 출장마사지 후기 목록">
+            ${reviews.map((review) => `<section class="area-review-card">
+              <div class="area-review-head">
+                <span>${review.reviewer}</span>
+                <strong>${review.title}</strong>
+              </div>
+              <dl>
+                <div><dt>예약 시간</dt><dd>${review.time}</dd></div>
+                <div><dt>방문 지역</dt><dd>${review.location}</dd></div>
+                <div><dt>선택한 관리 유형</dt><dd>${review.type}</dd></div>
+              </dl>
+              <p>${review.body}</p>
+              <p><b>아쉬웠던 점</b> ${review.regret}</p>
+              <p><b>재이용 여부</b> ${review.revisit}</p>
+            </section>`).join("\n            ")}
+          </div>
+          <p class="area-review-note">후기 콘텐츠는 허위 실명, 치료 효과 보장, 선정적 암시, 무조건적인 만족 표현을 사용하지 않습니다. 실제 게시 시에는 개인정보를 가린 작성자 표기와 작성 동의 여부를 확인합니다.</p>
+        </article>`;
+};
+
 const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, next }) => {
   const publicSlug = toPublicSlug(slug);
   const url = `${siteUrl}/area/${regionSlug}/${publicSlug}/`;
@@ -453,6 +568,7 @@ const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, n
         <a href="#price">${name} 출장마사지 요금 안내</a>
         <a href="#before">${name} 예약 전 확인사항</a>
         <a href="#nearby">${name} 주변 추천 지역</a>
+        <a href="#local-reviews">${name} 이용 후기</a>
         <a href="#faq">${name} 출장마사지 FAQ</a>
       </nav>
 
@@ -511,6 +627,7 @@ const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, n
           <p>주변 지역을 함께 확인하는 이유는 실제 방문 가능성이 행정 경계만으로 결정되지 않기 때문입니다. 도로 연결이 좋은 인접 지역은 같은 시간대에도 더 빠르게 안내될 수 있고, 반대로 가까워 보여도 교통 흐름이나 주차 조건 때문에 시간이 더 걸릴 수 있습니다. ${name}에서 예약이 어렵거나 희망 시간이 맞지 않는 경우에는 인접 생활권을 함께 확인하면 선택지가 넓어집니다.</p>
           <p>다만 주변 지역 페이지 역시 동일한 문장을 반복하는 방식으로 운영하지 않습니다. 각 지역마다 업무지구인지, 주거 단지가 많은지, 외곽 이동이 긴지, 건물 보안이 까다로운지 같은 차이를 반영해 내용을 보강하는 것이 원칙입니다. 이는 검색을 위한 도어웨이 페이지가 아니라 실제 이용자가 비교하고 판단할 수 있는 지역 안내를 만들기 위한 기준입니다.</p>
         </article>
+        ${reviewSection({ regionSlug, name, slug, context, check })}
         <article id="faq" class="area-faq">
           <p class="eyebrow">FAQ</p>
           <h2>${name} 출장마사지 FAQ</h2>

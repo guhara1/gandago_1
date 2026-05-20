@@ -1142,6 +1142,7 @@ h3 {
 .area-content .area-link-panel,
 .area-content .area-dong-list,
 .area-content .area-faq,
+.area-content .area-review-panel,
 .area-content .area-price-panel {
   grid-column: 1 / -1;
 }
@@ -1289,6 +1290,122 @@ h3 {
   background:
     linear-gradient(90deg, rgba(30, 112, 103, 0.12), rgba(191, 147, 93, 0.1));
   color: rgba(16, 32, 30, 0.74);
+}
+
+.area-review-panel > p {
+  max-width: 980px;
+}
+
+.area-review-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 32px;
+}
+
+.area-review-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 420px;
+  padding: 26px;
+  border: 1px solid rgba(16, 32, 30, 0.1);
+  border-radius: 8px;
+  background:
+    linear-gradient(145deg, rgba(255, 254, 249, 0.98), rgba(246, 239, 228, 0.94));
+  box-shadow: 0 20px 50px rgba(16, 32, 30, 0.08);
+}
+
+.area-review-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: linear-gradient(90deg, var(--teal), rgba(191, 147, 93, 0.85));
+}
+
+.area-review-head {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.area-review-head span {
+  width: fit-content;
+  padding: 7px 10px;
+  border: 1px solid rgba(30, 112, 103, 0.18);
+  border-radius: 999px;
+  background: rgba(30, 112, 103, 0.08);
+  color: var(--teal);
+  font-size: 13px;
+  font-weight: 950;
+}
+
+.area-review-head strong {
+  color: var(--ink);
+  font-size: 21px;
+  line-height: 1.3;
+}
+
+.area-review-card dl {
+  display: grid;
+  gap: 0;
+  margin: 0 0 18px;
+  padding: 14px 16px;
+  border: 1px solid rgba(16, 32, 30, 0.08);
+  border-radius: 8px;
+  background: rgba(255, 252, 245, 0.76);
+}
+
+.area-review-card dl div {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 9px 0;
+  border-bottom: 1px dashed rgba(16, 32, 30, 0.14);
+}
+
+.area-review-card dl div:last-child {
+  border-bottom: 0;
+}
+
+.area-review-card dt {
+  color: rgba(16, 32, 30, 0.58);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.area-review-card dd {
+  margin: 0;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 900;
+  text-align: right;
+}
+
+.area-review-card p {
+  margin: 0 0 12px;
+  color: rgba(16, 32, 30, 0.72);
+  font-size: 15.5px;
+  line-height: 1.75;
+}
+
+.area-review-card p:last-child {
+  margin-bottom: 0;
+}
+
+.area-review-card b {
+  color: var(--ink);
+  font-weight: 950;
+}
+
+.area-review-note {
+  margin-top: 24px;
+  padding: 22px 24px;
+  border: 1px solid rgba(30, 112, 103, 0.18);
+  border-radius: 8px;
+  background:
+    linear-gradient(90deg, rgba(30, 112, 103, 0.1), rgba(191, 147, 93, 0.1));
 }
 
 .area-faq details {
@@ -1835,6 +1952,7 @@ h3 {
 
   .local-link-grid,
   .content-grid.compact,
+  .area-review-grid,
   .price-grid {
     grid-template-columns: 1fr;
   }
@@ -1912,6 +2030,7 @@ h3 {
   .area-trust-strip div,
   .area-conversion-panel,
   .area-content article,
+  .area-review-card,
   .price-card-head,
   .price-card p,
   .price-card dl {
@@ -1946,7 +2065,8 @@ h3 {
   }
 
   .review-card-head,
-  .review-card dl div {
+  .review-card dl div,
+  .area-review-card dl div {
     grid-template-columns: 1fr;
   }
 
@@ -1954,7 +2074,12 @@ h3 {
     display: grid;
   }
 
-  .review-card-head strong {
+  .area-review-card dl div {
+    display: grid;
+  }
+
+  .review-card-head strong,
+  .area-review-card dd {
     text-align: left;
   }
 }
