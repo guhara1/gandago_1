@@ -351,12 +351,13 @@ ${header(base)}
               <h2>이 글을 정리한 기준</h2>
               <p>이 글은 장거리 이동 후 방문 관리를 고민하는 이용자가 예약 전 스스로 확인할 수 있는 정보를 중심으로 작성했습니다. 작성자는 사이트 운영 기준, 고객 상담에서 반복적으로 확인되는 질문, 요금과 안전 안내 페이지의 기준을 함께 검토했습니다.</p>
               <div>
-                <a href="${base}guide/prepare/">이용 전 준비사항</a>
-                <a href="${base}guide/price/">요금 안내</a>
-                <a href="${base}guide/safety/">안전 이용 안내</a>
-                <a href="${base}policy/editorial/">편집 정책</a>
-                <a href="${base}about/">회사 소개</a>
-                <a href="${base}contact/">고객센터</a>
+                <a href="${base}guide/prepare/">장시간 운전 후 방문 관리 전 준비사항</a>
+                <a href="${base}guide/price/">서울·경기·인천 출장마사지 요금 확인 방법</a>
+                <a href="${base}guide/safety/">처음 이용 전 안전하게 확인할 운영 기준</a>
+                <a href="${base}#panel-seoul">서울 출장마사지 가능 지역 한눈에 보기</a>
+                <a href="${base}#panel-gyeonggi">경기 출장마사지 가능 시·군 확인하기</a>
+                <a href="${base}#panel-incheon">인천 출장마사지 가능 구역 확인하기</a>
+                <a href="${base}contact/">예약 전 주소와 시간 상담 문의</a>
               </div>
             </section>
           </div>
@@ -370,10 +371,10 @@ ${header(base)}
           <p>몸 상태를 확인한 뒤 실제 예약을 고민한다면 요금, 준비사항, 안전 기준을 함께 보는 편이 좋습니다.</p>
         </div>
         <div class="service-related-grid">
-          <a href="${base}guide/prepare/"><strong>이용 전 준비사항</strong><span>방문 전 공간, 수건, 주차와 출입 방식을 확인합니다.</span></a>
-          <a href="${base}guide/price/"><strong>요금 안내</strong><span>지역과 시간, 관리 유형에 따른 요금 확인 기준을 봅니다.</span></a>
-          <a href="${base}guide/safety/"><strong>안전 이용 안내</strong><span>무리한 요청 제한과 개인정보 보호 기준을 확인합니다.</span></a>
-          <a href="${base}magazine/"><strong>매거진 목록</strong><span>피로 관리 주제의 다른 글과 앞으로 확장될 주제를 확인합니다.</span></a>
+          <a href="${base}guide/prepare/"><strong>장거리 이동 후 방문 관리 준비 체크</strong><span>공간, 수건, 주차와 출입 방식을 예약 전 함께 확인합니다.</span></a>
+          <a href="${base}guide/price/"><strong>관리 유형별 최종 요금 확인 기준</strong><span>지역과 시간, 관리 유형에 따라 달라질 수 있는 금액 기준을 봅니다.</span></a>
+          <a href="${base}guide/safety/"><strong>처음 이용자를 위한 안전 예약 기준</strong><span>무리한 요청 제한과 개인정보 보호 기준을 함께 확인합니다.</span></a>
+          <a href="${base}#areas"><strong>서울·경기·인천 방문 가능 지역 찾기</strong><span>현재 이용할 수 있는 수도권 권역을 지역별로 확인합니다.</span></a>
         </div>
       </section>
     </main>

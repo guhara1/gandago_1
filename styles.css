@@ -2177,6 +2177,11 @@ h3 {
   color: #fffdf8;
 }
 
+.article-lead-card .eyebrow {
+  color: #f0c982;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.28);
+}
+
 .article-lead-card p:not(.eyebrow) {
   color: rgba(255, 253, 248, 0.82);
 }
