@@ -247,7 +247,7 @@ const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, n
         <a href="../../../#areas">지역</a>
         <a href="tel:${phone}">전화 문의</a>
       </div>
-      <p class="footer-note">최종 수정일: ${updated}. 실제 가능 시간과 금액은 상담 시점의 운영 조건을 기준으로 안내합니다.</p>
+      <p class="footer-note">회사 YH LAB · 대표 김유환 · 사업자등록번호 815-26-00585 · 경기도 파주시 청석로 268<br />최종 수정일: ${updated}. 실제 가능 시간과 금액은 상담 시점의 운영 조건을 기준으로 안내합니다.</p>
     </footer>
   </body>
 </html>
