@@ -345,6 +345,7 @@ const buildAreaReviews = ({ regionSlug, name, slug, context, check }) => {
     const regret = regretReviewPhrases[(seed + index * 5 + 3) % regretReviewPhrases.length];
     const note = regionNotes[index % regionNotes.length];
     const contextSentence = index % 2 === 0 ? context : check;
+    const rating = (4.6 + ((seed + index) % 4) * 0.1).toFixed(1);
     const revisit = index % 3 === 0
       ? "재이용 의사는 있지만, 다음에는 시간 여유를 두고 문의할 생각입니다."
       : index % 3 === 1
@@ -354,6 +355,7 @@ const buildAreaReviews = ({ regionSlug, name, slug, context, check }) => {
     return {
       title: `${name} ${type} 이용 흐름`,
       reviewer: `${reviewerNames[(seed + index * 3) % reviewerNames.length]} 님`,
+      rating,
       time,
       location: `${name} ${place}`,
       type,
@@ -376,6 +378,11 @@ const reviewSection = ({ regionSlug, name, slug, context, check }) => {
               <div class="area-review-head">
                 <span>${review.reviewer}</span>
                 <strong>${review.title}</strong>
+              </div>
+              <div class="review-score" aria-label="5점 만점 ${review.rating}점">
+                <span>만족도</span>
+                <strong>${review.rating}</strong>
+                <em>/ 5.0</em>
               </div>
               <dl>
                 <div><dt>예약 시간</dt><dd>${review.time}</dd></div>
