@@ -213,6 +213,8 @@ const toPublicSlug = (slug) => slug
   .replace("-gu-seoul", "")
   .replace(/-(gu|si|gun)$/, "");
 
+const publicAreaPath = (regionSlug, slug) => `area/${regionSlug}/${toPublicSlug(slug)}`;
+
 const districtLinksBySlug = {
   "gangnam-gu": [
     ["역삼동 출장마사지", "yeoksam-dong"],
@@ -252,15 +254,35 @@ const seoulDongGroups = {
   "jungnang-gu": ["면목본동", "면목동", "상봉동", "중화동", "묵동", "망우본동", "망우동", "신내동"]
 };
 
-const seoulDistrictMeta = Object.fromEntries(
-  areas.find(([regionSlug]) => regionSlug === "seoul")[2].map(([name, slug, context, check]) => [slug, { name, context, check }])
+const incheonDongGroups = {
+  "bupyeong-gu": ["갈산동", "부개동", "부평동", "산곡동", "삼산동", "십정동", "일신동", "청천동"],
+  "ganghwa-gun": ["강화읍", "교동면", "길상면", "내가면", "불은면", "삼산면", "서도면", "선원면", "송해면", "양도면", "양사면", "하점면", "화도면"],
+  "geomdan-gu": ["검단동", "당하동", "마전동", "불로대곡동", "아라동", "오류왕길동", "원당동"],
+  "gyeyang-gu": ["계산동", "계양동", "작전동", "작전서운동", "효성동"],
+  "jemulpo-gu": ["개항동", "금창동", "도원동", "동인천동", "만석동", "송림동", "송현동", "신포동", "신흥동", "연안동", "율목동", "화수·화평동"],
+  "michuhol-gu": ["관교동", "도화동", "문학동", "숭의동", "용현동", "주안동", "학익동"],
+  "namdong-gu": ["간석동", "구월동", "남촌도림동", "논현고잔동", "논현동", "만수동", "서창동", "장수서창동"],
+  "ongjin-gun": ["대청면", "덕적면", "백령면", "북도면", "연평면", "영흥면", "자월면"],
+  "seohae-gu": ["가정동", "가좌동", "검암경서동", "석남동", "신현원창동", "연희동", "청라동"],
+  "yeongjong-gu": ["영종동", "용유동", "운서동"],
+  "yeonsu-gu": ["동춘동", "선학동", "송도동", "연수동", "옥련동", "청학동"]
+};
+
+const areaMetaByRegion = Object.fromEntries(
+  areas.map(([regionSlug, , list]) => [
+    regionSlug,
+    Object.fromEntries(list.map(([name, slug, context, check]) => [slug, { name, context, check }]))
+  ])
 );
 
-const publicDistrictPath = (slug) => `area/seoul/${toPublicSlug(slug)}`;
+const dongGroupsByRegion = {
+  seoul: seoulDongGroups,
+  incheon: incheonDongGroups
+};
 
 const dongHref = (districtSlug, dongName) => `${dongName}/`;
 
-const dongPagePath = (districtSlug, dongName) => `${publicDistrictPath(districtSlug)}/${dongName}`;
+const dongPagePath = (regionSlug, districtSlug, dongName) => `${publicAreaPath(regionSlug, districtSlug)}/${dongName}`;
 
 const sortKorean = (list) => [...list].sort((a, b) => a.localeCompare(b, "ko-KR"));
 
@@ -270,7 +292,17 @@ const topicParticle = (value) => {
   return (last - 0xac00) % 28 === 0 ? "는" : "은";
 };
 
+const joinParticle = (value) => {
+  const last = value.trim().charCodeAt(value.trim().length - 1);
+  if (last < 0xac00 || last > 0xd7a3) return "와";
+  return (last - 0xac00) % 28 === 0 ? "와" : "과";
+};
+
 const dongAreaType = (dongName) => {
+  if (/영종|운서|용유|북도|연평|백령|대청|덕적|자월|영흥|강화|교동|삼산|서도|화도|길상/.test(dongName)) return "공항·도서·읍면 이동 조건을 먼저 확인해야 하는 생활권";
+  if (/송도|청라|검단|아라|원당|당하|마전|불로대곡|오류왕길|검암경서/.test(dongName)) return "신도시와 대단지 주거권 중심으로 방문 동선 확인이 중요한 생활권";
+  if (/부평|구월|간석|주안|연수|동춘|옥련|계산|작전|효성|서창|논현/.test(dongName)) return "역세권과 아파트 단지가 함께 있는 인천 주거 생활권";
+  if (/제물포|개항|신포|연안|동인천|송림|송현|만석|화수|금창|숭의|용현|학익|도화/.test(dongName)) return "원도심 건물과 주거 골목의 출입 조건이 중요한 생활권";
   if (/여의|광화문|을지로|가산|성수|마곡|문래|구로|상암|판교/.test(dongName)) return "업무지와 오피스텔 방문 문의가 함께 나오는 생활권";
   if (/목|상계|중계|잠실|개포|반포|방배|도곡|대치|고덕|명일|신정|신월|은평|진관/.test(dongName)) return "아파트 단지와 주거지 중심으로 예약 조건 확인이 중요한 생활권";
   if (/명동|홍대|서교|합정|건대|화양|신촌|종로|이태원|한남|강남|압구정|청담/.test(dongName)) return "상권과 주거 동선이 섞여 시간대별 이동 변수가 큰 생활권";
@@ -278,6 +310,34 @@ const dongAreaType = (dongName) => {
 };
 
 const dongProfile = (dongName) => {
+  if (/영종|운서|용유|북도|연평|백령|대청|덕적|자월|영흥|강화|교동|삼산|서도|화도|길상/.test(dongName)) {
+    return {
+      short: "공항·도서·읍면 이동 생활권",
+      focus: "도착 가능 시간, 교량·선박 동선, 추가 이동 조건",
+      intent: "방문 가능 여부를 먼저 확인해야 하는 분"
+    };
+  }
+  if (/송도|청라|검단|아라|원당|당하|마전|불로대곡|오류왕길|검암경서/.test(dongName)) {
+    return {
+      short: "신도시·대단지 주거 생활권",
+      focus: "단지 출입, 지하주차장 동선, 예약 시간대",
+      intent: "아파트나 오피스텔 방문 조건을 비교하려는 분"
+    };
+  }
+  if (/부평|구월|간석|주안|연수|동춘|옥련|계산|작전|효성|서창|논현|만수|갈산|삼산|청천|산곡/.test(dongName)) {
+    return {
+      short: "역세권·주거지 혼합 생활권",
+      focus: "공동현관, 주차 가능 여부, 혼잡 시간대",
+      intent: "퇴근 후 집이나 숙소에서 방문 관리를 확인하려는 분"
+    };
+  }
+  if (/개항|신포|연안|동인천|송림|송현|만석|화수|금창|숭의|용현|학익|도화|문학|관교/.test(dongName)) {
+    return {
+      short: "인천 원도심·주거 골목 생활권",
+      focus: "건물 출입 방식, 정차 위치, 골목 이동 동선",
+      intent: "원도심 건물 조건까지 차분히 확인하려는 분"
+    };
+  }
   if (/여의|광화문|을지로|가산|성수|마곡|문래|구로|상암|종로|충현|공덕|용산|한강로/.test(dongName)) {
     return {
       short: "업무지·오피스텔 생활권",
@@ -355,6 +415,7 @@ const dongSeoMeta = ({ districtName, districtSlug, dongName }) => {
   const titleAngle = titleAngles[seed % titleAngles.length];
   const situation = situationAngles[(seed + 3) % situationAngles.length];
   const prep = prepAngles[(seed + 7) % prepAngles.length];
+  const situationJoin = joinParticle(situation);
   const titlePatterns = [
     `${dongName} 출장마사지 | ${districtName} ${titleAngle} 가이드`,
     `${dongName} 방문 마사지 안내 | ${profile.short} ${prep}`,
@@ -366,7 +427,7 @@ const dongSeoMeta = ({ districtName, districtSlug, dongName }) => {
     `${dongName}은 ${profile.short}입니다. ${situation}에 맞춰 ${profile.focus}와 ${prep}을 예약 전 차분히 확인하세요.`,
     `${districtName} ${dongName} 방문 관리를 찾는 ${profile.intent}을 위해 ${situation}, 출입 방식, 요금 범위, 관리 유형 선택 기준을 정리했습니다.`,
     `${dongName} 출장마사지 상담 전 필요한 ${profile.focus}, ${prep}, 처음 이용 전 준비사항을 생활권 특성에 맞춰 안내합니다.`,
-    `${profile.short}인 ${dongName}에서 방문 가능 여부를 확인할 때 ${situation}와 ${prep}, 예약 시간 조율 기준을 함께 살펴보세요.`,
+    `${profile.short}인 ${dongName}에서 방문 가능 여부를 확인할 때 ${situation}${situationJoin} ${prep}, 예약 시간 조율 기준을 함께 살펴보세요.`,
     `${dongName} 출장마사지 페이지는 ${profile.intent}을 위해 ${situation}, 출입·주차 변수, 안전한 예약 흐름과 주변 행정동 링크를 제공합니다.`
   ];
   return {
@@ -726,7 +787,7 @@ const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, n
   const title = meta.title;
   const description = meta.description;
   const neighboring = [prev, next].filter(Boolean).join(" · ");
-  const dongNames = regionSlug === "seoul" ? sortKorean(seoulDongGroups[slug] || []) : [];
+  const dongNames = sortKorean(dongGroupsByRegion[regionSlug]?.[slug] || []);
   const districtLinks = dongNames.length
     ? dongNames.map((dongName) => [dongName, dongHref(slug, dongName)])
     : (districtLinksBySlug[slug] || []).map(([label, id]) => [label, `#${id}`]);
@@ -1190,17 +1251,17 @@ const supportShell = ({ path: pagePath, title, description, eyebrow, heading, su
 `;
 };
 
-const dongPageShell = ({ districtSlug, dongName }) => {
-  const district = seoulDistrictMeta[districtSlug];
-  const districtName = district?.name || "서울";
-  const pagePath = dongPagePath(districtSlug, dongName);
+const dongPageShell = ({ regionSlug, regionName, districtSlug, dongName }) => {
+  const district = areaMetaByRegion[regionSlug]?.[districtSlug];
+  const districtName = district?.name || regionName;
+  const pagePath = dongPagePath(regionSlug, districtSlug, dongName);
   const canonical = encodeURI(`${siteUrl}/${pagePath}/`);
   const meta = dongSeoMeta({ districtName, districtSlug, dongName });
   const title = meta.title;
   const description = meta.description;
   const areaType = dongAreaType(dongName);
   const parentHref = "../";
-  const siblings = sortKorean(seoulDongGroups[districtSlug] || []).filter((name) => name !== dongName).slice(0, 8);
+  const siblings = sortKorean(dongGroupsByRegion[regionSlug]?.[districtSlug] || []).filter((name) => name !== dongName).slice(0, 8);
   const base = "../../../../";
   const context = `${dongName}은 ${districtName} 안에서도 ${areaType}입니다. 같은 행정동 안에서도 역세권, 아파트 단지, 업무용 빌딩, 숙소 주변은 출입 조건과 이동 시간이 다르게 잡힐 수 있습니다.`;
   const check = `${dongName} 방문 관리를 문의할 때는 상세 주소, 공동현관 또는 보안 데스크 확인 방식, 주차 가능 여부, 희망 시간대를 먼저 알려주시면 상담이 더 정확해집니다.`;
@@ -1265,7 +1326,7 @@ const dongPageShell = ({ districtSlug, dongName }) => {
       <section class="area-hero">
         <div class="area-hero-inner">
           <div class="area-hero-copy">
-            <p class="eyebrow">Seoul Dong Area Guide</p>
+            <p class="eyebrow">${regionName} Local Area Guide</p>
             <h1>${dongName} 출장마사지</h1>
             <p>${description}</p>
             <div class="hero-actions">
@@ -1320,7 +1381,7 @@ const dongPageShell = ({ districtSlug, dongName }) => {
           <p>${context}</p>
           <p>${district?.context || ""}</p>
           <p>${dongName} 출장마사지 안내에서 가장 먼저 확인해야 할 부분은 행정동 이름 자체보다 실제 방문 지점의 생활권입니다. 같은 ${dongName} 안에서도 큰 도로를 기준으로 차량 정차가 쉬운 곳과 골목 진입이 까다로운 곳이 나뉠 수 있고, 아파트 단지와 오피스텔, 숙소, 업무용 건물은 공동현관이나 보안 데스크 확인 방식이 다릅니다. 상담 단계에서 이 정보를 먼저 확인하면 대기 시간과 이동 착오를 줄일 수 있습니다.</p>
-          <p>간다GO는 서울 전체를 무리하게 넓게 말하기보다 ${districtName} 안의 실제 방문 조건을 기준으로 안내합니다. 예약 가능 여부는 담당자 배정, 이동 거리, 시간대, 건물 출입 방식에 따라 달라질 수 있으므로 무조건 가능하다고 단정하지 않습니다. 이용자는 전화 상담에서 ${dongName} 상세 주소와 희망 시간을 알려주고, 안내받은 요금과 방문 조건을 확인한 뒤 예약을 결정하는 흐름이 가장 안전합니다.</p>
+          <p>간다GO는 ${regionName} 전체를 무리하게 넓게 말하기보다 ${districtName} 안의 실제 방문 조건을 기준으로 안내합니다. 예약 가능 여부는 담당자 배정, 이동 거리, 시간대, 건물 출입 방식에 따라 달라질 수 있으므로 무조건 가능하다고 단정하지 않습니다. 이용자는 전화 상담에서 ${dongName} 상세 주소와 희망 시간을 알려주고, 안내받은 요금과 방문 조건을 확인한 뒤 예약을 결정하는 흐름이 가장 안전합니다.</p>
         </article>
         <article id="access">
           <p class="eyebrow">Access Check</p>
@@ -1363,7 +1424,7 @@ const dongPageShell = ({ districtSlug, dongName }) => {
             ${siblings.map((name) => `<a href="../${dongHref(districtSlug, name)}">${name}</a>`).join("\n            ")}
           </div>
         </article>
-        ${reviewSection({ regionSlug: "seoul", name: dongName, slug: `${districtSlug}-${dongName}`, context, check })}
+        ${reviewSection({ regionSlug, name: dongName, slug: `${districtSlug}-${dongName}`, context, check })}
         <article id="faq" class="area-faq">
           <p class="eyebrow">FAQ</p>
           <h2>${dongName} 출장마사지 FAQ</h2>
@@ -1388,7 +1449,7 @@ const dongPageShell = ({ districtSlug, dongName }) => {
         <a class="footer-logo" href="${base}" aria-label="간다GO 홈">
           <img src="${base}areas/ganda_go_logo_transparent.png" alt="간다GO" width="280" height="70" />
         </a>
-        <p>서울 ${districtName} ${dongName} 방문 마사지 안내</p>
+        <p>${regionName} ${districtName} ${dongName} 방문 마사지 안내</p>
         <a class="footer-call" href="tel:${phone}">예약 문의 ${phone}</a>
       </div>
       <nav class="footer-nav" aria-label="하단 주요 메뉴">
@@ -1401,7 +1462,7 @@ const dongPageShell = ({ districtSlug, dongName }) => {
         </div>
         <div>
           <h2>지역</h2>
-          <a href="${base}#panel-seoul">서울 지역 찾기</a>
+          <a href="${base}#panel-${regionSlug}">${regionName} 지역 찾기</a>
           <a href="${parentHref}">${districtName} 전체</a>
           <a href="${base}guide/available-area/">방문 가능 지역</a>
           <a href="${base}contact/">고객센터</a>
@@ -1477,12 +1538,15 @@ const main = async () => {
     }
   }
 
-  for (const [districtSlug, dongNames] of Object.entries(seoulDongGroups)) {
-    for (const dongName of dongNames) {
-      const dir = path.join(root, ...dongPagePath(districtSlug, dongName).split("/"));
-      await mkdir(dir, { recursive: true });
-      await writeFile(path.join(dir, "index.html"), dongPageShell({ districtSlug, dongName }));
-      urls.push(encodeURI(`${siteUrl}/${dongPagePath(districtSlug, dongName)}/`));
+  for (const [regionSlug, regionName] of areas.map(([slug, name]) => [slug, name])) {
+    for (const [districtSlug, dongNames] of Object.entries(dongGroupsByRegion[regionSlug] || {})) {
+      for (const dongName of dongNames) {
+        const pagePath = dongPagePath(regionSlug, districtSlug, dongName);
+        const dir = path.join(root, ...pagePath.split("/"));
+        await mkdir(dir, { recursive: true });
+        await writeFile(path.join(dir, "index.html"), dongPageShell({ regionSlug, regionName, districtSlug, dongName }));
+        urls.push(encodeURI(`${siteUrl}/${pagePath}/`));
+      }
     }
   }
 
