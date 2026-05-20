@@ -99,6 +99,14 @@ a {
   display: inline-block;
 }
 
+.brand-core {
+  font-family: "Noto Serif KR", "Source Han Serif K", "Nanum Myeongjo", "Batang", serif;
+  font-weight: 900;
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.22),
+    0 10px 30px rgba(16, 32, 30, 0.24);
+}
+
 .brand-go {
   margin-left: 0.04em;
   color: #30d7bd;
@@ -217,6 +225,15 @@ h1 .brand-go {
     0 2px 0 rgba(255, 255, 255, 0.32),
     0 10px 26px rgba(48, 215, 189, 0.38),
     0 24px 70px rgba(255, 159, 90, 0.28);
+}
+
+h1 .brand-core {
+  color: var(--white);
+  text-shadow:
+    0 2px 0 rgba(255, 255, 255, 0.18),
+    0 12px 34px rgba(0, 0, 0, 0.38),
+    0 28px 80px rgba(191, 147, 93, 0.16);
+  transform: scaleY(1.04);
 }
 
 h2 {
