@@ -264,6 +264,12 @@ const dongPagePath = (districtSlug, dongName) => `${publicDistrictPath(districtS
 
 const sortKorean = (list) => [...list].sort((a, b) => a.localeCompare(b, "ko-KR"));
 
+const topicParticle = (value) => {
+  const last = value.trim().charCodeAt(value.trim().length - 1);
+  if (last < 0xac00 || last > 0xd7a3) return "은";
+  return (last - 0xac00) % 28 === 0 ? "는" : "은";
+};
+
 const dongAreaType = (dongName) => {
   if (/여의|광화문|을지로|가산|성수|마곡|문래|구로|상암|판교/.test(dongName)) return "업무지와 오피스텔 방문 문의가 함께 나오는 생활권";
   if (/목|상계|중계|잠실|개포|반포|방배|도곡|대치|고덕|명일|신정|신월|은평|진관/.test(dongName)) return "아파트 단지와 주거지 중심으로 예약 조건 확인이 중요한 생활권";
@@ -514,6 +520,139 @@ const hashString = (value) => [...value].reduce((sum, char) => sum + char.charCo
 
 const pick = (list, seed, offset = 0) => list[(seed + offset) % list.length];
 
+const areaProfile = ({ regionSlug, name, slug }) => {
+  if (regionSlug === "seoul") {
+    if (/gangnam|seocho|songpa|yeongdeungpo|jung-gu-seoul|jongno|mapo|seongdong|guro|geumcheon/.test(slug)) {
+      return {
+        zone: "업무지·상권 밀집 지역",
+        user: "퇴근 후 또는 숙소 복귀 전 방문 가능 여부를 확인하려는 분",
+        variable: "보안 데스크, 차량 정차, 엘리베이터 이용 시간",
+        angle: "야간·퇴근 시간대 상담 기준"
+      };
+    }
+    if (/gangdong|nowon|dobong|yangcheon|eunpyeong|seongbuk|dongjak|seodaemun/.test(slug)) {
+      return {
+        zone: "주거 단지와 역세권이 함께 있는 지역",
+        user: "집에서 조용히 휴식형 관리를 알아보는 분",
+        variable: "공동현관, 단지 내 동선, 주차 가능 여부",
+        angle: "아파트·주거지 방문 조건"
+      };
+    }
+    return {
+      zone: "생활권과 상권이 섞인 서울 지역",
+      user: "처음 예약 전 위치와 시간을 차분히 확인하려는 분",
+      variable: "상세 주소, 가까운 역, 건물 출입 방식",
+      angle: "동별 생활권 확인"
+    };
+  }
+  if (regionSlug === "gyeonggi") {
+    if (/suwon|seongnam|goyang|yongin|bucheon|anyang|gimpo|hanam|gwangmyeong|pyeongtaek|hwaseong|siheung|ansan/.test(slug)) {
+      return {
+        zone: "신도시·대형 주거권 중심 지역",
+        user: "넓은 생활권 안에서 방문 가능 시간을 먼저 확인하려는 분",
+        variable: "구 단위 위치, 이동 거리, 단지 주차 조건",
+        angle: "생활권별 이동 시간 기준"
+      };
+    }
+    if (/gapyeong|yangpyeong|yeoncheon|pocheon|yeoju|anseong|gwangju|paju|yangju|namyangju/.test(slug)) {
+      return {
+        zone: "외곽 이동 동선 확인이 중요한 지역",
+        user: "읍·면 단위 위치와 도착 가능 시간을 함께 상담하려는 분",
+        variable: "장거리 이동, 야간 도로, 상세 주소 확인",
+        angle: "외곽 방문 가능 여부"
+      };
+    }
+    return {
+      zone: "도심과 주거권이 연결된 경기 지역",
+      user: "지역별 이동 조건과 요금을 함께 비교하려는 분",
+      variable: "차량 이동, 주차, 예약 시간대",
+      angle: "도심·주거권 예약 조건"
+    };
+  }
+  if (/yeongjong|ganghwa|ongjin/.test(slug)) {
+    return {
+      zone: "도서·공항 이동 변수가 큰 인천 지역",
+      user: "이동 가능 여부를 먼저 확인해야 하는 분",
+      variable: "교량·공항권 이동, 도착 시간, 추가 비용 여부",
+      angle: "이동 조건 사전 확인"
+    };
+  }
+  if (/songdo|yeonsu|bupyeong|namdong|gyeyang|michuhol|jemulpo|geomdan|seohae/.test(slug)) {
+    return {
+      zone: "주거지·업무지·상권이 섞인 인천 지역",
+      user: "아파트, 오피스텔, 숙소 방문 조건을 비교하려는 분",
+      variable: "공동현관, 주차, 심야 이동 동선",
+      angle: "인천 생활권별 방문 기준"
+    };
+  }
+  return {
+    zone: `${name} 생활권`,
+    user: "예약 전 실제 방문 조건을 확인하려는 분",
+    variable: "상세 주소, 시간대, 출입 방식",
+    angle: "방문 조건 확인"
+  };
+};
+
+const areaSeoMeta = ({ regionSlug, regionName, name, slug, context, check }) => {
+  const profile = areaProfile({ regionSlug, name, slug });
+  const seed = hashString(`${regionSlug}-${slug}-${name}`);
+  const trimSentence = (value, length = 72) => {
+    const clean = value.replace(/\s+/g, " ").trim();
+    return clean.length > length ? `${clean.slice(0, length).replace(/[,.· ]+$/, "")}...` : clean;
+  };
+  const contextBrief = trimSentence(context, 78);
+  const checkBrief = trimSentence(check, 64);
+  const localCue = trimSentence(context
+    .replace(/입니다\.?$/, "")
+    .replace(/지역입니다\.?$/, "지역")
+    .replace(/생활권처럼/, "생활권")
+    .replace(/처럼/, "")
+    .replace(/중심의/, "중심")
+    .trim(), 24);
+  const checkCue = trimSentence(check.replace(/합니다\.?$/, "").replace(/확인합니다\.?$/, "확인"), 26);
+  const titleTopics = [
+    profile.angle,
+    `${profile.variable} 체크`,
+    "요금·시간 상담 기준",
+    "처음 예약 전 확인사항",
+    `${profile.zone} 안내`,
+    "주변 생활권 비교"
+  ];
+  const descOpeners = [
+    `${name}${topicParticle(name)} ${profile.zone}입니다.`,
+    `${regionName} ${name} 방문 관리를 찾는 ${profile.user}을 위해 정리했습니다.`,
+    `${name} 출장마사지 상담 전에는 ${profile.variable}를 먼저 확인하는 편이 좋습니다.`,
+    `${contextBrief}`,
+    `${checkBrief}`
+  ];
+  const descClosers = [
+    `${checkBrief} 요금 범위, 이용 시간대, 관리 유형, 안전 이용 기준을 함께 확인하세요.`,
+    `${contextBrief} 예약 전 준비사항과 주변 지역 링크, 전화 상담 전 체크할 내용을 한 번에 살펴볼 수 있습니다.`,
+    `${checkBrief} 과장된 가능 표현보다 실제 이동 조건과 건물 접근 기준을 중심으로 안내합니다.`,
+    `${contextBrief} 처음 이용하는 분도 상담 전 필요한 주소·시간·요금 정보를 차분히 확인할 수 있습니다.`,
+    `${checkBrief} ${profile.variable}에 따라 실제 방문 가능 시간과 최종 안내 범위가 달라질 수 있습니다.`
+  ];
+  const titlePatterns = [
+    `${name} 출장마사지 | ${localCue} 상담 포인트`,
+    `${name} 방문 마사지 안내 | ${checkCue}`,
+    `${name} 홈타이·출장마사지 | ${profile.variable} 기준`,
+    `${name} 예약 가능 지역 | ${localCue} 방문 조건`,
+    `${name} 출장마사지 체크리스트 | ${checkCue}`,
+    `${name} 방문 관리 가이드 | ${profile.angle}`,
+    `${name} 마사지 예약 안내 | ${regionName} ${profile.zone}`,
+    `${name} 출장마사지 | ${titleTopics[seed % titleTopics.length]}`
+  ];
+  const opener = descOpeners[(seed + 1) % descOpeners.length];
+  let closer = descClosers[(seed + 4) % descClosers.length];
+  if (closer.startsWith(opener)) {
+    closer = descClosers[(seed + 5) % descClosers.length];
+  }
+  return {
+    title: titlePatterns[seed % titlePatterns.length],
+    description: `${opener} ${closer}`.replace(/\s+/g, " ")
+  };
+};
+
 const buildAreaReviews = ({ regionSlug, name, slug, context, check }) => {
   const seed = hashString(`${regionSlug}-${slug}-${name}`);
   const regionNotes = regionReviewNotes[regionSlug] || regionReviewNotes.seoul;
@@ -583,8 +722,9 @@ const reviewSection = ({ regionSlug, name, slug, context, check }) => {
 const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, next }) => {
   const publicSlug = toPublicSlug(slug);
   const url = `${siteUrl}/area/${regionSlug}/${publicSlug}/`;
-  const title = `${name} 출장마사지 | 간다GO ${regionName} 방문 케어`;
-  const description = `${name} 출장마사지 가능 권역, 주요 이용 시간대, 많이 찾는 관리 유형, 예약 전 확인사항과 주변 추천 지역을 간다GO가 정리합니다.`;
+  const meta = areaSeoMeta({ regionSlug, regionName, name, slug, context, check });
+  const title = meta.title;
+  const description = meta.description;
   const neighboring = [prev, next].filter(Boolean).join(" · ");
   const dongNames = regionSlug === "seoul" ? sortKorean(seoulDongGroups[slug] || []) : [];
   const districtLinks = dongNames.length
