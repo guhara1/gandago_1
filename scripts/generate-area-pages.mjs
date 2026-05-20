@@ -410,13 +410,31 @@ const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, n
 
     <main>
       <section class="area-hero">
-        <p class="eyebrow">${regionName} 지역 안내</p>
-        <h1>${name} 출장마사지</h1>
-        <p>${description}</p>
-        <div class="hero-actions">
-          <a class="button primary" href="tel:${phone}">${phone}</a>
-          <a class="button secondary on-light" href="../../../#areas">다른 지역 보기</a>
+        <div class="area-hero-inner">
+          <div class="area-hero-copy">
+            <p class="eyebrow">${regionName} Premium Area Guide</p>
+            <h1>${name} 출장마사지</h1>
+            <p>${description}</p>
+            <div class="hero-actions">
+              <a class="button primary" href="tel:${phone}">${phone}</a>
+              <a class="button secondary on-light" href="#price">요금 먼저 보기</a>
+            </div>
+          </div>
+          <aside class="area-hero-card" aria-label="${name} 예약 핵심 정보">
+            <span>Reservation Check</span>
+            <dl>
+              <div><dt>상담 기준</dt><dd>지역·시간 확인</dd></div>
+              <div><dt>요금 안내</dt><dd>코스별 범위 공개</dd></div>
+              <div><dt>운영 원칙</dt><dd>합법 웰니스</dd></div>
+            </dl>
+          </aside>
         </div>
+      </section>
+
+      <section class="area-trust-strip" aria-label="${name} 이용 전 핵심 기준">
+        <div><span>01</span><strong>권역 확인</strong><p>동·건물·출입 방식을 먼저 확인합니다.</p></div>
+        <div><span>02</span><strong>요금 투명성</strong><p>확정 전 상담 기준으로 안내합니다.</p></div>
+        <div><span>03</span><strong>안전 원칙</strong><p>불법·선정적 요청은 받지 않습니다.</p></div>
       </section>
 
       <nav class="area-subnav" aria-label="${name} 페이지 목차">

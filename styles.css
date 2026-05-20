@@ -691,7 +691,8 @@ h3 {
 }
 
 .area-page {
-  background: var(--paper);
+  background:
+    linear-gradient(180deg, #f6f1e8 0%, #fbf8f1 34%, #f0eadf 100%);
 }
 
 .area-page .site-header {
@@ -699,26 +700,146 @@ h3 {
 }
 
 .area-hero {
-  padding: clamp(96px, 12vw, 150px) clamp(20px, 6vw, 88px) clamp(52px, 8vw, 88px);
+  position: relative;
+  overflow: hidden;
+  padding: clamp(78px, 10vw, 132px) clamp(20px, 6vw, 88px) clamp(46px, 7vw, 76px);
   background:
-    linear-gradient(120deg, rgba(16, 32, 30, 0.92), rgba(22, 76, 71, 0.82)),
+    linear-gradient(105deg, rgba(8, 23, 21, 0.96) 0%, rgba(14, 48, 44, 0.91) 46%, rgba(34, 33, 28, 0.56) 100%),
     url("assets/gandago-hero.png");
   background-size: cover;
   background-position: center;
   color: var(--white);
 }
 
+.area-hero::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 34%;
+  background: linear-gradient(180deg, rgba(247, 243, 236, 0), #f6f1e8);
+  pointer-events: none;
+}
+
+.area-hero-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 380px);
+  gap: clamp(28px, 6vw, 72px);
+  align-items: end;
+}
+
+.area-hero-copy {
+  max-width: 900px;
+}
+
 .area-hero h1 {
   max-width: 920px;
-  margin-bottom: 18px;
-  font-size: clamp(44px, 7vw, 82px);
-  line-height: 1.02;
+  margin: 10px 0 22px;
+  font-size: clamp(56px, 9vw, 118px);
+  line-height: 0.94;
+  letter-spacing: 0;
+  text-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
 }
 
 .area-hero p:not(.eyebrow) {
   max-width: 820px;
   color: rgba(255, 253, 248, 0.86);
   font-size: clamp(17px, 2vw, 22px);
+}
+
+.area-hero-card {
+  padding: 26px;
+  border: 1px solid rgba(255, 252, 245, 0.22);
+  border-radius: 8px;
+  background: rgba(255, 252, 245, 0.12);
+  box-shadow: 0 26px 80px rgba(0, 0, 0, 0.24);
+  backdrop-filter: blur(18px);
+}
+
+.area-hero-card > span {
+  display: block;
+  margin-bottom: 18px;
+  color: var(--brass);
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.area-hero-card dl {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+}
+
+.area-hero-card dl div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255, 252, 245, 0.18);
+}
+
+.area-hero-card dl div:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.area-hero-card dt {
+  color: rgba(255, 252, 245, 0.66);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.area-hero-card dd {
+  margin: 0;
+  color: var(--white);
+  font-weight: 900;
+  text-align: right;
+}
+
+.area-trust-strip {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin: -30px clamp(20px, 6vw, 88px) 0;
+  border: 1px solid rgba(16, 32, 30, 0.12);
+  border-radius: 8px;
+  background: rgba(255, 252, 245, 0.92);
+  box-shadow: 0 24px 70px rgba(16, 32, 30, 0.14);
+  backdrop-filter: blur(16px);
+}
+
+.area-trust-strip div {
+  min-height: 116px;
+  padding: 24px;
+  border-right: 1px solid rgba(16, 32, 30, 0.1);
+}
+
+.area-trust-strip div:last-child {
+  border-right: 0;
+}
+
+.area-trust-strip span {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--brass);
+  font-size: 13px;
+  font-weight: 950;
+}
+
+.area-trust-strip strong {
+  display: block;
+  color: var(--ink);
+  font-size: 20px;
+}
+
+.area-trust-strip p {
+  margin: 6px 0 0;
+  color: rgba(16, 32, 30, 0.62);
+  font-size: 14px;
 }
 
 .area-subnav {
@@ -728,22 +849,24 @@ h3 {
   display: flex;
   gap: 10px;
   overflow-x: auto;
-  padding: 14px clamp(20px, 6vw, 88px);
+  margin-top: 28px;
+  padding: 16px clamp(20px, 6vw, 88px);
   border-bottom: 1px solid var(--line);
-  background: rgba(255, 252, 245, 0.94);
+  background: rgba(246, 241, 232, 0.88);
   backdrop-filter: blur(18px);
 }
 
 .area-subnav a {
   flex: 0 0 auto;
-  min-height: 38px;
-  padding: 9px 14px;
+  min-height: 42px;
+  padding: 10px 16px;
   border: 1px solid rgba(16, 32, 30, 0.12);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 252, 245, 0.78);
   color: rgba(16, 32, 30, 0.76);
   font-size: 14px;
   font-weight: 800;
+  box-shadow: 0 10px 24px rgba(16, 32, 30, 0.05);
 }
 
 .area-subnav a:hover,
@@ -755,20 +878,49 @@ h3 {
 .area-content {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
-  padding: clamp(42px, 7vw, 88px) clamp(20px, 6vw, 88px);
+  gap: 22px;
+  padding: clamp(48px, 7vw, 92px) clamp(20px, 6vw, 88px);
 }
 
 .area-content article {
-  min-height: 260px;
-  padding: clamp(24px, 4vw, 34px);
-  border: 1px solid var(--line);
+  position: relative;
+  min-height: 300px;
+  overflow: hidden;
+  padding: clamp(28px, 4vw, 42px);
+  border: 1px solid rgba(16, 32, 30, 0.1);
   border-radius: 8px;
-  background: var(--white);
+  background:
+    linear-gradient(180deg, rgba(255, 253, 248, 0.96), rgba(255, 250, 239, 0.9));
+  box-shadow: 0 22px 58px rgba(16, 32, 30, 0.08);
+}
+
+.area-content article::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: linear-gradient(90deg, var(--teal), var(--brass));
+  opacity: 0.9;
+}
+
+.area-content article:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 30px 72px rgba(16, 32, 30, 0.13);
 }
 
 .area-content h2 {
+  margin: 8px 0 18px;
   font-size: clamp(24px, 3vw, 34px);
+  line-height: 1.18;
+}
+
+.area-content p,
+.area-content li {
+  color: rgba(16, 32, 30, 0.72);
+}
+
+.area-content article > p:last-child {
+  margin-bottom: 0;
 }
 
 .area-content .area-link-panel,
@@ -785,21 +937,28 @@ h3 {
 .price-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-  margin-top: 26px;
+  gap: 20px;
+  margin-top: 30px;
 }
 
 .price-card {
   --price-accent: var(--teal);
   display: flex;
   flex-direction: column;
-  min-height: 330px;
+  min-height: 350px;
   overflow: hidden;
-  border: 1px solid rgba(16, 32, 30, 0.14);
+  border: 1px solid rgba(16, 32, 30, 0.1);
   border-top: 5px solid var(--price-accent);
-  border-radius: 10px;
-  background: #fffdf8;
-  box-shadow: 0 18px 44px rgba(16, 32, 30, 0.1);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, #fffef9, #f8f4ec);
+  box-shadow: 0 24px 58px rgba(16, 32, 30, 0.12);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.price-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 34px 80px rgba(16, 32, 30, 0.17);
 }
 
 .price-card.rose {
@@ -827,13 +986,13 @@ h3 {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 28px 26px 10px;
+  padding: 30px 28px 12px;
 }
 
 .price-card h3 {
   margin: 0;
   color: var(--ink);
-  font-size: 24px;
+  font-size: 25px;
 }
 
 .price-card-head span {
@@ -847,9 +1006,9 @@ h3 {
 }
 
 .price-card p {
-  min-height: 82px;
+  min-height: 96px;
   margin: 0;
-  padding: 0 26px 22px;
+  padding: 0 28px 24px;
   color: rgba(16, 32, 30, 0.74);
   line-height: 1.7;
 }
@@ -858,8 +1017,9 @@ h3 {
   display: grid;
   gap: 0;
   margin: auto 0 0;
-  padding: 16px 26px 24px;
-  background: rgba(238, 241, 244, 0.72);
+  padding: 18px 28px 26px;
+  background:
+    linear-gradient(180deg, rgba(235, 239, 241, 0.8), rgba(227, 231, 231, 0.76));
 }
 
 .price-card dl div {
@@ -884,29 +1044,32 @@ h3 {
 .price-card dd {
   margin: 0;
   color: #006367;
-  font-size: 18px;
+  font-size: 19px;
   font-weight: 950;
   text-align: right;
 }
 
 .price-note {
   margin-top: 24px;
-  padding: 18px 20px;
-  border: 1px solid rgba(16, 32, 30, 0.1);
+  padding: 20px 22px;
+  border: 1px solid rgba(30, 112, 103, 0.2);
   border-radius: 8px;
-  background: rgba(41, 211, 191, 0.08);
+  background:
+    linear-gradient(90deg, rgba(30, 112, 103, 0.12), rgba(191, 147, 93, 0.1));
   color: rgba(16, 32, 30, 0.74);
 }
 
 .area-faq details {
   border-top: 1px solid rgba(16, 32, 30, 0.1);
+  background: rgba(255, 252, 245, 0.55);
 }
 
 .area-faq summary {
   cursor: pointer;
-  padding: 18px 0;
+  padding: 20px 0;
   color: var(--ink);
   font-weight: 900;
+  font-size: 18px;
 }
 
 .area-faq p {
@@ -917,27 +1080,46 @@ h3 {
 .local-link-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
+  gap: 14px;
 }
 
 .local-link-grid a {
-  min-height: 54px;
-  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 64px;
+  padding: 18px 20px;
   border: 1px solid rgba(16, 32, 30, 0.12);
   border-radius: 8px;
-  background: linear-gradient(180deg, #fffdf8, #f4efe5);
+  background:
+    linear-gradient(135deg, #fffdf8, #f2eadc);
   color: var(--ink);
   font-weight: 900;
+  box-shadow: 0 14px 34px rgba(16, 32, 30, 0.08);
+}
+
+.local-link-grid a::after {
+  content: "→";
+  color: var(--teal);
+  font-weight: 900;
+}
+
+.local-link-grid a:hover,
+.local-link-grid a:focus {
+  border-color: rgba(30, 112, 103, 0.32);
+  transform: translateY(-2px);
 }
 
 .content-grid.compact {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   padding: 0;
+  gap: 16px;
 }
 
 .content-grid.compact .content-card {
-  min-height: 190px;
+  min-height: 220px;
   box-shadow: none;
+  background: rgba(255, 252, 245, 0.72);
 }
 
 .content-grid.compact h3 {
@@ -1238,6 +1420,28 @@ h3 {
     flex-direction: column;
   }
 
+  .area-hero-inner,
+  .area-trust-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .area-hero-card {
+    max-width: 520px;
+  }
+
+  .area-trust-strip {
+    margin-top: -18px;
+  }
+
+  .area-trust-strip div {
+    border-right: 0;
+    border-bottom: 1px solid rgba(16, 32, 30, 0.1);
+  }
+
+  .area-trust-strip div:last-child {
+    border-bottom: 0;
+  }
+
   .area-subnav {
     top: 66px;
   }
@@ -1282,6 +1486,10 @@ h3 {
   .area-content {
     grid-template-columns: 1fr;
   }
+
+  .area-content article {
+    min-height: auto;
+  }
 }
 
 @media (max-width: 560px) {
@@ -1292,6 +1500,24 @@ h3 {
 
   h1 {
     font-size: 72px;
+  }
+
+  .area-hero h1 {
+    font-size: clamp(52px, 16vw, 76px);
+  }
+
+  .area-hero {
+    padding-top: 64px;
+  }
+
+  .area-hero-card,
+  .area-trust-strip div,
+  .area-content article,
+  .price-card-head,
+  .price-card p,
+  .price-card dl {
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
   .hero-actions .button {
