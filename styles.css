@@ -100,11 +100,14 @@ a {
 }
 
 .brand-core {
-  font-family: "Noto Serif KR", "Source Han Serif K", "Nanum Myeongjo", "Batang", serif;
+  font-family: "BM JUA_TTF", "BMEULJIROTTF", "NanumSquareRound", "Gmarket Sans", "Jua", "Do Hyeon", "Arial Rounded MT Bold", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
   font-weight: 900;
+  letter-spacing: 0;
+  transform: rotate(-1deg);
   text-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.22),
-    0 10px 30px rgba(16, 32, 30, 0.24);
+    0 2px 0 rgba(255, 255, 255, 0.24),
+    0 5px 0 rgba(16, 32, 30, 0.16),
+    0 16px 28px rgba(16, 32, 30, 0.28);
 }
 
 .brand-go {
@@ -229,11 +232,13 @@ h1 .brand-go {
 
 h1 .brand-core {
   color: var(--white);
+  -webkit-text-stroke: 1px rgba(255, 253, 248, 0.08);
   text-shadow:
-    0 2px 0 rgba(255, 255, 255, 0.18),
-    0 12px 34px rgba(0, 0, 0, 0.38),
-    0 28px 80px rgba(191, 147, 93, 0.16);
-  transform: scaleY(1.04);
+    0 3px 0 rgba(255, 255, 255, 0.18),
+    0 7px 0 rgba(16, 32, 30, 0.34),
+    0 18px 38px rgba(0, 0, 0, 0.42),
+    0 30px 90px rgba(48, 215, 189, 0.16);
+  transform: rotate(-1.5deg) scaleY(0.96);
 }
 
 h2 {
