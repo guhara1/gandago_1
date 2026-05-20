@@ -164,11 +164,48 @@ const areas = [
   ]]
 ];
 
+const toPublicSlug = (slug) => slug
+  .replace("-gu-seoul", "")
+  .replace(/-(gu|si|gun)$/, "");
+
+const districtLinksBySlug = {
+  "gangnam-gu": [
+    ["역삼동 출장마사지", "yeoksam-dong"],
+    ["논현동 출장마사지", "nonhyeon-dong"],
+    ["삼성동 출장마사지", "samseong-dong"],
+    ["청담동 출장마사지", "cheongdam-dong"],
+    ["대치동 출장마사지", "daechi-dong"],
+    ["개포동 출장마사지", "gaepo-dong"]
+  ]
+};
+
 const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, next }) => {
-  const url = `${siteUrl}/areas/${regionSlug}/${slug}/`;
-  const title = `${name} 출장마사지 예약 안내 | 간다GO ${regionName} 방문 케어`;
-  const description = `간다GO ${name} 페이지는 ${context} ${check} 서울·경기·인천 방문 마사지 예약 전 확인할 정보를 정리합니다.`;
+  const publicSlug = toPublicSlug(slug);
+  const url = `${siteUrl}/area/${regionSlug}/${publicSlug}/`;
+  const title = `${name} 출장마사지 | 간다GO ${regionName} 방문 케어`;
+  const description = `${name} 출장마사지 가능 권역, 주요 이용 시간대, 많이 찾는 관리 유형, 예약 전 확인사항과 주변 추천 지역을 간다GO가 정리합니다.`;
   const neighboring = [prev, next].filter(Boolean).join(" · ");
+  const districtLinks = districtLinksBySlug[slug] || [];
+  const districtName = name.endsWith("구") || name.endsWith("시") || name.endsWith("군") ? name : `${name} 지역`;
+  const districtList = districtLinks.length
+    ? `<article class="area-link-panel">
+          <p class="eyebrow">Dong Links</p>
+          <h2>${name} 동별 출장마사지 내부 링크</h2>
+          <div class="local-link-grid">
+            ${districtLinks.map(([label, id]) => `<a href="#${id}">${label}</a>`).join("\n            ")}
+          </div>
+        </article>
+        <article class="area-dong-list">
+          <p class="eyebrow">Local Detail</p>
+          <h2>${name} 주요 동별 확인 포인트</h2>
+          <div class="content-grid compact">
+            ${districtLinks.map(([label, id]) => `<section id="${id}" class="content-card">
+              <h3>${label}</h3>
+              <p>${label.replace(" 출장마사지", "")} 권역은 건물 출입 방식, 주차 가능 여부, 희망 시간대를 상담 전에 확인하면 예약 안내가 더 정확해집니다.</p>
+            </section>`).join("\n            ")}
+          </div>
+        </article>`
+    : "";
 
   return `<!doctype html>
 <html lang="ko">
@@ -197,7 +234,7 @@ const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, n
         "description": "${description}",
         "about": {
           "@type": "Service",
-          "name": "${name} 출장마사지 예약 안내",
+          "name": "${name} 출장마사지",
           "areaServed": { "@type": "AdministrativeArea", "name": "${name}" },
           "provider": { "@type": "HealthAndBeautyBusiness", "name": "간다GO", "telephone": "${phone}" }
         },
@@ -285,7 +322,7 @@ const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, n
     <main>
       <section class="area-hero">
         <p class="eyebrow">${regionName} 지역 안내</p>
-        <h1>${name} 출장마사지 예약 안내</h1>
+        <h1>${name} 출장마사지</h1>
         <p>${description}</p>
         <div class="hero-actions">
           <a class="button primary" href="tel:${phone}">${phone}</a>
@@ -293,16 +330,35 @@ const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, n
         </div>
       </section>
 
+      <nav class="area-subnav" aria-label="${name} 페이지 목차">
+        <a href="#coverage">${name} 출장마사지 가능 권역</a>
+        <a href="#time">${name} 주요 이용 시간대</a>
+        <a href="#types">${name}에서 많이 찾는 관리 유형</a>
+        <a href="#before">${name} 예약 전 확인사항</a>
+        <a href="#nearby">${name} 주변 추천 지역</a>
+        <a href="#faq">${name} 출장마사지 FAQ</a>
+      </nav>
+
       <section class="area-content">
-        <article>
+        <article id="coverage">
           <p class="eyebrow">Local Note</p>
-          <h2>${name}에서 먼저 확인할 점</h2>
+          <h2>${name} 출장마사지 가능 권역</h2>
           <p>${context}</p>
           <p>${check}</p>
         </article>
-        <article>
+        <article id="time">
+          <p class="eyebrow">Time</p>
+          <h2>${name} 주요 이용 시간대</h2>
+          <p>${districtName}는 평일 퇴근 이후와 주말 저녁 문의가 많은 편입니다. 실제 가능 시간은 이동 동선, 예약 현황, 건물 출입 조건에 따라 달라질 수 있어 전화 상담에서 다시 확인합니다.</p>
+        </article>
+        <article id="types">
+          <p class="eyebrow">Care Type</p>
+          <h2>${name}에서 많이 찾는 관리 유형</h2>
+          <p>아로마 관리, 건식 관리, 홈타이, 스웨디시 안내처럼 휴식과 피로 완화 목적의 웰니스 관리 위주로 안내합니다. 선정적 표현이나 치료 효과를 보장하는 설명은 사용하지 않습니다.</p>
+        </article>
+        <article id="before">
           <p class="eyebrow">Before Booking</p>
-          <h2>예약 전 체크리스트</h2>
+          <h2>${name} 예약 전 확인사항</h2>
           <ul class="check-list">
             <li>정확한 동·건물명·공동현관 출입 방식을 확인합니다.</li>
             <li>주차 가능 여부와 엘리베이터 이용 가능 시간을 확인합니다.</li>
@@ -310,16 +366,33 @@ const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, n
             <li>의료 행위나 치료 효과를 보장하는 표현은 사용하지 않습니다.</li>
           </ul>
         </article>
+        <article id="nearby">
+          <p class="eyebrow">Nearby</p>
+          <h2>${name} 주변 추천 지역</h2>
+          <p>${neighboring || "같은 권역의 다른 지역 페이지도 순차적으로 확인할 수 있습니다."}</p>
+        </article>
+        <article id="faq" class="area-faq">
+          <p class="eyebrow">FAQ</p>
+          <h2>${name} 출장마사지 FAQ</h2>
+          <details open>
+            <summary>${name} 당일 예약도 가능한가요?</summary>
+            <p>가능 여부는 상담 시점의 예약 현황과 이동 동선에 따라 달라집니다. 희망 시간과 상세 주소를 먼저 알려주시면 더 빠르게 확인할 수 있습니다.</p>
+          </details>
+          <details>
+            <summary>${name}에서 어떤 정보를 미리 준비해야 하나요?</summary>
+            <p>동명, 건물명, 공동현관 출입 방식, 주차 가능 여부, 희망 관리 유형, 피해야 할 부위를 미리 확인하는 것이 좋습니다.</p>
+          </details>
+          <details>
+            <summary>치료 목적의 관리를 받을 수 있나요?</summary>
+            <p>간다GO는 웰니스 목적의 방문 마사지 안내 사이트이며 질병 진단이나 치료 효과를 보장하지 않습니다.</p>
+          </details>
+        </article>
         <article>
           <p class="eyebrow">Who · How · Why</p>
           <h2>작성 기준</h2>
           <p>이 페이지는 간다GO 운영팀이 예약 상담에 필요한 지역별 확인 항목을 정리한 안내입니다. AI 초안을 활용할 수 있으나, 최종 게시 전 운영 기준과 법적 표현을 검토한다는 원칙으로 관리합니다.</p>
         </article>
-        <article>
-          <p class="eyebrow">Nearby</p>
-          <h2>인접 지역 확인</h2>
-          <p>${neighboring || "같은 권역의 다른 지역 페이지도 순차적으로 확인할 수 있습니다."}</p>
-        </article>
+        ${districtList}
       </section>
     </main>
 
@@ -544,9 +617,12 @@ const buildLinks = (html) => {
   let next = html;
   for (const [regionSlug, , list] of areas) {
     for (const [name, slug] of list) {
-      const url = `areas/${regionSlug}/${slug}/`;
-      const pattern = new RegExp(`<li>${escapeRegExp(name)}( <small>[^<]+<\\/small>)?<\\/li>`);
-      next = next.replace(pattern, (match, badge = "") => `<li><a href="${url}">${name}${badge}</a></li>`);
+      const url = `area/${regionSlug}/${toPublicSlug(slug)}/`;
+      const plainPattern = new RegExp(`<li>${escapeRegExp(name)}( <small>[^<]+<\\/small>)?<\\/li>`);
+      const linkedPattern = new RegExp(`<li><a href="[^"]+">${escapeRegExp(name)}( <small>[^<]+<\\/small>)?<\\/a><\\/li>`);
+      next = next
+        .replace(plainPattern, (match, badge = "") => `<li><a href="${url}">${name}${badge}</a></li>`)
+        .replace(linkedPattern, (match, badge = "") => `<li><a href="${url}">${name}${badge}</a></li>`);
     }
   }
   return next;
@@ -561,9 +637,7 @@ const main = async () => {
       const [name, slug, context, check] = list[index];
       const previous = list[index - 1]?.[0];
       const next = list[index + 1]?.[0];
-      const dir = path.join(root, "areas", regionSlug, slug);
-      await mkdir(dir, { recursive: true });
-      await writeFile(path.join(dir, "index.html"), pageShell({
+      const html = pageShell({
         regionSlug,
         regionName,
         name,
@@ -572,8 +646,14 @@ const main = async () => {
         check,
         prev: previous,
         next
-      }));
-      urls.push(`${siteUrl}/areas/${regionSlug}/${slug}/`);
+      });
+      const publicDir = path.join(root, "area", regionSlug, toPublicSlug(slug));
+      const legacyDir = path.join(root, "areas", regionSlug, slug);
+      await mkdir(publicDir, { recursive: true });
+      await mkdir(legacyDir, { recursive: true });
+      await writeFile(path.join(publicDir, "index.html"), html);
+      await writeFile(path.join(legacyDir, "index.html"), html);
+      urls.push(`${siteUrl}/area/${regionSlug}/${toPublicSlug(slug)}/`);
     }
   }
 
