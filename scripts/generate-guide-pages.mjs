@@ -21,6 +21,14 @@ const reviewLinks = [
   ["첫 이용 후기", "reviews/first-time/"]
 ];
 
+const magazineLinks = [
+  ["피로 관리", "magazine/fatigue/"],
+  ["지역 생활 정보", "magazine/"],
+  ["마사지 상식", "magazine/"],
+  ["예약 전 알아둘 점", "magazine/"],
+  ["직장인 피로 회복", "magazine/"]
+];
+
 const extraGuideLinks = [
   ["처음 이용 안내", "guide/first-time/"],
   ["예약 취소 및 변경 안내", "guide/cancel-change/"],
@@ -297,7 +305,12 @@ const header = (base) => `
             ${reviewLinks.map(([label, href]) => `<a href="${base}${href}">${label}</a>`).join("\n            ")}
           </div>
         </div>
-        <div class="nav-item"><a href="${base}#magazine">매거진</a></div>
+        <div class="nav-item">
+          <a href="${base}magazine/">매거진</a>
+          <div class="submenu" aria-label="매거진 하위 메뉴">
+            ${magazineLinks.map(([label, href]) => `<a href="${base}${href}">${label}</a>`).join("\n            ")}
+          </div>
+        </div>
         <div class="nav-item"><a href="${base}contact/">고객센터</a></div>
       </nav>
       <a class="nav-cta" href="tel:${phone}">예약 문의</a>

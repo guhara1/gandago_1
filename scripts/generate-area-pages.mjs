@@ -36,6 +36,11 @@ const reviewPaths = [
   "reviews/first-time"
 ];
 
+const magazinePaths = [
+  "magazine",
+  "magazine/fatigue"
+];
+
 const supportPages = [
   {
     path: "about",
@@ -538,13 +543,13 @@ const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, n
           </div>
         </div>
         <div class="nav-item">
-          <a href="../../../#magazine">매거진</a>
+          <a href="../../../magazine/">매거진</a>
           <div class="submenu" aria-label="매거진 하위 메뉴">
-            <a href="../../../#magazine-fatigue">피로 관리</a>
-            <a href="../../../#magazine-local">지역 생활 정보</a>
-            <a href="../../../#magazine-knowledge">마사지 상식</a>
-            <a href="../../../#magazine-before">예약 전 알아둘 점</a>
-            <a href="../../../#magazine-worker">직장인 피로 회복</a>
+            <a href="../../../magazine/fatigue/">피로 관리</a>
+            <a href="../../../magazine/">지역 생활 정보</a>
+            <a href="../../../magazine/">마사지 상식</a>
+            <a href="../../../magazine/">예약 전 알아둘 점</a>
+            <a href="../../../magazine/">직장인 피로 회복</a>
           </div>
         </div>
         <div class="nav-item">
@@ -700,7 +705,7 @@ const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, n
         </div>
         <div>
           <h2>콘텐츠</h2>
-          <a href="../../../#magazine">매거진</a>
+          <a href="../../../magazine/">매거진</a>
           <a href="../../../#trust">신뢰 기준</a>
           <a href="../../../about/">회사 소개</a>
           <a href="../../../contact/">고객센터</a>
@@ -805,13 +810,13 @@ const supportShell = ({ path: pagePath, title, description, eyebrow, heading, su
           </div>
         </div>
         <div class="nav-item">
-          <a href="${base}#magazine">매거진</a>
+          <a href="${base}magazine/">매거진</a>
           <div class="submenu" aria-label="매거진 하위 메뉴">
-            <a href="${base}#magazine-fatigue">피로 관리</a>
-            <a href="${base}#magazine-local">지역 생활 정보</a>
-            <a href="${base}#magazine-knowledge">마사지 상식</a>
-            <a href="${base}#magazine-before">예약 전 알아둘 점</a>
-            <a href="${base}#magazine-worker">직장인 피로 회복</a>
+            <a href="${base}magazine/fatigue/">피로 관리</a>
+            <a href="${base}magazine/">지역 생활 정보</a>
+            <a href="${base}magazine/">마사지 상식</a>
+            <a href="${base}magazine/">예약 전 알아둘 점</a>
+            <a href="${base}magazine/">직장인 피로 회복</a>
           </div>
         </div>
         <div class="nav-item">
@@ -868,7 +873,7 @@ const supportShell = ({ path: pagePath, title, description, eyebrow, heading, su
         </div>
         <div>
           <h2>콘텐츠</h2>
-          <a href="${base}#magazine">매거진</a>
+          <a href="${base}magazine/">매거진</a>
           <a href="${base}#trust">신뢰 기준</a>
           <a href="${base}about/">회사 소개</a>
           <a href="${base}contact/">고객센터</a>
@@ -922,7 +927,8 @@ const main = async () => {
     `${siteUrl}/`,
     ...servicePaths.map((pagePath) => `${siteUrl}/${pagePath}/`),
     ...guidePaths.map((pagePath) => `${siteUrl}/${pagePath}/`),
-    ...reviewPaths.map((pagePath) => `${siteUrl}/${pagePath}/`)
+    ...reviewPaths.map((pagePath) => `${siteUrl}/${pagePath}/`),
+    ...magazinePaths.map((pagePath) => `${siteUrl}/${pagePath}/`)
   ];
 
   for (const [regionSlug, regionName, list] of areas) {

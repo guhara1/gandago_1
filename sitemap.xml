@@ -145,6 +145,18 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://gandago-1.pages.dev/magazine/</loc>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://gandago-1.pages.dev/magazine/fatigue/</loc>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://gandago-1.pages.dev/area/seoul/gangnam/</loc>
     <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
