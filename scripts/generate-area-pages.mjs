@@ -224,6 +224,51 @@ const districtLinksBySlug = {
   ]
 };
 
+const seoulDongGroups = {
+  "gangnam-gu": ["신사동", "논현동", "압구정동", "청담동", "삼성동", "대치동", "역삼동", "도곡동", "개포동", "일원본동", "일원동", "수서동", "세곡동"],
+  "gangdong-gu": ["강일동", "상일동", "명일동", "고덕동", "암사동", "천호동", "성내동", "길동", "둔촌동"],
+  "gangbuk-gu": ["삼양동", "미아동", "송중동", "송천동", "삼각산동", "번동", "수유동", "우이동", "인수동"],
+  "gangseo-gu": ["염창동", "등촌동", "화곡동", "우장산동", "가양동", "발산동", "공항동", "방화동"],
+  "gwanak-gu": ["보라매동", "은천동", "성현동", "중앙동", "청림동", "행운동", "청룡동", "낙성대동", "인헌동", "남현동", "신림동", "신사동", "조원동", "미성동", "난곡동", "난향동", "서원동", "신원동", "서림동", "삼성동", "대학동"],
+  "gwangjin-gu": ["중곡동", "능동", "구의동", "광장동", "자양동", "화양동", "군자동"],
+  "guro-gu": ["신도림동", "구로동", "가리봉동", "고척동", "개봉동", "오류동", "수궁동", "항동"],
+  "geumcheon-gu": ["가산동", "독산동", "시흥동"],
+  "nowon-gu": ["월계동", "공릉동", "하계동", "중계본동", "중계동", "상계동"],
+  "dobong-gu": ["쌍문동", "방학동", "창동", "도봉동"],
+  "dongdaemun-gu": ["용신동", "제기동", "전농동", "답십리동", "장안동", "청량리동", "회기동", "휘경동", "이문동"],
+  "dongjak-gu": ["노량진동", "상도동", "흑석동", "사당동", "대방동", "신대방동"],
+  "mapo-gu": ["공덕동", "아현동", "도화동", "용강동", "대흥동", "염리동", "신수동", "서강동", "서교동", "합정동", "망원동", "연남동", "성산동", "상암동"],
+  "seodaemun-gu": ["충현동", "천연동", "북아현동", "신촌동", "연희동", "홍제동", "홍은동", "남가좌동", "북가좌동"],
+  "seocho-gu": ["서초동", "잠원동", "반포동", "방배동", "양재동", "내곡동"],
+  "seongdong-gu": ["왕십리도선동", "왕십리동", "마장동", "사근동", "행당동", "응봉동", "금호동", "옥수동", "성수동", "송정동", "용답동"],
+  "seongbuk-gu": ["성북동", "삼선동", "동선동", "돈암동", "안암동", "보문동", "정릉동", "길음동", "종암동", "월곡동", "장위동", "석관동"],
+  "songpa-gu": ["풍납동", "거여동", "마천동", "방이동", "오륜동", "오금동", "송파동", "석촌동", "삼전동", "가락본동", "가락동", "문정동", "장지동", "위례동", "잠실본동", "잠실동"],
+  "yangcheon-gu": ["목동", "신월동", "신정동"],
+  "yeongdeungpo-gu": ["영등포본동", "영등포동", "여의동", "당산동", "도림동", "문래동", "양평동", "신길동", "대림동"],
+  "yongsan-gu": ["후암동", "용산동", "남영동", "청파동", "원효로동", "효창동", "용문동", "한강로동", "이촌동", "이태원동", "한남동", "서빙고동", "보광동"],
+  "eunpyeong-gu": ["녹번동", "불광동", "갈현동", "구산동", "대조동", "응암동", "역촌동", "신사동", "증산동", "수색동", "진관동"],
+  "jongno-gu": ["청운효자동", "사직동", "삼청동", "부암동", "평창동", "무악동", "교남동", "가회동", "종로동", "이화동", "혜화동", "창신동", "숭인동"],
+  "jung-gu-seoul": ["소공동", "회현동", "명동", "필동", "장충동", "광희동", "을지로동", "신당동", "다산동", "약수동", "청구동", "동화동", "황학동", "중림동"],
+  "jungnang-gu": ["면목본동", "면목동", "상봉동", "중화동", "묵동", "망우본동", "망우동", "신내동"]
+};
+
+const seoulDistrictMeta = Object.fromEntries(
+  areas.find(([regionSlug]) => regionSlug === "seoul")[2].map(([name, slug, context, check]) => [slug, { name, context, check }])
+);
+
+const publicDistrictPath = (slug) => `area/seoul/${toPublicSlug(slug)}`;
+
+const dongHref = (districtSlug, dongName) => `${dongName}/`;
+
+const dongPagePath = (districtSlug, dongName) => `${publicDistrictPath(districtSlug)}/${dongName}`;
+
+const dongAreaType = (dongName) => {
+  if (/여의|광화문|을지로|가산|성수|마곡|문래|구로|상암|판교/.test(dongName)) return "업무지와 오피스텔 방문 문의가 함께 나오는 생활권";
+  if (/목|상계|중계|잠실|개포|반포|방배|도곡|대치|고덕|명일|신정|신월|은평|진관/.test(dongName)) return "아파트 단지와 주거지 중심으로 예약 조건 확인이 중요한 생활권";
+  if (/명동|홍대|서교|합정|건대|화양|신촌|종로|이태원|한남|강남|압구정|청담/.test(dongName)) return "상권과 주거 동선이 섞여 시간대별 이동 변수가 큰 생활권";
+  return "주거지와 역세권 이동이 함께 있는 생활권";
+};
+
 const priceCards = [
   {
     name: "스웨디시 관리",
@@ -440,25 +485,18 @@ const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, n
   const title = `${name} 출장마사지 | 간다GO ${regionName} 방문 케어`;
   const description = `${name} 출장마사지 가능 권역, 주요 이용 시간대, 많이 찾는 관리 유형, 예약 전 확인사항과 주변 추천 지역을 간다GO가 정리합니다.`;
   const neighboring = [prev, next].filter(Boolean).join(" · ");
-  const districtLinks = districtLinksBySlug[slug] || [];
+  const dongNames = regionSlug === "seoul" ? (seoulDongGroups[slug] || []) : [];
+  const districtLinks = dongNames.length
+    ? dongNames.map((dongName) => [`${dongName} 출장마사지`, dongHref(slug, dongName)])
+    : (districtLinksBySlug[slug] || []).map(([label, id]) => [label, `#${id}`]);
   const districtName = name.endsWith("구") || name.endsWith("시") || name.endsWith("군") ? name : `${name} 지역`;
   const districtList = districtLinks.length
     ? `<article class="area-link-panel">
           <p class="eyebrow">Dong Links</p>
-          <h2>${name} 동별 출장마사지 내부 링크</h2>
-          <p>${name} 안에서도 동별 생활권은 서로 다릅니다. 같은 구 안에 있더라도 업무지구, 주거 단지, 역세권, 고급 주거지, 오피스텔 밀집 지역은 방문 가능 시간과 준비해야 할 정보가 달라질 수 있습니다. 아래 동별 링크는 별도의 과장된 홍보 페이지를 만들기 위한 것이 아니라, 상담 전에 확인해야 할 위치와 건물 조건을 더 세분화해 보기 위한 내부 이동 링크입니다.</p>
+          <h2>${name} 행정동별 방문 관리 안내</h2>
+          <p>${name} 안에서도 행정동별 생활권은 서로 다릅니다. 같은 구 안에 있더라도 업무지구, 주거 단지, 역세권, 오피스텔 밀집 지역은 방문 가능 시간과 준비해야 할 정보가 달라질 수 있습니다. 숫자로 나뉜 1동, 2동, 3동은 대표 동 단위로 묶어 불필요한 중복 페이지를 줄이고, 상담 전에 확인해야 할 위치와 건물 조건을 더 세분화해 볼 수 있도록 구성했습니다.</p>
           <div class="local-link-grid">
-            ${districtLinks.map(([label, id]) => `<a href="#${id}">${label}</a>`).join("\n            ")}
-          </div>
-        </article>
-        <article class="area-dong-list">
-          <p class="eyebrow">Local Detail</p>
-          <h2>${name} 주요 동별 확인 포인트</h2>
-          <div class="content-grid compact">
-            ${districtLinks.map(([label, id]) => `<section id="${id}" class="content-card">
-              <h3>${label}</h3>
-              <p>${label.replace(" 출장마사지", "")} 권역은 건물 출입 방식, 주차 가능 여부, 희망 시간대를 상담 전에 확인하면 예약 안내가 더 정확해집니다. 역세권이나 업무용 건물이 많은 곳은 퇴근 시간대 엘리베이터 이용, 보안 데스크 확인, 차량 정차 위치가 변수로 작용할 수 있습니다. 예약을 문의할 때는 상세 주소와 함께 공동현관 출입 방법, 관리가 가능한 조용한 공간 여부, 희망하는 관리 강도를 미리 알려주는 편이 좋습니다.</p>
-            </section>`).join("\n            ")}
+            ${districtLinks.map(([label, href]) => `<a href="${href}">${label}</a>`).join("\n            ")}
           </div>
         </article>`
     : "";
@@ -911,6 +949,240 @@ const supportShell = ({ path: pagePath, title, description, eyebrow, heading, su
 `;
 };
 
+const dongPageShell = ({ districtSlug, dongName }) => {
+  const district = seoulDistrictMeta[districtSlug];
+  const districtName = district?.name || "서울";
+  const pagePath = dongPagePath(districtSlug, dongName);
+  const canonical = encodeURI(`${siteUrl}/${pagePath}/`);
+  const title = `${dongName} 출장마사지 | ${districtName} 행정동 방문 관리 안내`;
+  const description = `${dongName} 출장마사지 예약 전 확인할 방문 가능 생활권, 출입 방식, 이용 시간대, 요금 기준과 안전 이용 원칙을 간다GO가 정리합니다.`;
+  const areaType = dongAreaType(dongName);
+  const parentHref = "../";
+  const siblings = (seoulDongGroups[districtSlug] || []).filter((name) => name !== dongName).slice(0, 8);
+  const base = "../../../../";
+  const context = `${dongName}은 ${districtName} 안에서도 ${areaType}입니다. 같은 행정동 안에서도 역세권, 아파트 단지, 업무용 빌딩, 숙소 주변은 출입 조건과 이동 시간이 다르게 잡힐 수 있습니다.`;
+  const check = `${dongName} 방문 관리를 문의할 때는 상세 주소, 공동현관 또는 보안 데스크 확인 방식, 주차 가능 여부, 희망 시간대를 먼저 알려주시면 상담이 더 정확해집니다.`;
+
+  return `<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>${title}</title>
+    <meta name="description" content="${description}" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href="${canonical}" />
+    <link rel="stylesheet" href="${base}styles.css" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta property="og:site_name" content="간다GO" />
+    <meta property="og:title" content="${title}" />
+    <meta property="og:description" content="${description}" />
+    <meta property="og:url" content="${canonical}" />
+    <meta property="og:image" content="${siteUrl}/assets/gandago-hero.png" />
+    <meta property="og:image:alt" content="간다GO ${dongName} 방문 마사지 안내 이미지" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "${title}",
+        "url": "${canonical}",
+        "description": "${description}",
+        "about": {
+          "@type": "Service",
+          "name": "${dongName} 출장마사지",
+          "areaServed": { "@type": "AdministrativeArea", "name": "${dongName}" },
+          "provider": { "@type": "HealthAndBeautyBusiness", "name": "간다GO", "telephone": "${phone}" }
+        },
+        "reviewedBy": {
+          "@type": "Organization",
+          "name": "간다GO 운영팀"
+        },
+        "dateModified": "${updated}"
+      }
+    </script>
+  </head>
+  <body class="area-page">
+    <header class="site-header is-scrolled" aria-label="상단 메뉴">
+      <a class="brand" href="${base}" aria-label="간다GO 홈">
+        <img class="brand-logo" src="${base}areas/ganda_go_logo_transparent.png" alt="간다GO" width="220" height="55" />
+        <small>Seoul · Gyeonggi · Incheon</small>
+      </a>
+      <nav class="nav" aria-label="주요 메뉴">
+        <div class="nav-item"><a href="${base}#areas">지역별 찾기</a></div>
+        <div class="nav-item"><a href="${base}service/">서비스 안내</a></div>
+        <div class="nav-item"><a href="${base}guide/">이용 방법</a></div>
+        <div class="nav-item"><a href="${base}reviews/">이용 후기</a></div>
+        <div class="nav-item"><a href="${base}magazine/">매거진</a></div>
+        <div class="nav-item"><a href="${base}contact/">고객센터</a></div>
+      </nav>
+      <a class="nav-cta" href="tel:${phone}">예약 문의</a>
+    </header>
+
+    <main>
+      <section class="area-hero">
+        <div class="area-hero-inner">
+          <div class="area-hero-copy">
+            <p class="eyebrow">Seoul Dong Area Guide</p>
+            <h1>${dongName} 출장마사지</h1>
+            <p>${description}</p>
+            <div class="hero-actions">
+              <a class="button primary call-bell" href="tel:${phone}" aria-label="${phone} 전화 예약"><span aria-hidden="true">☎</span>${phone}</a>
+              <a class="button secondary on-light" href="#price">요금 먼저 보기</a>
+            </div>
+          </div>
+          <aside class="area-hero-card" aria-label="${dongName} 예약 핵심 정보">
+            <span>Reservation Check</span>
+            <dl>
+              <div><dt>상위 지역</dt><dd>${districtName}</dd></div>
+              <div><dt>운영 방식</dt><dd>방문 가능 여부 확인제</dd></div>
+              <div><dt>상담 번호</dt><dd>${phone}</dd></div>
+            </dl>
+          </aside>
+        </div>
+      </section>
+
+      <section class="area-trust-strip" aria-label="${dongName} 이용 전 확인 기준">
+        <div><span>01</span><strong>생활권 확인</strong><p>상세 주소와 출입 방식을 먼저 확인합니다.</p></div>
+        <div><span>02</span><strong>요금 투명성</strong><p>관리 유형과 시간 기준으로 안내합니다.</p></div>
+        <div><span>03</span><strong>안전 원칙</strong><p>건전한 방문 관리 기준을 지킵니다.</p></div>
+      </section>
+
+      <nav class="area-subnav" aria-label="${dongName} 페이지 목차">
+        <a href="#coverage">${dongName} 방문 가능 생활권</a>
+        <a href="#access">${dongName} 출입·주차 확인</a>
+        <a href="#time">${dongName} 주요 이용 시간대</a>
+        <a href="#types">${dongName} 관리 유형</a>
+        <a href="#price">${dongName} 요금 안내</a>
+        <a href="#before">${dongName} 예약 전 확인사항</a>
+        <a href="#nearby">${dongName} 주변 지역</a>
+        <a href="#faq">${dongName} FAQ</a>
+      </nav>
+
+      <section class="area-conversion-panel" aria-label="${dongName} 전화 예약 안내">
+        <div>
+          <span>Gandago Booking Desk</span>
+          <strong>${dongName} 방문 가능 여부를 먼저 확인하세요</strong>
+          <p>상세 주소와 희망 시간, 관리 유형을 알려주시면 실제 이동 조건을 기준으로 상담합니다.</p>
+        </div>
+        <div class="area-conversion-actions">
+          <a class="button primary call-bell" href="tel:${phone}"><span aria-hidden="true">☎</span>${phone}</a>
+          <a class="button secondary on-light" href="#before">예약 전 확인사항</a>
+        </div>
+      </section>
+
+      <section class="area-content">
+        <article id="coverage">
+          <p class="eyebrow">Local Coverage</p>
+          <h2>${dongName} 방문 가능 생활권</h2>
+          <p>${context}</p>
+          <p>${district?.context || ""}</p>
+          <p>${dongName} 출장마사지 안내에서 가장 먼저 확인해야 할 부분은 행정동 이름 자체보다 실제 방문 지점의 생활권입니다. 같은 ${dongName} 안에서도 큰 도로를 기준으로 차량 정차가 쉬운 곳과 골목 진입이 까다로운 곳이 나뉠 수 있고, 아파트 단지와 오피스텔, 숙소, 업무용 건물은 공동현관이나 보안 데스크 확인 방식이 다릅니다. 상담 단계에서 이 정보를 먼저 확인하면 대기 시간과 이동 착오를 줄일 수 있습니다.</p>
+          <p>간다GO는 서울 전체를 무리하게 넓게 말하기보다 ${districtName} 안의 실제 방문 조건을 기준으로 안내합니다. 예약 가능 여부는 담당자 배정, 이동 거리, 시간대, 건물 출입 방식에 따라 달라질 수 있으므로 무조건 가능하다고 단정하지 않습니다. 이용자는 전화 상담에서 ${dongName} 상세 주소와 희망 시간을 알려주고, 안내받은 요금과 방문 조건을 확인한 뒤 예약을 결정하는 흐름이 가장 안전합니다.</p>
+        </article>
+        <article id="access">
+          <p class="eyebrow">Access Check</p>
+          <h2>${dongName} 출입·주차 확인</h2>
+          <p>${check}</p>
+          <p>${dongName}은 건물 유형에 따라 예약 준비가 크게 달라질 수 있습니다. 공동현관 비밀번호나 호출 방식이 필요한 곳은 방문 전 안내가 늦어지면 실제 도착 후 대기 시간이 생길 수 있습니다. 업무용 빌딩이나 숙소 주변은 보안 데스크 확인, 엘리베이터 이용 시간, 차량 정차 위치가 변수가 됩니다. 주차가 어려운 골목이나 대로변 건물은 가까운 정차 지점을 미리 정해두는 편이 좋습니다.</p>
+          <p>상담 시에는 건물명, 동·호수, 출입 방법, 주차 가능 여부를 한 번에 정리해 전달하는 것이 좋습니다. 오일 관리가 필요한 경우에는 샤워 가능 여부와 수건 준비 여부도 함께 확인하면 안내가 더 정확해집니다.</p>
+        </article>
+        <article id="time">
+          <p class="eyebrow">Time</p>
+          <h2>${dongName} 주요 이용 시간대</h2>
+          <p>${dongName} 문의는 평일 퇴근 이후와 주말 저녁에 몰릴 수 있습니다. 다만 실제 가능 시간은 예약 현황, 이동 동선, 건물 출입 조건에 따라 달라지므로 전화 상담에서 다시 확인해야 합니다.</p>
+          <p>퇴근 직후에는 도로 정체와 엘리베이터 이용이 겹치는 경우가 많아 여유 시간을 두고 상담하는 편이 좋습니다. 늦은 시간대 예약은 주변 소음, 공동현관 출입, 주차 가능 여부를 더 세심하게 확인해야 합니다.</p>
+        </article>
+        <article id="types">
+          <p class="eyebrow">Care Type</p>
+          <h2>${dongName}에서 상담이 많은 관리 유형</h2>
+          <p>${dongName}에서는 아로마 관리, 건식 관리, 홈타이, 스웨디시 안내처럼 휴식과 피로 완화 목적의 방문 관리 문의가 들어올 수 있습니다. 표현은 관리 방식과 준비사항 중심으로 안내하며, 선정적이거나 과장된 표현은 사용하지 않습니다.</p>
+          <p>오일 사용이 부담스럽거나 피부 민감도가 있다면 건식 관리가 더 편할 수 있고, 부드러운 분위기의 관리를 원한다면 아로마나 스웨디시 안내를 상담해 볼 수 있습니다. 중요한 것은 이름보다 본인의 컨디션, 선호 강도, 이용 공간의 준비 상태입니다.</p>
+        </article>
+        ${priceSection(dongName)}
+        <article id="before">
+          <p class="eyebrow">Before Booking</p>
+          <h2>${dongName} 예약 전 확인사항</h2>
+          <ul class="check-list">
+            <li>정확한 건물명과 공동현관 출입 방식을 확인합니다.</li>
+            <li>주차 또는 정차가 가능한 위치를 미리 정리합니다.</li>
+            <li>희망 시간, 관리 유형, 피해야 할 부위를 상담 단계에서 공유합니다.</li>
+            <li>요금은 관리 시간, 지역, 시간대, 출입 조건에 따라 최종 확인합니다.</li>
+            <li>건전한 방문 관리 범위를 벗어난 요청은 받지 않습니다.</li>
+          </ul>
+          <p>처음 이용하는 경우에는 예약 절차와 요금 안내를 함께 보는 것이 좋습니다. 상담자는 이용자가 알려준 정보를 바탕으로 방문 가능 여부와 예상 범위를 안내하고, 이용자는 최종 조건을 확인한 뒤 예약을 확정하면 됩니다.</p>
+        </article>
+        <article id="nearby">
+          <p class="eyebrow">Nearby</p>
+          <h2>${dongName} 주변 함께 확인할 지역</h2>
+          <p>${districtName} 안의 다른 행정동도 이동 동선에 따라 함께 확인할 수 있습니다. 아래 링크는 검색어를 늘리기 위한 반복 페이지가 아니라, 실제 생활권이 가까운 동을 비교해 보기 위한 내부 이동 경로입니다.</p>
+          <div class="local-link-grid">
+            <a href="${parentHref}">${districtName} 출장마사지 전체 보기</a>
+            ${siblings.map((name) => `<a href="../${dongHref(districtSlug, name)}">${name} 출장마사지</a>`).join("\n            ")}
+          </div>
+        </article>
+        ${reviewSection({ regionSlug: "seoul", name: dongName, slug: `${districtSlug}-${dongName}`, context, check })}
+        <article id="faq" class="area-faq">
+          <p class="eyebrow">FAQ</p>
+          <h2>${dongName} 출장마사지 FAQ</h2>
+          <details open>
+            <summary>${dongName} 당일 예약도 가능한가요?</summary>
+            <p>상담 시점의 예약 현황과 이동 동선에 따라 달라집니다. 희망 시간, 상세 주소, 건물 출입 방식을 먼저 알려주시면 가능 여부를 더 빠르게 확인할 수 있습니다.</p>
+          </details>
+          <details>
+            <summary>${dongName} 예약 전 요금은 어떻게 확인하나요?</summary>
+            <p>관리 유형과 시간, 방문 위치, 시간대, 추가 이동 조건을 기준으로 상담에서 최종 안내합니다. 페이지의 요금표는 예상 범위를 확인하기 위한 참고용입니다.</p>
+          </details>
+          <details>
+            <summary>처음 이용할 때 무엇을 준비하면 좋나요?</summary>
+            <p>조용한 공간, 출입 방법, 주차 정보, 샤워나 수건 필요 여부, 피해야 할 부위를 미리 정리하면 상담과 방문이 더 매끄럽습니다.</p>
+          </details>
+        </article>
+      </section>
+    </main>
+
+    <footer class="site-footer" aria-label="사이트 하단 정보">
+      <div class="footer-brand">
+        <a class="footer-logo" href="${base}" aria-label="간다GO 홈">
+          <img src="${base}areas/ganda_go_logo_transparent.png" alt="간다GO" width="280" height="70" />
+        </a>
+        <p>서울 ${districtName} ${dongName} 방문 마사지 안내</p>
+        <a class="footer-call" href="tel:${phone}">예약 문의 ${phone}</a>
+      </div>
+      <nav class="footer-nav" aria-label="하단 주요 메뉴">
+        <div>
+          <h2>서비스</h2>
+          <a href="${base}service/">서비스 안내</a>
+          <a href="${base}guide/">이용 방법</a>
+          <a href="${base}guide/price/">요금 안내</a>
+          <a href="${base}guide/safety/">안전 이용 안내</a>
+        </div>
+        <div>
+          <h2>지역</h2>
+          <a href="${base}#panel-seoul">서울 지역 찾기</a>
+          <a href="${parentHref}">${districtName} 전체</a>
+          <a href="${base}guide/available-area/">방문 가능 지역</a>
+          <a href="${base}contact/">고객센터</a>
+        </div>
+        <div>
+          <h2>정책</h2>
+          <a href="${base}about/">회사 소개</a>
+          <a href="${base}policy/editorial/">편집 정책</a>
+          <a href="${base}policy/privacy/">개인정보처리방침</a>
+          <a href="${base}policy/terms/">이용약관</a>
+        </div>
+      </nav>
+      <address class="footer-business">
+        <span>회사 YH LAB</span>
+        <span>대표 김유환</span>
+        <span>사업자등록번호 815-26-00585</span>
+        <span>주소 경기도 파주시 청석로 268</span>
+      </address>
+    </footer>
+  </body>
+</html>`;
+};
+
 const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 const buildLinks = (html) => {
@@ -960,6 +1232,15 @@ const main = async () => {
       await writeFile(path.join(publicDir, "index.html"), html);
       await writeFile(path.join(legacyDir, "index.html"), html);
       urls.push(`${siteUrl}/area/${regionSlug}/${toPublicSlug(slug)}/`);
+    }
+  }
+
+  for (const [districtSlug, dongNames] of Object.entries(seoulDongGroups)) {
+    for (const dongName of dongNames) {
+      const dir = path.join(root, ...dongPagePath(districtSlug, dongName).split("/"));
+      await mkdir(dir, { recursive: true });
+      await writeFile(path.join(dir, "index.html"), dongPageShell({ districtSlug, dongName }));
+      urls.push(encodeURI(`${siteUrl}/${dongPagePath(districtSlug, dongName)}/`));
     }
   }
 
