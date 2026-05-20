@@ -262,7 +262,7 @@ h3 {
 
 .notice-band,
 .section,
-.split-section,
+.coverage-section,
 .editorial,
 .site-footer {
   padding: clamp(56px, 9vw, 112px) clamp(20px, 6vw, 88px);
@@ -287,7 +287,7 @@ h3 {
 }
 
 .section-heading p:last-child,
-.split-section p,
+.coverage-section p,
 .editorial li,
 .feature-card p,
 .trust-layout p,
@@ -326,33 +326,150 @@ h3 {
   background: var(--paper-2);
 }
 
-.split-section {
-  display: grid;
-  grid-template-columns: minmax(0, 0.92fr) minmax(320px, 0.8fr);
-  gap: clamp(28px, 6vw, 80px);
-  align-items: start;
+.coverage-section {
+  background: var(--paper);
 }
 
-.area-list {
+.coverage-intro {
   display: grid;
-  gap: 12px;
+  max-width: 1080px;
+  grid-template-columns: minmax(0, 0.8fr) minmax(300px, 0.64fr);
+  gap: clamp(24px, 6vw, 76px);
+  align-items: end;
+  margin-bottom: 30px;
 }
 
-.area-list div {
+.area-explorer {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+  box-shadow: 0 22px 70px rgba(16, 32, 30, 0.1);
+}
+
+.area-tabs {
   display: grid;
-  grid-template-columns: 86px 1fr;
-  gap: 16px;
+  grid-template-columns: repeat(3, 1fr);
+  border-bottom: 1px solid var(--line);
+  background: #ebe2d3;
+}
+
+.area-tab {
+  display: grid;
+  min-height: 96px;
+  gap: 4px;
   padding: 20px;
-  border-top: 1px solid var(--line);
+  border: 0;
+  border-right: 1px solid var(--line);
+  color: rgba(16, 32, 30, 0.7);
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
 }
 
-.area-list strong {
+.area-tab:last-child {
+  border-right: 0;
+}
+
+.area-tab span {
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.area-tab strong {
+  font-size: clamp(18px, 2.4vw, 26px);
+  line-height: 1.15;
+}
+
+.area-tab.is-active {
+  color: var(--white);
+  background: var(--teal-dark);
+}
+
+.area-panel {
+  padding: clamp(24px, 5vw, 48px);
+}
+
+.panel-heading {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.panel-heading h3 {
+  margin-bottom: 0;
+  font-size: clamp(26px, 4vw, 40px);
+}
+
+.panel-badge {
+  flex: 0 0 auto;
+  padding: 8px 12px;
+  border: 1px solid rgba(30, 112, 103, 0.22);
+  border-radius: 999px;
   color: var(--teal-dark);
-  font-size: 22px;
+  background: rgba(30, 112, 103, 0.08);
+  font-size: 13px;
+  font-weight: 900;
 }
 
-.area-list span {
-  color: rgba(16, 32, 30, 0.74);
+.panel-badge.highlight {
+  border-color: rgba(191, 147, 93, 0.4);
+  color: #785124;
+  background: rgba(191, 147, 93, 0.16);
+}
+
+.panel-note {
+  max-width: 860px;
+  margin-bottom: 18px;
+}
+
+.district-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.district-grid.wide {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.district-grid li {
+  display: flex;
+  min-height: 52px;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px 10px;
+  border: 1px solid rgba(16, 32, 30, 0.12);
+  border-radius: 8px;
+  color: var(--ink-2);
+  background: linear-gradient(180deg, #fffdf8, #f3eee4);
+  font-weight: 800;
+  text-align: center;
+}
+
+.district-grid small {
+  padding: 2px 6px;
+  border-radius: 999px;
+  color: var(--white);
+  background: var(--brass);
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.source-link {
+  display: inline-flex;
+  margin-top: 22px;
+  color: var(--teal-dark);
+  font-weight: 900;
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 .trust-layout {
@@ -462,15 +579,33 @@ h3 {
   .hero-metrics,
   .feature-grid,
   .trust-layout,
-  .split-section,
+  .coverage-intro,
   .editorial,
   .site-footer {
     grid-template-columns: 1fr;
   }
 
-  .area-list div {
+  .area-tabs {
     grid-template-columns: 1fr;
-    gap: 6px;
+  }
+
+  .area-tab {
+    min-height: 76px;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .panel-heading {
+    display: grid;
+  }
+
+  .panel-badge {
+    justify-self: start;
+  }
+
+  .district-grid,
+  .district-grid.wide {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -494,5 +629,15 @@ h3 {
 
   .feature-card {
     min-height: auto;
+  }
+
+  .district-grid,
+  .district-grid.wide {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .district-grid li {
+    min-height: 48px;
+    padding: 10px 8px;
   }
 }
