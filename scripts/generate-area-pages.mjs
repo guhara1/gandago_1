@@ -4,6 +4,15 @@ import path from "node:path";
 const siteUrl = "https://gandago-1.pages.dev";
 const phone = "0508-202-4743";
 const updated = "2026-05-20";
+const servicePaths = [
+  "service",
+  "service/business-trip-massage",
+  "service/hometai",
+  "service/swedish",
+  "service/aroma",
+  "service/dry-massage",
+  "service/before-reservation"
+];
 
 const supportPages = [
   {
@@ -354,14 +363,14 @@ const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, n
           </div>
         </div>
         <div class="nav-item">
-          <a href="../../../#service">서비스 안내</a>
+          <a href="../../../service/">서비스 안내</a>
           <div class="submenu" aria-label="서비스 안내 하위 메뉴">
-            <a href="../../../#service-onsite">출장마사지 안내</a>
-            <a href="../../../#service-home-thai">홈타이 안내</a>
-            <a href="../../../#service-swedish">스웨디시 안내</a>
-            <a href="../../../#service-aroma">아로마 관리 안내</a>
-            <a href="../../../#service-dry">건식 관리 안내</a>
-            <a href="../../../#service-before">예약 전 확인사항</a>
+            <a href="../../../service/business-trip-massage/">출장마사지 안내</a>
+            <a href="../../../service/hometai/">홈타이 안내</a>
+            <a href="../../../service/swedish/">스웨디시 안내</a>
+            <a href="../../../service/aroma/">아로마 관리 안내</a>
+            <a href="../../../service/dry-massage/">건식 관리 안내</a>
+            <a href="../../../service/before-reservation/">예약 전 확인사항</a>
           </div>
         </div>
         <div class="nav-item">
@@ -538,7 +547,7 @@ const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, n
       <nav class="footer-nav" aria-label="하단 주요 메뉴">
         <div>
           <h2>서비스</h2>
-          <a href="../../../#service">서비스 안내</a>
+          <a href="../../../service/">서비스 안내</a>
           <a href="../../../#process">이용 방법</a>
           <a href="../../../#areas">방문 가능 지역</a>
           <a href="../../../#reviews">이용 후기</a>
@@ -619,14 +628,14 @@ const supportShell = ({ path: pagePath, title, description, eyebrow, heading, su
           </div>
         </div>
         <div class="nav-item">
-          <a href="${base}#service">서비스 안내</a>
+          <a href="${base}service/">서비스 안내</a>
           <div class="submenu" aria-label="서비스 안내 하위 메뉴">
-            <a href="${base}#service-onsite">출장마사지 안내</a>
-            <a href="${base}#service-home-thai">홈타이 안내</a>
-            <a href="${base}#service-swedish">스웨디시 안내</a>
-            <a href="${base}#service-aroma">아로마 관리 안내</a>
-            <a href="${base}#service-dry">건식 관리 안내</a>
-            <a href="${base}#service-before">예약 전 확인사항</a>
+            <a href="${base}service/business-trip-massage/">출장마사지 안내</a>
+            <a href="${base}service/hometai/">홈타이 안내</a>
+            <a href="${base}service/swedish/">스웨디시 안내</a>
+            <a href="${base}service/aroma/">아로마 관리 안내</a>
+            <a href="${base}service/dry-massage/">건식 관리 안내</a>
+            <a href="${base}service/before-reservation/">예약 전 확인사항</a>
           </div>
         </div>
         <div class="nav-item">
@@ -706,7 +715,7 @@ const supportShell = ({ path: pagePath, title, description, eyebrow, heading, su
       <nav class="footer-nav" aria-label="하단 주요 메뉴">
         <div>
           <h2>서비스</h2>
-          <a href="${base}#service">서비스 안내</a>
+          <a href="${base}service/">서비스 안내</a>
           <a href="${base}#process">이용 방법</a>
           <a href="${base}#areas">방문 가능 지역</a>
           <a href="${base}#reviews">이용 후기</a>
@@ -763,7 +772,7 @@ const buildLinks = (html) => {
 
 const main = async () => {
   const root = process.cwd();
-  const urls = [`${siteUrl}/`];
+  const urls = [`${siteUrl}/`, ...servicePaths.map((pagePath) => `${siteUrl}/${pagePath}/`)];
 
   for (const [regionSlug, regionName, list] of areas) {
     for (let index = 0; index < list.length; index += 1) {
