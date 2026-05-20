@@ -179,6 +179,94 @@ const districtLinksBySlug = {
   ]
 };
 
+const priceCards = [
+  {
+    name: "스웨디시 관리",
+    badge: "오일",
+    tone: "teal",
+    description: "부드러운 압과 흐름 중심의 관리입니다. 긴장을 낮추고 차분한 휴식을 원하는 경우 상담에서 자주 선택됩니다.",
+    rows: [
+      ["60분", "7~10만원대"],
+      ["90분", "10~14만원대"],
+      ["120분", "14~18만원대"]
+    ]
+  },
+  {
+    name: "아로마 관리",
+    badge: "오일",
+    tone: "rose",
+    description: "아로마 오일을 활용하는 방문 관리입니다. 향 선호도와 피부 민감 여부를 예약 전에 확인하는 것이 좋습니다.",
+    rows: [
+      ["60분", "8~11만원대"],
+      ["90분", "11~15만원대"],
+      ["120분", "15~19만원대"]
+    ]
+  },
+  {
+    name: "타이 관리",
+    badge: "건식",
+    tone: "amber",
+    description: "스트레칭과 지압 성격의 관리입니다. 강도 선호와 불편한 부위를 상담 단계에서 구체적으로 알려주세요.",
+    rows: [
+      ["60분", "6~9만원대"],
+      ["90분", "9~12만원대"],
+      ["120분", "12~15만원대"]
+    ]
+  },
+  {
+    name: "로미로미 관리",
+    badge: "오일",
+    tone: "violet",
+    description: "흐름이 긴 부드러운 오일 관리입니다. 조용한 공간에서 여유 있게 휴식하고 싶은 경우에 적합합니다.",
+    rows: [
+      ["90분", "13~16만원대"],
+      ["120분", "16~20만원대"],
+      ["상담", "가능 여부 확인"]
+    ]
+  },
+  {
+    name: "스포츠 관리",
+    badge: "건식",
+    tone: "red",
+    description: "운동 후 뭉침이나 피로감을 느끼는 부위를 중심으로 상담합니다. 치료 목적이 아닌 웰니스 관리 기준입니다.",
+    rows: [
+      ["60분", "8~11만원대"],
+      ["90분", "12~15만원대"],
+      ["부분 관리", "5~8만원대"]
+    ]
+  },
+  {
+    name: "홈케어 방문 관리",
+    badge: "방문",
+    tone: "cyan",
+    description: "이동 부담 없이 집이나 숙소에서 받는 방문 관리입니다. 지역과 시간, 건물 조건에 따라 출장비가 달라질 수 있습니다.",
+    rows: [
+      ["60분", "7~10만원대"],
+      ["90분", "10~13만원대"],
+      ["출장비", "0~1만원대"]
+    ]
+  }
+];
+
+const priceSection = (name) => `<article id="price" class="area-price-panel">
+          <p class="eyebrow">Price Guide</p>
+          <h2>${name} 출장마사지 요금 안내</h2>
+          <p>${name} 출장마사지 요금은 관리 유형, 이용 시간, 방문 지역, 이동 거리, 예약 시간대, 건물 출입 조건에 따라 달라질 수 있습니다. 아래 금액은 사용자가 예약 전 대략적인 예산을 잡을 수 있도록 정리한 참고 범위이며, 최종 금액은 전화 상담에서 실제 조건을 확인한 뒤 안내합니다.</p>
+          <div class="price-grid" aria-label="${name} 출장마사지 관리별 참고 요금">
+            ${priceCards.map((card) => `<section class="price-card ${card.tone}">
+              <div class="price-card-head">
+                <h3>${card.name}</h3>
+                <span>${card.badge}</span>
+              </div>
+              <p>${card.description}</p>
+              <dl>
+                ${card.rows.map(([label, value]) => `<div><dt>${label}</dt><dd>${value}</dd></div>`).join("\n                ")}
+              </dl>
+            </section>`).join("\n            ")}
+          </div>
+          <p class="price-note">요금표는 과장된 최저가 유도나 확정가 고지가 아닙니다. 심야 시간, 외곽 이동, 주차 난이도, 당일 예약 상황에 따라 안내 범위가 달라질 수 있으며, 불법·선정적 요청은 금액과 관계없이 받지 않습니다.</p>
+        </article>`;
+
 const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, next }) => {
   const publicSlug = toPublicSlug(slug);
   const url = `${siteUrl}/area/${regionSlug}/${publicSlug}/`;
@@ -335,6 +423,7 @@ const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, n
         <a href="#coverage">${name} 출장마사지 가능 권역</a>
         <a href="#time">${name} 주요 이용 시간대</a>
         <a href="#types">${name}에서 많이 찾는 관리 유형</a>
+        <a href="#price">${name} 출장마사지 요금 안내</a>
         <a href="#before">${name} 예약 전 확인사항</a>
         <a href="#nearby">${name} 주변 추천 지역</a>
         <a href="#faq">${name} 출장마사지 FAQ</a>
@@ -363,6 +452,7 @@ const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, n
           <p>관리 유형을 고를 때는 이름보다 본인의 컨디션과 선호도를 먼저 보는 것이 좋습니다. 오일 사용이 부담스럽다면 건식 관리를, 부드럽고 차분한 흐름을 원한다면 아로마 관리나 스웨디시 안내를 상담할 수 있습니다. 장시간 앉아 있거나 이동이 많았던 날에는 강한 압만 요청하기보다 피로가 쌓인 부위, 피해야 할 부위, 선호하는 강도를 구체적으로 말하는 편이 안전합니다.</p>
           <p>간다GO는 방문 관리 정보를 안내하지만 의료기관이 아니며 질병 진단이나 치료 효과를 약속하지 않습니다. 통증이 심하거나 기존 질환이 있거나 임신, 수술 후 회복, 피부 민감 등 주의가 필요한 상황이라면 먼저 전문가와 상담하는 것이 우선입니다. 이런 기준을 명확히 적어두는 이유는 검색 노출보다 이용자의 안전한 판단이 더 중요하기 때문입니다.</p>
         </article>
+        ${priceSection(name)}
         <article id="before">
           <p class="eyebrow">Before Booking</p>
           <h2>${name} 예약 전 확인사항</h2>
