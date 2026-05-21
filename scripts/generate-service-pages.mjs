@@ -3,7 +3,7 @@ import path from "node:path";
 
 const siteUrl = "https://gandago.xyz";
 const phone = "0508-202-4743";
-const updated = "2026-05-20";
+const updated = "2026-05-21";
 
 const serviceLinks = [
   ["출장마사지 안내", "service/business-trip-massage/"],

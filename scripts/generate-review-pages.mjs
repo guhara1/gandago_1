@@ -3,7 +3,7 @@ import path from "node:path";
 
 const siteUrl = "https://gandago.xyz";
 const phone = "0508-202-4743";
-const updated = "2026-05-20";
+const updated = "2026-05-21";
 
 const reviewLinks = [
   ["서울 이용 후기", "reviews/seoul/"],

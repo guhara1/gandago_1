@@ -40,6 +40,19 @@ const categories = [
 
 const magazineLinks = categories.map((category) => [category.label, `magazine/#cat-${category.id}`]);
 
+const escapeXml = (value) =>
+  String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+
+const rssDate = (date) => {
+  const [year, month, day] = date.split(".").map(Number);
+  return new Date(Date.UTC(year, month - 1, day, 0, 0, 0)).toUTCString();
+};
+
 const articles = [
   {
     categoryId: "fatigue",
@@ -374,6 +387,7 @@ const hubHtml = () => {
     <meta name="description" content="간다GO 매거진은 피로 관리, 지역 생활 정보, 마사지 상식, 예약 전 알아둘 점, 직장인 피로 회복을 생활 정보 중심으로 정리합니다." />
     <meta name="robots" content="index,follow,max-image-preview:large" />
     <link rel="canonical" href="${canonical}" />
+    <link rel="alternate" type="application/rss+xml" title="간다GO 매거진 RSS" href="${siteUrl}/rss.xml" />
     <link rel="stylesheet" href="${base}styles.css" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   </head>
@@ -428,6 +442,7 @@ const articleHtml = (article) => {
     <meta name="description" content="${article.description}" />
     <meta name="robots" content="index,follow,max-image-preview:large" />
     <link rel="canonical" href="${canonical}" />
+    <link rel="alternate" type="application/rss+xml" title="간다GO 매거진 RSS" href="${siteUrl}/rss.xml" />
     <link rel="stylesheet" href="${base}styles.css" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   </head>
@@ -523,6 +538,38 @@ ${footer(base)}
 </html>`;
 };
 
+const rssXml = () => {
+  const items = [...articles]
+    .sort((a, b) => Date.parse(rssDate(b.date)) - Date.parse(rssDate(a.date)))
+    .map((article) => {
+      const link = `${siteUrl}/${pathFor(article)}`;
+      const category = categoryFor(article.categoryId).label;
+      return `    <item>
+      <title>${escapeXml(article.title)}</title>
+      <link>${escapeXml(link)}</link>
+      <guid isPermaLink="true">${escapeXml(link)}</guid>
+      <description>${escapeXml(article.description)}</description>
+      <category>${escapeXml(category)}</category>
+      <pubDate>${rssDate(article.date)}</pubDate>
+    </item>`;
+    })
+    .join("\n");
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>간다GO 매거진</title>
+    <link>${siteUrl}/magazine/</link>
+    <atom:link href="${siteUrl}/rss.xml" rel="self" type="application/rss+xml" />
+    <description>서울, 경기, 인천 방문 관리 예약 전 확인할 생활 정보와 안전 기준을 정리한 간다GO 매거진입니다.</description>
+    <language>ko-KR</language>
+    <lastBuildDate>${new Date(Date.UTC(2026, 4, 21, 0, 0, 0)).toUTCString()}</lastBuildDate>
+${items}
+  </channel>
+</rss>
+`;
+};
+
 const main = async () => {
   const root = process.cwd();
   const pages = [["magazine", hubHtml()], ...articles.map((article) => [pathFor(article).replace(/\/$/, ""), articleHtml(article)])];
@@ -532,6 +579,8 @@ const main = async () => {
     await mkdir(dir, { recursive: true });
     await writeFile(path.join(dir, "index.html"), html.replace(/^[ \t]+$/gm, ""));
   }
+
+  await writeFile(path.join(root, "rss.xml"), rssXml());
 };
 
 main().catch((error) => {

@@ -1,4 +1,20 @@
 User-agent: *
 Allow: /
 
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Googlebot-Mobile
+Allow: /
+
+User-agent: Yeti
+Allow: /
+
+User-agent: NaverBot
+Allow: /
+
 Sitemap: https://gandago.xyz/sitemap.xml
+Sitemap: https://gandago.xyz/rss.xml
