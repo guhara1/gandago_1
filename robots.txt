@@ -17,4 +17,5 @@ User-agent: NaverBot
 Allow: /
 
 Sitemap: https://gandago.xyz/sitemap.xml
+Sitemap: https://gandago.xyz/sitemap1.xml
 Sitemap: https://gandago.xyz/rss.xml
