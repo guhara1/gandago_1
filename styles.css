@@ -1797,6 +1797,19 @@ h3 {
   position: relative;
 }
 
+.footer-business a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: rgba(15, 121, 106, 0.28);
+  text-underline-offset: 3px;
+}
+
+.footer-business a:hover,
+.footer-business a:focus {
+  color: #0f796a;
+  text-decoration-color: rgba(15, 121, 106, 0.72);
+}
+
 .footer-business span:not(:last-child)::after {
   content: "";
   position: absolute;
