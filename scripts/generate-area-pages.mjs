@@ -75,7 +75,7 @@ const supportPages = [
       ["공지사항", "현재 간다GO는 서울, 경기, 인천 지역 안내를 우선 운영합니다. 운영 지역과 정책 변경이 있을 때 이 페이지에 반영합니다.", "notice"],
       ["자주 묻는 질문", "요금, 가능 시간, 방문 가능 지역은 상담 시점의 이동 조건과 예약 현황에 따라 달라질 수 있습니다.", "faq"],
       ["1:1 문의", `예약 또는 이용 전 확인이 필요한 내용은 ${phone}으로 문의해 주세요. 상담 시 지역, 희망 시간, 관리 유형을 함께 알려주시면 더 정확합니다.`, "one-to-one"],
-      ["제휴 문의", "콘텐츠, 지역 운영, 브랜드 제휴 문의는 사업자 정보와 제안 내용을 정리한 뒤 전화 상담을 통해 접수합니다.", "partnership"],
+      ["제휴 문의", "콘텐츠, 지역 운영, 브랜드 제휴 문의는 전용 접수 페이지에서 성명, 전화번호, 광고지역, 전달 메시지를 남겨주세요.", "partnership"],
       ["운영 정책", "간다GO는 불법·성매매·선정적 서비스를 제공하거나 중개하지 않으며, 치료 효과를 보장하지 않습니다.", "operation-policy"]
     ]
   },
@@ -925,7 +925,7 @@ const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, n
             <a href="../../../contact/#notice">공지사항</a>
             <a href="../../../contact/#faq">자주 묻는 질문</a>
             <a href="../../../contact/#one-to-one">1:1 문의</a>
-            <a href="../../../contact/#partnership">제휴 문의</a>
+            <a href="../../../contact/partnership/">제휴 문의</a>
             <a href="../../../policy/editorial/">운영 정책</a>
           </div>
         </div>
@@ -1191,7 +1191,7 @@ const supportShell = ({ path: pagePath, title, description, eyebrow, heading, su
             <a href="${base}contact/#notice">공지사항</a>
             <a href="${base}contact/#faq">자주 묻는 질문</a>
             <a href="${base}contact/#one-to-one">1:1 문의</a>
-            <a href="${base}contact/#partnership">제휴 문의</a>
+            <a href="${base}contact/partnership/">제휴 문의</a>
             <a href="${base}policy/editorial/">운영 정책</a>
           </div>
         </div>
