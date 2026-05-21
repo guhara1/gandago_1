@@ -885,8 +885,16 @@ const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, n
     <meta property="og:title" content="${title}" />
     <meta property="og:description" content="${description}" />
     <meta property="og:url" content="${url}" />
-    <meta property="og:image" content="${siteUrl}/assets/gandago-hero-optimized.jpg" />
+    <meta property="og:image" content="${siteUrl}/assets/og-image.jpg" />
+    <meta property="og:image:secure_url" content="${siteUrl}/assets/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:alt" content="간다GO ${name} 방문 마사지 안내 이미지" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="${title}" />
+    <meta name="twitter:description" content="${description}" />
+    <meta name="twitter:image" content="${siteUrl}/assets/og-image.jpg" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -1172,6 +1180,16 @@ const supportShell = ({ path: pagePath, title, description, eyebrow, heading, su
     <meta property="og:title" content="${title} | 간다GO" />
     <meta property="og:description" content="${description}" />
     <meta property="og:url" content="${canonical}" />
+    <meta property="og:image" content="${siteUrl}/assets/og-image.jpg" />
+    <meta property="og:image:secure_url" content="${siteUrl}/assets/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:alt" content="간다GO ${title} 공유 이미지" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="${title} | 간다GO" />
+    <meta name="twitter:description" content="${description}" />
+    <meta name="twitter:image" content="${siteUrl}/assets/og-image.jpg" />
   </head>
   <body class="content-page">
     <a class="skip-link" href="#main">본문으로 이동</a>
@@ -1372,8 +1390,16 @@ const dongPageShell = ({ regionSlug, regionName, districtSlug, dongName }) => {
     <meta property="og:title" content="${title}" />
     <meta property="og:description" content="${description}" />
     <meta property="og:url" content="${canonical}" />
-    <meta property="og:image" content="${siteUrl}/assets/gandago-hero-optimized.jpg" />
+    <meta property="og:image" content="${siteUrl}/assets/og-image.jpg" />
+    <meta property="og:image:secure_url" content="${siteUrl}/assets/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:alt" content="간다GO ${dongName} 방문 마사지 안내 이미지" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="${title}" />
+    <meta name="twitter:description" content="${description}" />
+    <meta name="twitter:image" content="${siteUrl}/assets/og-image.jpg" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
