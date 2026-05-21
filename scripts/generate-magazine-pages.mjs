@@ -1,7 +1,7 @@
 ﻿import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 
-const siteUrl = "https://gandago-1.pages.dev";
+const siteUrl = "https://gandago.xyz";
 const phone = "0508-202-4743";
 const updated = "2026-05-21";
 
