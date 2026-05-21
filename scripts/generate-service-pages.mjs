@@ -1,4 +1,4 @@
-﻿import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 const siteUrl = "https://gandago.xyz";
@@ -244,6 +244,12 @@ const footer = (base) => `
         </a>
         <p>서울 · 경기 · 인천에 집중한 합법 웰니스 방문 마사지 안내 서비스입니다.</p>
         <a class="footer-call" href="tel:${phone}">예약 문의 ${phone}</a>
+        <div class="footer-social" aria-label="Gandago social links">
+          <span>SNS</span>
+          <a href="https://www.linkedin.com/in/%EB%B0%B1%ED%98%B8-%EA%B0%95-a84273261/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="https://medium.com/@88smartbro88" target="_blank" rel="noopener noreferrer">Medium</a>
+          <a href="https://x.com/gugeulmake84173" target="_blank" rel="noopener noreferrer">X</a>
+        </div>
       </div>
       <nav class="footer-nav" aria-label="하단 주요 메뉴">
         <div>

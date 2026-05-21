@@ -1649,6 +1649,45 @@ h3 {
   box-shadow: 0 16px 34px rgba(16, 32, 30, 0.16);
 }
 
+.footer-social {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.footer-social span {
+  width: 100%;
+  color: rgba(16, 32, 30, 0.54);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.footer-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 8px 12px;
+  border: 1px solid rgba(16, 32, 30, 0.14);
+  border-radius: 999px;
+  color: var(--ink);
+  font-size: 0.86rem;
+  font-weight: 800;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.52);
+}
+
+.footer-social a:hover,
+.footer-social a:focus {
+  border-color: rgba(15, 121, 106, 0.5);
+  color: #0f796a;
+  background: rgba(230, 250, 246, 0.86);
+}
+
 .footer-nav {
   display: grid;
   grid-template-columns: repeat(3, minmax(120px, 1fr));
