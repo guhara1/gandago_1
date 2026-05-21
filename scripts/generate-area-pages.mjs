@@ -40,12 +40,14 @@ const magazinePaths = [
   "magazine",
   "magazine/fatigue",
   "magazine/fatigue/after-work-checklist",
+  "magazine/fatigue/weekend-condition-check",
   "magazine/local-life/late-night-areas",
   "magazine/local-life/apartment-access",
   "magazine/knowledge/aroma-dry-difference",
   "magazine/knowledge/pressure-level",
   "magazine/before-booking/check-business-info",
   "magazine/before-booking/final-price",
+  "magazine/before-booking/cancel-change-notice",
   "magazine/office-fatigue/desk-worker-shoulder",
   "magazine/office-fatigue/night-shift-recovery"
 ];

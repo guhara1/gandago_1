@@ -163,6 +163,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://gandago-1.pages.dev/magazine/fatigue/weekend-condition-check/</loc>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://gandago-1.pages.dev/magazine/local-life/late-night-areas/</loc>
     <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
@@ -194,6 +200,12 @@
   </url>
   <url>
     <loc>https://gandago-1.pages.dev/magazine/before-booking/final-price/</loc>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://gandago-1.pages.dev/magazine/before-booking/cancel-change-notice/</loc>
     <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
