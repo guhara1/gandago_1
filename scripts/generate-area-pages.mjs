@@ -85,7 +85,7 @@ const supportPages = [
     description: "간다GO 콘텐츠 작성 기준, 검수 원칙, 스팸 방지 기준을 안내합니다.",
     eyebrow: "Editorial Policy",
     heading: "편집 정책",
-    summary: "간다GO는 검색 순위 조작보다 이용자의 예약 전 판단에 도움이 되는 정보 제공을 우선합니다.",
+    summary: "간다GO는 노출 목적의 반복보다 이용자의 예약 전 판단에 도움이 되는 정보 제공을 우선합니다.",
     sections: [
       ["작성 기준", "지역명만 바꾼 반복 글을 만들지 않고, 이동 조건, 건물 출입, 상담 전 확인사항처럼 실제 판단에 필요한 정보를 우선합니다."],
       ["검수 기준", "허위 후기, 과장된 치료 효과, 선정적 표현, 자격을 오해하게 하는 표현을 사용하지 않습니다."],
@@ -396,6 +396,16 @@ const dongProfile = (dongName) => {
 const dongSeoMeta = ({ districtName, districtSlug, dongName }) => {
   const profile = dongProfile(dongName);
   const seed = hashString(`${districtSlug}-${dongName}`);
+  const localHints = [
+    `${districtName} 안에서 ${dongName}의 실제 도착 지점을 먼저 좁히는 기준`,
+    `${dongName} 주변 건물 유형과 출입 방식에 따라 상담 내용이 달라지는 부분`,
+    `${districtName} 생활권 중 ${dongName}에서 시간대별 이동 여유를 잡는 방법`,
+    `${dongName} 예약 전 공동현관, 주차, 엘리베이터 조건을 함께 보는 이유`,
+    `${districtName} ${dongName}에서 처음 문의자가 헷갈리기 쉬운 주소 전달 기준`,
+    `${dongName} 인근 주거지·상권·숙소 위치를 나눠 확인하는 상담 흐름`,
+    `${districtName} 내 다른 생활권과 ${dongName}의 이동 조건을 비교하는 관점`,
+    `${dongName}에서 늦은 시간 문의 전 준비하면 좋은 기본 정보`
+  ];
   const titleAngles = [
     "퇴근 후 방문 조건",
     "공동현관·주차 동선",
@@ -406,7 +416,13 @@ const dongSeoMeta = ({ districtName, districtSlug, dongName }) => {
     "숙소 주변 이용 조건",
     "주말 예약 흐름",
     "정차 위치 확인",
-    "관리 유형 선택"
+    "관리 유형 선택",
+    "상담 전 주소 확인",
+    "방문 가능 시간 조율",
+    "요금 범위 확인",
+    "주변 생활권 비교",
+    "건물 보안 확인",
+    "처음 이용자 준비"
   ];
   const situationAngles = [
     "퇴근 직후 문의가 몰릴 수 있는 시간대",
@@ -418,7 +434,12 @@ const dongSeoMeta = ({ districtName, districtSlug, dongName }) => {
     "숙소나 업무용 건물에서 출입 안내가 필요한 경우",
     "늦은 시간대 소음과 이동 동선을 함께 고려해야 하는 경우",
     "관리 유형을 정하기 전 컨디션을 먼저 설명해야 하는 상황",
-    "주차 가능 여부가 실제 방문 시간에 영향을 주는 경우"
+    "주차 가능 여부가 실제 방문 시간에 영향을 주는 경우",
+    "상세 주소가 늦게 공유되면 상담이 길어질 수 있는 경우",
+    "주거 단지와 상권 동선이 겹쳐 도착 시간이 달라질 수 있는 시간대",
+    "관리 유형보다 먼저 장소 조건을 정리해야 하는 상황",
+    "건물 출입 안내와 연락 가능 시간을 함께 맞춰야 하는 경우",
+    "주변 행정동으로 대체 가능 여부를 같이 확인하면 좋은 상황"
   ];
   const prepAngles = [
     "상세 주소 전달 방법",
@@ -430,29 +451,51 @@ const dongSeoMeta = ({ districtName, districtSlug, dongName }) => {
     "예약 확정 전 확인 순서",
     "주변 행정동 비교 링크",
     "처음 이용 전 체크리스트",
-    "상담 시 피해야 할 오해"
+    "상담 시 피해야 할 오해",
+    "건물 출입 정보 정리",
+    "주차·정차 확인 순서",
+    "야간 문의 준비",
+    "컨디션 공유 방식",
+    "주변 지역 대체 상담",
+    "최종 금액 확인 기준"
+  ];
+  const proofAngles = [
+    "예약 전 필요한 정보만 먼저 정리했습니다",
+    "과장된 가능 표현보다 실제 운영 조건을 우선했습니다",
+    "처음 이용자가 확인할 순서대로 구성했습니다",
+    "주소·시간·요금 확인 흐름을 한 페이지에 모았습니다",
+    "주변 행정동 링크까지 함께 확인할 수 있게 정리했습니다",
+    "건전한 웰니스 방문 관리 기준으로 안내합니다"
   ];
   const titleAngle = titleAngles[seed % titleAngles.length];
   const situation = situationAngles[(seed + 3) % situationAngles.length];
   const prep = prepAngles[(seed + 7) % prepAngles.length];
+  const hint = localHints[(seed + 11) % localHints.length];
+  const proof = proofAngles[(seed + 17) % proofAngles.length];
   const situationJoin = joinParticle(situation);
   const titlePatterns = [
     `${dongName} 출장마사지 | ${districtName} ${titleAngle} 가이드`,
-    `${dongName} 방문 마사지 안내 | ${profile.short} ${prep}`,
+    `${dongName} 방문 마사지 안내 | ${prep}와 ${titleAngle}`,
     `${dongName} 출장마사지 예약 안내 | ${profile.focus} 체크`,
-    `${dongName} 홈타이·방문 관리 | ${titleAngle} 정리`,
-    `${dongName} 출장마사지 가능 여부 | ${profile.short} ${prep}`
+    `${districtName} ${dongName} 홈타이·방문 관리 | ${titleAngle} 정리`,
+    `${districtName} ${dongName} 출장마사지 가능 여부 | ${prep} 중심 안내`,
+    `${dongName} 방문 관리 체크 | ${districtName} ${profile.short}`,
+    `${districtName} ${dongName} 예약 상담 | ${titleAngle} 기준`,
+    `${dongName} 마사지 문의 전 확인 | ${prep}`
   ];
   const descriptionPatterns = [
-    `${dongName}은 ${profile.short}입니다. ${situation}에 맞춰 ${profile.focus}와 ${prep}을 예약 전 차분히 확인하세요.`,
-    `${districtName} ${dongName} 방문 관리를 찾는 ${profile.intent}을 위해 ${situation}, 출입 방식, 요금 범위, 관리 유형 선택 기준을 정리했습니다.`,
-    `${dongName} 출장마사지 상담 전 필요한 ${profile.focus}, ${prep}, 처음 이용 전 준비사항을 생활권 특성에 맞춰 안내합니다.`,
-    `${profile.short}인 ${dongName}에서 방문 가능 여부를 확인할 때 ${situation}${situationJoin} ${prep}, 예약 시간 조율 기준을 함께 살펴보세요.`,
-    `${dongName} 출장마사지 페이지는 ${profile.intent}을 위해 ${situation}, 출입·주차 변수, 안전한 예약 흐름과 주변 행정동 링크를 제공합니다.`
+    `${dongName}은 ${profile.short}입니다. ${situation}에 맞춰 ${profile.focus}와 ${prep}을 예약 전 차분히 확인하세요. ${proof}.`,
+    `${districtName} ${dongName} 방문 관리를 찾는 ${profile.intent}을 위해 ${situation}, 출입 방식, 요금 범위, 관리 유형 선택 기준을 정리했습니다. ${hint}도 함께 확인하세요.`,
+    `${dongName} 출장마사지 상담 전 필요한 ${profile.focus}, ${prep}, 처음 이용 전 준비사항을 생활권 특성에 맞춰 안내합니다. ${proof}.`,
+    `${profile.short}인 ${dongName}에서 방문 가능 여부를 확인할 때 ${situation}${situationJoin} ${prep}, 예약 시간 조율 기준을 함께 살펴보세요. ${hint}을 반영했습니다.`,
+    `${dongName} 출장마사지 페이지는 ${profile.intent}을 위해 ${situation}, 출입·주차 변수, 안전한 예약 흐름과 주변 행정동 링크를 제공합니다. ${proof}.`,
+    `${districtName} 안의 ${dongName}은 같은 구 안에서도 도착 지점과 건물 조건에 따라 상담 내용이 달라질 수 있습니다. ${prep}, ${titleAngle}, 요금 확인 순서를 함께 정리했습니다.`,
+    `${hint}. ${dongName} 문의 전에는 ${profile.focus}, ${situation}, 최종 금액 안내 방식을 함께 확인하는 편이 좋습니다.`,
+    `${dongName} 방문 가능 여부를 빠르게 판단하려면 ${prep}과 ${profile.focus}를 먼저 알려주세요. ${districtName} 주변 생활권과 비교할 내부 링크도 함께 제공합니다.`
   ];
   return {
     title: titlePatterns[seed % titlePatterns.length],
-    description: descriptionPatterns[(seed + 2) % descriptionPatterns.length],
+    description: descriptionPatterns[(seed + 2) % descriptionPatterns.length].replace(/\s+/g, " ").trim(),
     profile
   };
 };
@@ -1026,7 +1069,7 @@ const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, n
           <h2>${name} 주변 추천 지역</h2>
           <p>${neighboring || "같은 권역의 다른 지역 페이지도 순차적으로 확인할 수 있습니다."}</p>
           <p>주변 지역을 함께 확인하는 이유는 실제 방문 가능성이 행정 경계만으로 결정되지 않기 때문입니다. 도로 연결이 좋은 인접 지역은 같은 시간대에도 더 빠르게 안내될 수 있고, 반대로 가까워 보여도 교통 흐름이나 주차 조건 때문에 시간이 더 걸릴 수 있습니다. ${name}에서 예약이 어렵거나 희망 시간이 맞지 않는 경우에는 인접 생활권을 함께 확인하면 선택지가 넓어집니다.</p>
-          <p>다만 주변 지역 페이지 역시 동일한 문장을 반복하는 방식으로 운영하지 않습니다. 각 지역마다 업무지구인지, 주거 단지가 많은지, 외곽 이동이 긴지, 건물 보안이 까다로운지 같은 차이를 반영해 내용을 보강하는 것이 원칙입니다. 이는 검색을 위한 도어웨이 페이지가 아니라 실제 이용자가 비교하고 판단할 수 있는 지역 안내를 만들기 위한 기준입니다.</p>
+          <p>다만 주변 지역 페이지 역시 동일한 문장을 반복하는 방식으로 운영하지 않습니다. 각 지역마다 업무지구인지, 주거 단지가 많은지, 외곽 이동이 긴지, 건물 보안이 까다로운지 같은 차이를 반영해 내용을 보강하는 것이 원칙입니다. 이는 단순한 반복 안내가 아니라 실제 이용자가 비교하고 판단할 수 있는 지역 안내를 만들기 위한 기준입니다.</p>
         </article>
         ${reviewSection({ regionSlug, name, slug, context, check })}
         <article id="faq" class="area-faq">
@@ -1120,6 +1163,7 @@ const supportShell = ({ path: pagePath, title, description, eyebrow, heading, su
     <meta name="robots" content="index,follow,max-image-preview:large" />
     <link rel="canonical" href="${canonical}" />
     <link rel="stylesheet" href="${base}styles.css" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="ko_KR" />
     <meta property="og:site_name" content="간다GO" />
@@ -1267,6 +1311,29 @@ const supportShell = ({ path: pagePath, title, description, eyebrow, heading, su
         <p>최종 수정일: ${updated}. 실제 가능 지역, 예약 시간, 금액은 상담 시점의 운영 조건을 기준으로 안내합니다.</p>
       </div>
     </footer>
+  </body>
+</html>
+`;
+};
+
+const legacyAreaShell = ({ regionSlug, regionName, name, slug }) => {
+  const target = `${siteUrl}/${publicAreaPath(regionSlug, slug)}/`;
+  return `<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>${name} 지역 안내 새 주소로 이동 | 간다GO</title>
+    <meta name="robots" content="noindex,follow" />
+    <link rel="canonical" href="${target}" />
+    <meta http-equiv="refresh" content="0; url=${target}" />
+  </head>
+  <body>
+    <main>
+      <h1>${name} 지역 안내 주소가 변경되었습니다</h1>
+      <p>${regionName} ${name} 안내는 새 주소에서 확인할 수 있습니다.</p>
+      <p><a href="${target}">${target}</a></p>
+    </main>
   </body>
 </html>
 `;
@@ -1554,7 +1621,7 @@ const main = async () => {
       await mkdir(publicDir, { recursive: true });
       await mkdir(legacyDir, { recursive: true });
       await writeFile(path.join(publicDir, "index.html"), html);
-      await writeFile(path.join(legacyDir, "index.html"), html);
+      await writeFile(path.join(legacyDir, "index.html"), legacyAreaShell({ regionSlug, regionName, name, slug }));
       urls.push(`${siteUrl}/area/${regionSlug}/${toPublicSlug(slug)}/`);
     }
   }
