@@ -13,13 +13,20 @@ const clean = (value, max = 500) =>
     .trim()
     .slice(0, max);
 
-const getChatIds = (env) => {
-  const fromList = clean(env.TELEGRAM_CHAT_IDS, 300)
-    .split(",")
-    .map((item) => item.trim())
-    .filter(Boolean);
+const getTelegramTargets = (env) => {
+  const fallbackToken = clean(env.TELEGRAM_BOT_TOKEN, 120);
+  const pairs = [
+    {
+      token: clean(env.TELEGRAM_BOT_TOKEN_1 || fallbackToken, 120),
+      chatId: clean(env.TELEGRAM_CHAT_ID_1, 80),
+    },
+    {
+      token: clean(env.TELEGRAM_BOT_TOKEN_2 || fallbackToken, 120),
+      chatId: clean(env.TELEGRAM_CHAT_ID_2, 80),
+    },
+  ];
 
-  return [...new Set([env.TELEGRAM_CHAT_ID_1, env.TELEGRAM_CHAT_ID_2, ...fromList].filter(Boolean))];
+  return pairs.filter((item) => item.token && item.chatId);
 };
 
 export async function onRequestOptions() {
@@ -27,10 +34,9 @@ export async function onRequestOptions() {
 }
 
 export async function onRequestPost({ request, env }) {
-  const token = clean(env.TELEGRAM_BOT_TOKEN, 120);
-  const chatIds = getChatIds(env);
+  const targets = getTelegramTargets(env);
 
-  if (!token || chatIds.length === 0) {
+  if (targets.length === 0) {
     return json({ ok: false, message: "전송 설정이 아직 완료되지 않았습니다." }, 500);
   }
 
@@ -72,12 +78,12 @@ export async function onRequestPost({ request, env }) {
   ].join("\n");
 
   const results = await Promise.allSettled(
-    chatIds.map((chat_id) =>
+    targets.map(({ token, chatId }) =>
       fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
-          chat_id,
+          chat_id: chatId,
           text,
           disable_web_page_preview: true,
         }),
