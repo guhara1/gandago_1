@@ -3082,3 +3082,54 @@ h3 {
     font-size: 17px;
   }
 }
+
+/* ===== Breadcrumb navigation (internal linking) ===== */
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 14px 24px 0;
+  font-size: 13px;
+  line-height: 1.4;
+  color: rgba(16, 32, 30, 0.6);
+}
+
+.breadcrumb a {
+  color: var(--teal);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb span[aria-current="page"] {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.breadcrumb .breadcrumb-sep {
+  color: rgba(16, 32, 30, 0.32);
+}
+
+.area-page .breadcrumb {
+  color: rgba(255, 253, 248, 0.72);
+}
+
+.area-page .breadcrumb a {
+  color: #7fd6c6;
+}
+
+.area-page .breadcrumb span[aria-current="page"] {
+  color: #fffdf8;
+}
+
+@media (max-width: 640px) {
+  .breadcrumb {
+    padding: 12px 18px 0;
+    font-size: 12px;
+  }
+}
