@@ -879,22 +879,23 @@ const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, n
     <link rel="canonical" href="${url}" />
     <link rel="stylesheet" href="../../../styles.css" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="image_src" href="${siteUrl}/assets/gandago-thumb.jpg" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="ko_KR" />
     <meta property="og:site_name" content="간다GO" />
     <meta property="og:title" content="${title}" />
     <meta property="og:description" content="${description}" />
     <meta property="og:url" content="${url}" />
-    <meta property="og:image" content="${siteUrl}/assets/og-image.jpg" />
-    <meta property="og:image:secure_url" content="${siteUrl}/assets/og-image.jpg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+    <meta property="og:image" content="${siteUrl}/assets/gandago-thumb.jpg" />
+    <meta property="og:image:secure_url" content="${siteUrl}/assets/gandago-thumb.jpg" />
+    <meta property="og:image:width" content="1080" />
+    <meta property="og:image:height" content="1080" />
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:alt" content="간다GO ${name} 방문 마사지 안내 이미지" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${title}" />
     <meta name="twitter:description" content="${description}" />
-    <meta name="twitter:image" content="${siteUrl}/assets/og-image.jpg" />
+    <meta name="twitter:image" content="${siteUrl}/assets/gandago-thumb.jpg" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -1161,6 +1162,7 @@ const pageShell = ({ regionSlug, regionName, name, slug, context, check, prev, n
       </div>
     </footer>
     <script src="../../../script.js" defer></script>
+    <a class="floating-call" href="tel:${phone}" aria-label="전화 예약 문의 ${phone}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .8-.3 1l-2.2 2.2z"/></svg></a>
   </body>
 </html>
 `;
@@ -1181,22 +1183,23 @@ const supportShell = ({ path: pagePath, title, description, eyebrow, heading, su
     <link rel="canonical" href="${canonical}" />
     <link rel="stylesheet" href="${base}styles.css" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="image_src" href="${siteUrl}/assets/gandago-thumb.jpg" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="ko_KR" />
     <meta property="og:site_name" content="간다GO" />
     <meta property="og:title" content="${title} | 간다GO" />
     <meta property="og:description" content="${description}" />
     <meta property="og:url" content="${canonical}" />
-    <meta property="og:image" content="${siteUrl}/assets/og-image.jpg" />
-    <meta property="og:image:secure_url" content="${siteUrl}/assets/og-image.jpg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+    <meta property="og:image" content="${siteUrl}/assets/gandago-thumb.jpg" />
+    <meta property="og:image:secure_url" content="${siteUrl}/assets/gandago-thumb.jpg" />
+    <meta property="og:image:width" content="1080" />
+    <meta property="og:image:height" content="1080" />
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:alt" content="간다GO ${title} 공유 이미지" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${title} | 간다GO" />
     <meta name="twitter:description" content="${description}" />
-    <meta name="twitter:image" content="${siteUrl}/assets/og-image.jpg" />
+    <meta name="twitter:image" content="${siteUrl}/assets/gandago-thumb.jpg" />
   </head>
   <body class="content-page">
     <a class="skip-link" href="#main">본문으로 이동</a>
@@ -1344,6 +1347,7 @@ const supportShell = ({ path: pagePath, title, description, eyebrow, heading, su
         <p>최종 수정일: ${updated}. 실제 가능 지역, 예약 시간, 금액은 상담 시점의 운영 조건을 기준으로 안내합니다.</p>
       </div>
     </footer>
+    <a class="floating-call" href="tel:${phone}" aria-label="전화 예약 문의 ${phone}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .8-.3 1l-2.2 2.2z"/></svg></a>
   </body>
 </html>
 `;
@@ -1403,16 +1407,16 @@ const dongPageShell = ({ regionSlug, regionName, districtSlug, dongName }) => {
     <meta property="og:title" content="${title}" />
     <meta property="og:description" content="${description}" />
     <meta property="og:url" content="${canonical}" />
-    <meta property="og:image" content="${siteUrl}/assets/og-image.jpg" />
-    <meta property="og:image:secure_url" content="${siteUrl}/assets/og-image.jpg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+    <meta property="og:image" content="${siteUrl}/assets/gandago-thumb.jpg" />
+    <meta property="og:image:secure_url" content="${siteUrl}/assets/gandago-thumb.jpg" />
+    <meta property="og:image:width" content="1080" />
+    <meta property="og:image:height" content="1080" />
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:alt" content="간다GO ${dongName} 방문 마사지 안내 이미지" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${title}" />
     <meta name="twitter:description" content="${description}" />
-    <meta name="twitter:image" content="${siteUrl}/assets/og-image.jpg" />
+    <meta name="twitter:image" content="${siteUrl}/assets/gandago-thumb.jpg" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -1617,6 +1621,7 @@ const dongPageShell = ({ regionSlug, regionName, districtSlug, dongName }) => {
         <span>주소 경기도 파주시 청석로 268</span>
       </address>
     </footer>
+    <a class="floating-call" href="tel:${phone}" aria-label="전화 예약 문의 ${phone}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .8-.3 1l-2.2 2.2z"/></svg></a>
   </body>
 </html>`;
 };

@@ -304,22 +304,23 @@ const pageHtml = (page) => {
     <link rel="canonical" href="${canonical}" />
     <link rel="stylesheet" href="${base}styles.css" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="image_src" href="${siteUrl}/assets/gandago-thumb.jpg" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="ko_KR" />
     <meta property="og:site_name" content="간다GO" />
     <meta property="og:title" content="${page.title} | 간다GO" />
     <meta property="og:description" content="${page.description}" />
     <meta property="og:url" content="${canonical}" />
-    <meta property="og:image" content="${siteUrl}/assets/og-image.jpg" />
-    <meta property="og:image:secure_url" content="${siteUrl}/assets/og-image.jpg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+    <meta property="og:image" content="${siteUrl}/assets/gandago-thumb.jpg" />
+    <meta property="og:image:secure_url" content="${siteUrl}/assets/gandago-thumb.jpg" />
+    <meta property="og:image:width" content="1080" />
+    <meta property="og:image:height" content="1080" />
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:alt" content="간다GO ${page.title} 안내 이미지" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${page.title} | 간다GO" />
     <meta name="twitter:description" content="${page.description}" />
-    <meta name="twitter:image" content="${siteUrl}/assets/og-image.jpg" />
+    <meta name="twitter:image" content="${siteUrl}/assets/gandago-thumb.jpg" />
   </head>
   <body class="content-page service-page">
 ${header(base)}

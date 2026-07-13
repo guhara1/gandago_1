@@ -401,18 +401,19 @@ const hubHtml = () => {
     <meta property="og:title" content="매거진 | 간다GO" />
     <meta property="og:description" content="피로 관리, 지역 생활 정보, 마사지 상식, 예약 전 알아둘 점을 생활 정보 중심으로 정리합니다." />
     <meta property="og:url" content="${canonical}" />
-    <meta property="og:image" content="${siteUrl}/assets/og-image.jpg" />
-    <meta property="og:image:secure_url" content="${siteUrl}/assets/og-image.jpg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+    <meta property="og:image" content="${siteUrl}/assets/gandago-thumb.jpg" />
+    <meta property="og:image:secure_url" content="${siteUrl}/assets/gandago-thumb.jpg" />
+    <meta property="og:image:width" content="1080" />
+    <meta property="og:image:height" content="1080" />
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:alt" content="간다GO 매거진 공유 이미지" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="매거진 | 간다GO" />
     <meta name="twitter:description" content="피로 관리, 지역 생활 정보, 마사지 상식, 예약 전 알아둘 점을 생활 정보 중심으로 정리합니다." />
-    <meta name="twitter:image" content="${siteUrl}/assets/og-image.jpg" />
+    <meta name="twitter:image" content="${siteUrl}/assets/gandago-thumb.jpg" />
     <link rel="stylesheet" href="${base}styles.css" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="image_src" href="${siteUrl}/assets/gandago-thumb.jpg" />
   </head>
   <body class="content-page magazine-page">
     <a class="skip-link" href="#main">본문으로 이동</a>
@@ -472,18 +473,19 @@ const articleHtml = (article) => {
     <meta property="og:title" content="${article.title} | 간다GO 매거진" />
     <meta property="og:description" content="${article.description}" />
     <meta property="og:url" content="${canonical}" />
-    <meta property="og:image" content="${siteUrl}/assets/og-image.jpg" />
-    <meta property="og:image:secure_url" content="${siteUrl}/assets/og-image.jpg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+    <meta property="og:image" content="${siteUrl}/assets/gandago-thumb.jpg" />
+    <meta property="og:image:secure_url" content="${siteUrl}/assets/gandago-thumb.jpg" />
+    <meta property="og:image:width" content="1080" />
+    <meta property="og:image:height" content="1080" />
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:alt" content="간다GO 매거진 공유 이미지" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${article.title} | 간다GO 매거진" />
     <meta name="twitter:description" content="${article.description}" />
-    <meta name="twitter:image" content="${siteUrl}/assets/og-image.jpg" />
+    <meta name="twitter:image" content="${siteUrl}/assets/gandago-thumb.jpg" />
     <link rel="stylesheet" href="${base}styles.css" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="image_src" href="${siteUrl}/assets/gandago-thumb.jpg" />
   </head>
   <body class="content-page magazine-page">
     <a class="skip-link" href="#main">본문으로 이동</a>
